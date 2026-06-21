@@ -72,6 +72,20 @@ and changes whenever the code does.
 
 ## Getting started
 
+### Option A — Automated (recommended)
+
+Let an agent do the work:
+
+1. Open **your repo** in a VS Code workspace.
+2. **Add this template repo** as a second folder in the same workspace.
+3. Ask the agent to run the
+   [`apply-manifest-template`](.agents/skills/apply-manifest-template/SKILL.md)
+   skill. It studies your repo, then creates a tailored `.agents/` manifest
+   (or upgrades an existing one) with real, project-specific content — replacing
+   all the examples for you.
+
+### Option B — Manual
+
 1. **Copy** the root `AGENTS.md` and the `.agents/` directory into your repo.
 2. **Edit `AGENTS.md`** — replace the example mandates with your project's real,
    non-negotiable rules (keep the list short).
@@ -96,7 +110,8 @@ the format and the expected level of detail:
   decision.
 - **reference/** — an example subsystem mechanics doc.
 - **guides/** — `setup.md`, `commands.md`, and `notes.md`.
-- **skills/** — an `example-add-module` runbook with a supporting asset file.
+- **skills/** — a real `apply-manifest-template` runbook (bootstraps the manifest
+  into another repo in the workspace) plus an `example-add-module` example.
 - **actions/** — a `verify-docs-in-sync` one-step check.
 - **personas/** — a `reviewer` and a `manifester` agent.
 - **plans/** — a canonical `backlog.plan.md` and an example feature plan.
