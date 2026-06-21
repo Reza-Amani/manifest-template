@@ -52,8 +52,8 @@ Defined in `personas/*.agent.md`:
 
 - `reviewer` — pre-commit reviewer focused on safety, correctness, and decision
   compliance → [`personas/reviewer.agent.md`](../personas/reviewer.agent.md)
-- `documenter` — manifest keeper who writes and fixes `.agents/` docs in plain
-  English → [`personas/documenter.agent.md`](../personas/documenter.agent.md)
+- `manifester` — manifest keeper who writes and fixes `.agents/` docs in plain
+  English → [`personas/manifester.agent.md`](../personas/manifester.agent.md)
 
 ## Plans & actions
 

@@ -83,7 +83,7 @@ and changes whenever the code does.
    `.github/` / `.cursor/` if your tools need it.
 6. **Keep it in sync** — when a change makes a doc wrong, fix it in the same
    change. The [`verify-docs-in-sync`](.agents/actions/verify-docs-in-sync.md)
-   action and the [`documenter`](.agents/personas/documenter.agent.md) persona
+   action and the [`manifester`](.agents/personas/manifester.agent.md) persona
    help with this.
 
 ## What's included
@@ -98,7 +98,7 @@ the format and the expected level of detail:
 - **guides/** — `setup.md`, `commands.md`, and `notes.md`.
 - **skills/** — an `example-add-module` runbook with a supporting asset file.
 - **actions/** — a `verify-docs-in-sync` one-step check.
-- **personas/** — a `reviewer` and a `documenter` agent.
+- **personas/** — a `reviewer` and a `manifester` agent.
 - **plans/** — a canonical `backlog.plan.md` and an example feature plan.
 
 ## Principles for keeping it useful
