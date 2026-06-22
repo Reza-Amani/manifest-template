@@ -8,11 +8,7 @@ and follow its routing table to find the specific decision record, reference,
 guide, skill, or persona for your task. Read only what the current task needs.
 Do not bulk-read every file under `.agents/` at once.
 
-## Project-wide mandates
-
-> Replace this list with the non-negotiable rules of *your* project. These are
-> the few constraints an agent must never violate. Keep the list short — long
-> lists get ignored. Examples below; delete and rewrite for your repo.
+## Generic rules
 
 - **Read the decisions first.** The files in [`.agents/adr/`](.agents/adr/) are the
   durable laws of this codebase and override generic conventions.
@@ -20,7 +16,6 @@ Do not bulk-read every file under `.agents/` at once.
   in the same change. See [`.agents/rules/manifest-structure.rule.md`](.agents/rules/manifest-structure.rule.md).
 - **Check the backlog before proposing work.** The canonical task list lives in
   [`.agents/plans/backlog.plan.md`](.agents/plans/backlog.plan.md).
-- _(Add your own: coding style, security boundaries, forbidden patterns, etc.)_
 
 ## What is `.agents/`?
 
