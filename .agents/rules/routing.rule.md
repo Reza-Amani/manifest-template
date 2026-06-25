@@ -1,7 +1,7 @@
 # Routing Guide
 
 Single source of truth for discovering manifest documents. Maps a task to the
-**specific** ADR, reference, skill, persona, plan, or action that covers it.
+**specific** ADR, reference, skill, persona, plan, learning record, or action that covers it.
 
 > **How to use this file:** Scan the tables for the row that matches your task,
 > then open only the file it names. Replace the example rows below with the real
@@ -43,6 +43,10 @@ Pair with the ADR above only when implementation detail is required:
 - _(example)_ Add a new module end-to-end → [`skills/example-add-module`](../skills/example-add-module/SKILL.md)
 - _(add your real runbooks here under `skills/<name>/SKILL.md`)_
 
+## Task → Learning (teach session records)
+
+- Record or resume a `teach` skill session → the state is kept under [`learning`](../learning) and is managed by "teach" skill only.
+
 ## Task → Action (one-step checks)
 
 - _(example)_ Verify docs match code before declaring done → [`actions/verify-docs-in-sync.md`](../actions/verify-docs-in-sync.md)
@@ -60,5 +64,7 @@ Defined in `personas/*.agent.md`:
 
 - Multi-session plans live in `plans/`. The canonical backlog is
   [`plans/backlog.plan.md`](../plans/backlog.plan.md).
+- Teach session records live in `learning/`. Start with
+  [`learning/README.md`](../learning/README.md).
 - One-step procedures live in `actions/` (e.g.
   [`actions/verify-docs-in-sync.md`](../actions/verify-docs-in-sync.md)).

@@ -15,7 +15,7 @@ Always follow [`.agents/rules/manifest-structure.rule.md`](../rules/manifest-str
 Before you add, move, rename, or edit a doc, check that rule to make sure:
 
 1. The content goes in the right folder (`adr/`, `reference/`, `rules/`,
-   `personas/`, `skills/`, `guides/`, `plans/`, `actions/`).
+   `personas/`, `skills/`, `guides/`, `plans/`, `learning/`, `actions/`).
 2. The file name uses the right suffix for that folder (for example `*.adr.md`,
    `*.ref.md`, `*.rule.md`, `*.agent.md`, `SKILL.md`).
 3. You do not copy the same fact into many files. Put it in one place and link
@@ -30,7 +30,8 @@ Rules you live by:
 - Do not keep revision history inside the manifest files; version control does
   that.
 - Keep how-things-work details in `reference/`, how-to steps in `guides/`, plans
-  in `plans/`, and short one-step jobs in `actions/`.
+  in `plans/`, teach session records in `learning/`, and short one-step jobs in
+  `actions/`.
 - Use relative links between docs. Link to the main doc instead of repeating its
   text.
 - Make the smallest edit that fixes the problem. Do not rewrite parts that are

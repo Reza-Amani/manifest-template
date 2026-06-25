@@ -3,7 +3,7 @@
 This rule defines how the project organizes agent-facing manifest files under
 `.agents/`. Use it when adding, moving, renaming, or reviewing manifest files,
 or when deciding whether information belongs in a decision record (ADR),
-reference, rule, skill, guide, plan, action, or persona.
+reference, rule, skill, guide, plan, action, persona, or learning record.
 
 > **This file is required.** It is the one document that explains the whole
 > structure. Keep it in every copy of the template.
@@ -65,7 +65,7 @@ Standard rule files included in this template:
   itself. Put manifest organization, file naming, folder purpose, and placement
   guidance here.
 - `routing.rule.md`: the discovery map from task/domain to the ADR, reference,
-  skill, persona, plan, action, or rule that should be read. Put routing entries
+  skill, persona, plan, learning, action, or rule that should be read. Put routing entries
   and context-loading discipline here.
 - `terms.rule.md`: project-wide terminology and conversational agreements. Put
   canonical vocabulary definitions here, especially terms that must be used
@@ -115,6 +115,20 @@ Standard rule files included in this template:
 - **Purpose:** Track work that spans multiple sessions and help agents resume
   where prior work stopped.
 
+### `learning/`
+
+**Teach Session Records** — durable records of `teach` skill sessions. Important: these are managed by the "teach"skill, not by the user or other skills. 
+
+- **Format:** Markdown files.
+- **Naming:** Dated, descriptive files such as `YYYY-MM-DD-topic.md`; example
+  placeholder material may live under `example/`.
+- **Content:** Session topic, teaching goal, explanations, examples, exercises,
+  follow-up practice, and open questions.
+- **Purpose:** Preserve what was taught so future agents and contributors can
+  resume learning without re-deriving the session context.
+- **Rule of thumb:** Put learning-session records here, not project decisions,
+  subsystem mechanics, general scratch notes, or project backlog items.
+
 ### `actions/`
 
 **Actions** — one-step or narrowly scoped procedures.
@@ -137,6 +151,7 @@ Standard rule files included in this template:
 6. Put long-lived progress tracking in `plans/`.
 7. Put role behavior and task focus in `personas/`.
 8. Put tutorials and operator how-to material in `guides/`.
+9. Put records from `teach` skill sessions in `learning/`.
 
 If content seems to belong in more than one place, keep the canonical rule or
 decision in the most authoritative place and link to it from the operational
@@ -150,7 +165,7 @@ When a task is about manifest files:
 1. Start from root `AGENTS.md`.
 2. Read this rule to understand folder purpose and placement.
 3. Read `routing.rule.md` to find task-specific ADRs, references, skills,
-   personas, plans, actions, or rules.
+    personas, plans, learning, actions, or rules.
 4. Read `terms.rule.md` only when terminology or wording matters to the task.
 
 For non-manifest coding work, do not bulk-read the manifest. Use routing only
@@ -163,6 +178,8 @@ when task context calls for a specific ADR, reference, skill, or rule.
 - ADRs may point to references for mechanics.
 - References may point to ADRs for authority and rules for terminology.
 - Skills may point to ADRs, references, and rules needed by their procedure.
+- Learning records may point to skills, guides, ADRs, references, and plans used
+  during a teach session.
 - Routing entries should point by path or filename, not repeat the target
   document's contents.
 
@@ -193,6 +210,7 @@ requires it. Personas (`*.agent.md`) and skills (`SKILL.md`) usually need a
 | `skills/`     | `<skill>/SKILL.md`    | yes (`name`, `description`) |
 | `guides/`     | descriptive `*.md`    | no                        |
 | `plans/`      | `*.plan.md`           | optional (`todos` block)  |
+| `learning/`   | `YYYY-MM-DD-topic.md` | optional                  |
 | `actions/`    | descriptive `*.md`    | optional                  |
 
 ## Syncing Across Mirrors

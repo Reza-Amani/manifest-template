@@ -46,7 +46,8 @@ your-repo/
    ├─ skills/                     # multi-step runbooks (<name>/SKILL.md)
    ├─ actions/                    # one-step checks/procedures
    ├─ personas/                   # role-focused agent definitions
-   └─ plans/                      # multi-session plans + canonical backlog
+    ├─ plans/                      # multi-session plans + canonical backlog
+   └─ learning/                   # teach skill session records
 ```
 
 ## What goes where
@@ -60,6 +61,7 @@ your-repo/
 | `skills/`     | Multi-step procedures + assets          | `<name>/SKILL.md`    |
 | `guides/`     | Tutorials and operator how-to           | descriptive `*.md`   |
 | `plans/`      | Multi-session plans and the backlog     | `*.plan.md`          |
+| `learning/`   | Teach skill session records             | `YYYY-MM-DD-topic.md` |
 | `actions/`    | One-step checks and procedures          | descriptive `*.md`   |
 
 The full, authoritative placement rules live in
@@ -115,6 +117,8 @@ the format and the expected level of detail:
 - **actions/** — a `verify-docs-in-sync` one-step check.
 - **personas/** — a `reviewer` and a `manifester` agent.
 - **plans/** — a canonical `backlog.plan.md` and an example feature plan.
+- **learning/** — a README for recording and resuming `teach` skill sessions,
+  plus an example placeholder directory.
 
 ## Principles for keeping it useful
 

@@ -79,7 +79,8 @@ Read these template files so your output follows the conventions exactly:
 - [`../../rules/terms.rule.md`](../../rules/terms.rule.md) — the terms format.
 - [`../../../AGENTS.md`](../../../AGENTS.md) — the root entry-point shape.
 - The example docs in each folder (`adr/`, `reference/`, `guides/`, `skills/`,
-  `actions/`, `personas/`, `plans/`) — use these for **format only**, not content.
+  `actions/`, `personas/`, `plans/`, `learning/`) — use these for **format only**,
+  not content.
 
 ### 3. Detect an existing manifest in the target
 
@@ -153,6 +154,8 @@ suffixes from `manifest-structure.rule.md`.
 - `.agents/guides/` — `setup.md` and `commands.md` filled with the target's real
   setup steps and commands; add `notes.md` if useful.
 - `.agents/plans/backlog.plan.md` — seeded from the target's real open work.
+- `.agents/learning/README.md` — explains where `teach` skill session records
+  belong and how they are named.
 - `.agents/personas/` — only personas that fit the target (adapt `reviewer`;
   include `manifester` so the target can maintain its own docs).
 - `.agents/skills/` and `.agents/actions/` — only if the target has a real
