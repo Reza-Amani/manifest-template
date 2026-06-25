@@ -40,6 +40,7 @@ Pair with the ADR above only when implementation detail is required:
 ## Task → Skill (multi-step procedures)
 
 - Apply this template to another repo in the workspace → [`skills/apply-manifest-template`](../skills/apply-manifest-template/SKILL.md)
+- Bring recent template updates into a repo that already has a manifest → [`skills/sync-manifest-template`](../skills/sync-manifest-template/SKILL.md)
 - _(example)_ Add a new module end-to-end → [`skills/example-add-module`](../skills/example-add-module/SKILL.md)
 - _(add your real runbooks here under `skills/<name>/SKILL.md`)_
 
