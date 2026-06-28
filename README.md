@@ -8,6 +8,16 @@ repository: decisions, mechanics, conventions, runbooks, and role definitions.
 Copy this template into any repository, fill it with your project's specifics,
 and your agents stop guessing intent — they read it.
 
+It fits **two kinds of repository** with the same structure:
+
+- **Software / development repos** — code, services, libraries.
+- **Operation / data repos** — scripts and instructions for data sources (Google
+  Analytics 4, Salesforce), dashboards, and data collection (data-analyst /
+  data-science work).
+
+Every folder ships a coding example and, where it helps, an `operation-`
+prefixed example beside it so both audiences see the expected shape.
+
 ## Why a manifest?
 
 AI agents are powerful but stateless. Without shared context they re-derive
@@ -47,6 +57,7 @@ your-repo/
    ├─ actions/                    # one-step checks/procedures
    ├─ personas/                   # role-focused agent definitions
     ├─ plans/                      # multi-session plans + canonical backlog
+   ├─ findings/                   # reproducible analysis/investigation records
    └─ learning/                   # teach skill session records
 ```
 
@@ -61,6 +72,7 @@ your-repo/
 | `skills/`     | Multi-step procedures + assets          | `<name>/SKILL.md`    |
 | `guides/`     | Tutorials and operator how-to           | descriptive `*.md`   |
 | `plans/`      | Multi-session plans and the backlog     | `*.plan.md`          |
+| `findings/`   | Reproducible analysis/investigation records | `YYYY-MM-DD-topic.md` |
 | `learning/`   | Teach skill session records             | `YYYY-MM-DD-topic.md` |
 | `actions/`    | One-step checks and procedures          | descriptive `*.md`   |
 
@@ -80,11 +92,17 @@ Let an agent do the work:
 
 1. Open **your repo** in a VS Code workspace.
 2. **Add this template repo** as a second folder in the same workspace.
-3. Ask the agent to run the
-   [`apply-manifest-template`](.agents/skills/apply-manifest-template/SKILL.md)
-   skill. It studies your repo, then creates a tailored `.agents/` manifest
-   (or upgrades an existing one) with real, project-specific content — replacing
-   all the examples for you.
+3. Ask the agent to run the right apply skill for your repo type:
+   - Software / development repo →
+     [`apply-manifest-template`](.agents/skills/apply-manifest-template/SKILL.md)
+   - Operation / data repo →
+     [`operation-apply-manifest-template`](.agents/skills/operation-apply-manifest-template/SKILL.md)
+
+   It studies your repo, then creates a tailored `.agents/` manifest (or upgrades
+   an existing one) with real, project-specific content — replacing all the
+   examples for you. To pull later template updates into an existing manifest,
+   use the matching `sync-manifest-template` /
+   `operation-sync-manifest-template` skill.
 
 ### Option B — Manual
 
@@ -105,18 +123,25 @@ Let an agent do the work:
 ## What's included
 
 This template ships at least one worked example in every folder so you can see
-the format and the expected level of detail:
+the format and the expected level of detail. Where it helps, a coding example and
+an `operation-` prefixed example sit side by side:
 
-- **rules/** — all three rule files (`manifest-structure`, `routing`, `terms`).
-- **adr/** — the meta-ADR (*record architecture decisions*) plus an example
-  decision.
-- **reference/** — an example subsystem mechanics doc.
+- **rules/** — all three rule files (`manifest-structure`, `routing`, `terms`),
+  plus an operation/data example rule (`operation-secrets`).
+- **adr/** — the meta-ADR (*record architecture decisions*), a coding decision
+  example, and an operation/data decision. example (`operation-data-layering`).
+- **reference/** — a coding subsystem example and an operation/data connection
+  inventory example (`operation-connections`).
 - **guides/** — `setup.md`, `commands.md`, and `notes.md`.
-- **skills/** — a real `apply-manifest-template` runbook (bootstraps the manifest
-  into another repo in the workspace) plus an `example-add-module` example.
+- **skills/** — real `apply-manifest-template` / `sync-manifest-template`
+  runbooks for code repos and `operation-apply-manifest-template` /
+  `operation-sync-manifest-template` for data/ops repos, plus an
+  `example-add-module` (coding) and `operation-add-data-source` (data) example.
 - **actions/** — a `verify-docs-in-sync` one-step check.
 - **personas/** — a `reviewer` and a `manifester` agent.
 - **plans/** — a canonical `backlog.plan.md` and an example feature plan.
+- **findings/** — a README for recording reproducible analyses/investigations,
+  plus an example finding.
 - **learning/** — a README for recording and resuming `teach` skill sessions,
   plus an example placeholder directory.
 

@@ -15,6 +15,16 @@ toolchain.
 
 # set up the manifest
 
+# set up the manifest
+
+The manifest fits two repo types: **software / development** and **operation /
+data** (data sources, dashboards, data collection). The structure is identical;
+only the content differs. If you are letting an agent scaffold it, use the apply
+skill that matches your repo type:
+
+- Software / development → [`apply-manifest-template`](../skills/apply-manifest-template/SKILL.md)
+- Operation / data → [`operation-apply-manifest-template`](../skills/operation-apply-manifest-template/SKILL.md)
+
 ## 1. Copy the template into your repo
 
 Copy the `.agents/` directory and the root `AGENTS.md` from this template into
@@ -23,8 +33,10 @@ the root of your repository. Then:
 1. Edit `AGENTS.md` to state your project's real mandates.
 2. Edit [`.agents/rules/routing.rule.md`](../rules/routing.rule.md) to point at
    your real docs.
-3. Replace the example ADR, reference, skill, plan, and action with real ones
-   (or delete the examples once you have your own).
+3. Replace the example ADR, reference, skill, plan, action, and finding with
+   real ones (or delete the examples once you have your own). Operation/data
+   repos start from the `operation-` prefixed examples; coding repos start from
+   the coding examples.
 
 ## 2. Make tools discover the manifest
 

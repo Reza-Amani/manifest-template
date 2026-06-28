@@ -16,6 +16,22 @@ and human contributors. It is the source tree for agent-facing project context.
 Tool-specific mirrors such as `.github/` or `.cursor/` may point at or copy from
 `.agents/`, but the canonical content belongs here.
 
+The same structure serves **two kinds of repository**:
+
+- **Software / development repos** — code, services, libraries. Examples in this
+  template use the coding flavor (layered architecture, modules, build/test
+  commands).
+- **Operation / data repos** — scripts and instructions for data sources (Google
+  Analytics 4, Salesforce), pipelines, dashboards, and data collection
+  (data-analyst / data-science work). These use the operation flavor: connection
+  inventories, metric glossaries, secret policies, and data runbooks.
+
+The folders, naming, and routing are identical for both. Only the content
+differs. Operation-flavored example files are named with an `operation-` prefix
+(for example `reference/operation-connections.ref.md`,
+`rules/operation-secrets.rule.md`) so they sit clearly beside their coding
+counterparts.
+
 ## Folder Reference
 
 ### `adr/`
@@ -69,7 +85,14 @@ Standard rule files included in this template:
   and context-loading discipline here.
 - `terms.rule.md`: project-wide terminology and conversational agreements. Put
   canonical vocabulary definitions here, especially terms that must be used
-  consistently across code, schemas, docs, CLI flags, and agent output.
+  consistently across code, schemas, docs, CLI flags, and agent output. In an
+  operation / data repo this is the **metric glossary** (one definition per
+  metric).
+
+Repos may add their own **domain rules** alongside the standard three — for
+example `operation-secrets.rule.md` for credential and data-privacy handling in
+an operation / data repo. Name them `<category>.rule.md` and route to them from
+`routing.rule.md`.
 
 ### `personas/`
 
@@ -129,6 +152,23 @@ Standard rule files included in this template:
 - **Rule of thumb:** Put learning-session records here, not project decisions,
   subsystem mechanics, general scratch notes, or project backlog items.
 
+### `findings/`
+
+**Findings** — durable records of analyses and investigations: a specific
+question, how it was answered, and the result. Useful for both repo types (data
+analyses in an operation repo; investigation results such as a performance dig or
+root-cause analysis in a software repo).
+
+- **Format:** Markdown files.
+- **Naming:** Dated, descriptive files such as `YYYY-MM-DD-topic.md`; example
+  placeholder material may live under `example/`.
+- **Content:** Question, sources and parameters (enough to reproduce), method,
+  result, and caveats.
+- **Purpose:** Make one-off analysis reproducible and reusable so the next
+  person does not repeat the work.
+- **Rule of thumb:** Put a question-and-answer-at-a-point-in-time here. Decisions
+  go in `adr/`; how a subsystem or pipeline works goes in `reference/`.
+
 ### `actions/`
 
 **Actions** — one-step or narrowly scoped procedures.
@@ -152,6 +192,7 @@ Standard rule files included in this template:
 7. Put role behavior and task focus in `personas/`.
 8. Put tutorials and operator how-to material in `guides/`.
 9. Put records from `teach` skill sessions in `learning/`.
+10. Put reproducible analysis and investigation records in `findings/`.
 
 If content seems to belong in more than one place, keep the canonical rule or
 decision in the most authoritative place and link to it from the operational
@@ -165,7 +206,7 @@ When a task is about manifest files:
 1. Start from root `AGENTS.md`.
 2. Read this rule to understand folder purpose and placement.
 3. Read `routing.rule.md` to find task-specific ADRs, references, skills,
-    personas, plans, learning, actions, or rules.
+    personas, plans, learning, findings, actions, or rules.
 4. Read `terms.rule.md` only when terminology or wording matters to the task.
 
 For non-manifest coding work, do not bulk-read the manifest. Use routing only
@@ -211,6 +252,7 @@ requires it. Personas (`*.agent.md`) and skills (`SKILL.md`) usually need a
 | `guides/`     | descriptive `*.md`    | no                        |
 | `plans/`      | `*.plan.md`           | optional (`todos` block)  |
 | `learning/`   | `YYYY-MM-DD-topic.md` | optional                  |
+| `findings/`   | `YYYY-MM-DD-topic.md` | optional                  |
 | `actions/`    | descriptive `*.md`    | optional                  |
 
 ## Syncing Across Mirrors

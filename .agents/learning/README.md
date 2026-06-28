@@ -54,4 +54,5 @@ put real teach session records there.
 - Project decisions; put those in [`../adr/`](../adr/).
 - Current subsystem mechanics; put those in [`../reference/`](../reference/).
 - Multi-session project work; put that in [`../plans/`](../plans/).
+- Temporary discoveries, analysis, or investigation results; put those in [`../findings/`](../findings/).
 - General scratch notes; put those in [`../guides/notes.md`](../guides/notes.md).

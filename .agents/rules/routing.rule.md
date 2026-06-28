@@ -21,32 +21,48 @@ Read and follow the matching rule under `rules/` when working in that domain:
 
 - Project-wide terminology; applies to all tasks → [`terms.rule.md`](terms.rule.md)
 - Manifest structure; applies when editing manifest files → [`manifest-structure.rule.md`](manifest-structure.rule.md)
+- _(operation/data example)_ Secrets, credentials & data privacy → [`operation-secrets.rule.md`](operation-secrets.rule.md)
 
 ## Task → ADR (decisions)
 
 Read the matching ADR under `adr/` only when working in that domain:
 
 - How and why we record decisions → [`adr/0000-record-architecture-decisions.adr.md`](../adr/0000-record-architecture-decisions.adr.md)
-- _(example)_ Layered architecture & module boundaries → [`adr/0001-example-layered-architecture.adr.md`](../adr/0001-example-layered-architecture.adr.md)
+- _(coding example)_ Layered architecture & module boundaries → [`adr/0001-example-layered-architecture.adr.md`](../adr/0001-example-layered-architecture.adr.md)
+- _(operation/data example)_ Data pipeline layering & metric ownership → [`adr/0002-operation-data-layering.adr.md`](../adr/0002-operation-data-layering.adr.md)
 - _(add your real decisions here as `*.adr.md` files)_
 
 ## Task → Reference (mechanics)
 
 Pair with the ADR above only when implementation detail is required:
 
-- _(example)_ How the example subsystem is wired and configured → [`reference/example-subsystem.ref.md`](../reference/example-subsystem.ref.md)
+- _(coding example)_ How the example subsystem is wired and configured → [`reference/example-subsystem.ref.md`](../reference/example-subsystem.ref.md)
+- _(operation/data example)_ Data-source & destination connection inventory → [`reference/operation-connections.ref.md`](../reference/operation-connections.ref.md)
 - _(add your real mechanics docs here as `*.ref.md` files)_
 
 ## Task → Skill (multi-step procedures)
 
-- Apply this template to another repo in the workspace → [`skills/apply-manifest-template`](../skills/apply-manifest-template/SKILL.md)
-- Bring recent template updates into a repo that already has a manifest → [`skills/sync-manifest-template`](../skills/sync-manifest-template/SKILL.md)
-- _(example)_ Add a new module end-to-end → [`skills/example-add-module`](../skills/example-add-module/SKILL.md)
-- _(add your real runbooks here under `skills/<name>/SKILL.md`)_
+Manifest skills for **software / development** repos:
+
+- Apply this template to a code repo in the workspace → [`skills/apply-manifest-template`](../skills/apply-manifest-template/SKILL.md)
+- Bring recent template updates into a code repo that already has a manifest → [`skills/sync-manifest-template`](../skills/sync-manifest-template/SKILL.md)
+- _(coding example)_ Add a new module end-to-end → [`skills/example-add-module`](../skills/example-add-module/SKILL.md)
+
+Manifest skills for **operation / data** repos:
+
+- Apply this template to a data/ops repo in the workspace → [`skills/operation-apply-manifest-template`](../skills/operation-apply-manifest-template/SKILL.md)
+- Bring recent template updates into a data/ops repo that already has a manifest → [`skills/operation-sync-manifest-template`](../skills/operation-sync-manifest-template/SKILL.md)
+- _(operation/data example)_ Onboard a new data source end-to-end → [`skills/operation-add-data-source`](../skills/operation-add-data-source/SKILL.md)
+
+_(add your real runbooks here under `skills/<name>/SKILL.md`)_
 
 ## Task → Learning (teach session records)
 
 - Record or resume a `teach` skill session → the state is kept under [`learning`](../learning) and is managed by "teach" skill only.
+
+## Task → Findings (analysis & investigation records)
+
+- Record a finding or resume an analysis/investigation (data analysis, perf dig, root-cause) → [`findings/README.md`](../findings/README.md)
 
 ## Task → Action (one-step checks)
 
@@ -67,5 +83,7 @@ Defined in `personas/*.agent.md`:
   [`plans/backlog.plan.md`](../plans/backlog.plan.md).
 - Teach session records live in `learning/`. Start with
   [`learning/README.md`](../learning/README.md).
+- Analysis & investigation records live in `findings/`. Start with
+  [`findings/README.md`](../findings/README.md).
 - One-step procedures live in `actions/` (e.g.
   [`actions/verify-docs-in-sync.md`](../actions/verify-docs-in-sync.md)).
