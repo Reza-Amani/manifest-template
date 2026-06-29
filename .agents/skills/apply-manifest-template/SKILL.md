@@ -54,12 +54,15 @@ Task progress:
 - [ ] 1. Identify source (this template) and target repo
 - [ ] 2. Learn the template structure and conventions and agent rules/instructions 
 - [ ] 3. Detect whether the target already has a .agents/ manifest
-- [ ] 4. Study the target repo's business, architecture, stack, and commands
+- [ ] 4. Study the target repo's business, existing system prompts, existing documents, stack, and commands
 - [ ] 5. Interview the user for what code cannot reveal (mandates, decisions). Proactively, ask concise questions that cannot be answered by reading the repo.
 - [ ] 6. Create or upgrade the target manifest with REAL, tailored content
-- [ ] 7. Replace every example with real content; keep one leftover example in each manifest directory, if no file exists there, but mark it clearly as an example for future reference.
-- [ ] 8. Verify links, naming, and placement; report a summary
-- [ ] 9. Do NOT remove the existing ADRs, instructions, skills, etc. in the target repo; only edit them if required, move them if required, or add new ones. If you find something that seems wrong in an existing manifest, list it for the user instead of guessing. At the end, report any major content change in the existing manifest and report any items that need human review instead of silently guessing or leaving them broken.
+- [ ] 7. Interview the user for existing documents and system prompts. For each, recommend an action: keep where is, delete (if seems unnecessary), move to the new manifest skeleton (recommend a correct place)
+- [ ] 8. If any of the existing documents or system prompts are in a logically unfit place, move them to the correct place. For example, a mandate that has been written in docs directory, should move to the rules (or ADR) directory. Inform user about your intention to move it (if you are not sure) and if the user disagrees, keep it where it is, but flag it for review.
+- [ ] 9. If any of the existing documents or system prompts duplicates another document, merge them into one and put in the correct place and delete the other.   
+- [ ] 10. Replace every example with real content; keep one leftover example in each manifest directory, if no file exists there, but mark it clearly as an example for future reference.
+- [ ] 11. Verify links, naming, and placement; report a summary
+- [ ] 12. Do not remove the contents of existing ADRs, instructions, skills, etc without using them somewhere else in the target repo; edit them if required, move them if required, merge them if required. Delete the existing documents only if you have either moved them to the new manifest skeleton or merged them into another document.
 ```
 
 ### 1. Identify the repos
@@ -91,6 +94,8 @@ Check the target repo for `AGENTS.md` and a `.agents/` directory.
   against the template structure, keep good content, and fill gaps (step 6,
   "Upgrade" path). Treat existing ADRs as authoritative — never rewrite a
   decision; only add or flag.
+
+Check for arbitrary md files all over the target repo, especially in .github and .cursor and docs. If you find any, ask the user if they should be moved into the new manifest structure (recommend a location) or deleted or kept. 
 
 ### 4. Study the target repo
 
@@ -150,10 +155,10 @@ suffixes from `manifest-structure.rule.md`.
 
 - `.agents/adr/` — start with the meta-ADR (record architecture decisions), then
   one ADR per real, already-settled decision from steps 4–5.
-- `.agents/reference/` — a `*.ref.md` per real subsystem worth documenting.
+- `.agents/reference/` — a `*.ref.md` per real subsystem worth documenting. If you didn't find anything, leave a spaceholder as an example for future reference, but mark it clearly as an example.
 - `.agents/guides/` — `setup.md` and `commands.md` filled with the target's real
-  setup steps and commands; add `notes.md` if useful.
-- `.agents/plans/backlog.plan.md` — seeded from the target's real open work.
+  setup steps and commands; add `notes.md` with user's temporary notes.
+- `.agents/plans/backlog.plan.md` — seeded from the target's real open work, or leave it shallow with just some brief general guides.
 - `.agents/learning/README.md` — explains where `teach` skill session records
   belong and how they are named.
 - `.agents/findings/README.md` — explains where reproducible analysis and
@@ -161,9 +166,9 @@ suffixes from `manifest-structure.rule.md`.
   named.
 - `.agents/personas/` — only personas that fit the target (adapt `reviewer`;
   include `manifester` so the target can maintain its own docs).
-- `.agents/skills/` and `.agents/actions/` — only if the target has a real
-  repeatable procedure or check worth capturing. Do **not** copy
-  `example-add-module` or `verify-docs-in-sync` unless they genuinely apply.
+- `.agents/skills/` — copy any existing skill found in the target repo. If no skill found, create an example skill relevant to the target's business, but mark it clearly as an example for future reference. 
+- `.agents/actions/verify-docs-in-sync.md`. Also, any other "action" or "prompt" that you find in the existing system prompts.
+
 
 **Upgrade path specifics:** for an existing manifest, make the smallest set of
 changes that brings it in line with the structure — add missing required files,

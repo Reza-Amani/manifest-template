@@ -43,5 +43,7 @@ Skip template example content entirely (anything named `operation-*` example,
 
 ## Finish
 
-Validate links and markdown in the edited target files, then summarize what was
-brought across and what was deliberately skipped and why.
+Validate links and markdown in the edited target files. If the target has an
+`actions/verify-docs-in-sync.md` action, run it (or remind the user to) so the
+synced changes are checked for consistency. Then summarize what was brought
+across and what was deliberately skipped and why.

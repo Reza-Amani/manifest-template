@@ -43,8 +43,16 @@ Instead of services and modules, gather:
 - **Dashboards / reports:** what exists and which layer each reads from.
 - **Credentials handling:** where secrets live today (env vars, secret store).
   Record env-var **names** only.
+- **Existing system prompts and documents:** any data-governance notes, runbooks,
+  READMEs, or analyst instructions already written down — these often hold
+  decisions, metric definitions, and conventions that belong in the manifest.
 - **Open work:** requested dashboards, pending data pulls, and known
   data-quality issues.
+
+Check for arbitrary `.md` files all over the target repo, especially in
+`.github`, `.cursor`, and `docs`. If you find any, ask the user whether they
+should be moved into the new manifest structure (recommend a location), deleted,
+or kept.
 
 The goal of this study is to understand the target's real content so the manifest can be filled with it in a logical and accurate manner. 
 
@@ -59,15 +67,44 @@ Beyond the required core (`AGENTS.md`, `manifest-structure.rule.md`,
   metric ownership (see the example
   [`../../adr/0002-operation-data-layering.adr.md`](../../adr/0002-operation-data-layering.adr.md)).
 - `reference/operation-connections.ref.md` — the real connection inventory
-  (env-var names only, never secrets).
+  (env-var names only, never secrets) — plus any other `*.ref.md` per real
+  subsystem worth documenting. If you didn't find anything, leave a placeholder
+  as an example for future reference, but mark it clearly as an example.
 - `rules/operation-secrets.rule.md` — the repo's real secret & privacy policy.
 - `rules/terms.rule.md` — the real **metric glossary** (one definition per
   metric).
-- `skills/` — real data runbooks (onboarding a source, refreshing an extract,
-  building a dashboard).
+- `skills/` — copy any existing data runbook found in the target repo (onboarding
+  a source, refreshing an extract, building a dashboard). If no skill is found,
+  create an example runbook relevant to the target's data work, but mark it
+  clearly as an example for future reference.
+- `actions/verify-docs-in-sync.md`, plus any other "action" or "prompt" you find
+  in the target's existing system prompts.
 - `findings/` — seed [`../../findings/README.md`](../../findings/README.md) so
   analyses are captured reproducibly.
-- `plans/backlog.plan.md` — seeded from real requested reports and data work.
+- `guides/` — `setup.md` and `commands.md` filled with the target's real setup
+  steps and commands; add `notes.md` with the user's temporary notes.
+- `plans/backlog.plan.md` — seeded from real requested reports and data work, or
+  left shallow with just some brief general guides.
+
+## Handle existing documents and system prompts
+
+The target repo's real content is precious — never throw it away. For every
+existing document, runbook, or system prompt you found while studying the repo:
+
+- **Interview the user** and recommend an action for each: keep where it is,
+  delete (if it seems unnecessary), or move into the new manifest skeleton
+  (recommend a correct place).
+- **Move misplaced docs** to the correct place. For example, a data-governance
+  mandate written in a `docs` directory should move to `rules/` (or `adr/`).
+  Inform the user of your intention to move it; if the user disagrees, keep it
+  where it is but flag it for review.
+- **Merge duplicates** into one document in the correct place, and delete the
+  other.
+- **Preserve content:** do not remove the contents of existing ADRs, runbooks,
+  references, etc. without using them somewhere else in the target repo. Edit,
+  move, or merge as required. Delete an existing document only after you have
+  either moved it into the new manifest skeleton or merged it into another
+  document.
 
 ## Interview the user
 

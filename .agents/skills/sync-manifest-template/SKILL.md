@@ -69,7 +69,7 @@ Use this table:
 | Bring across (logical manifest progress) | Skip (not for the target) |
 |---|---|
 | New folder type documented (e.g. adding `learning/`) | Template example files: `*example*` ADRs, refs, skills, `example/` dirs |
-| New naming-suffix / placement / cross-link rules | The `apply-manifest-template` meta-skill (template-only) |
+| New naming-suffix / placement / cross-link rules | The apply/sync meta-skills, incl. `operation-*` variants (template-only) |
 | Routing discipline and discovery-flow wording | This template's `README.md` describing the template itself |
 | Persona convention updates (plain-English rules, folder lists) | Edits the target already has, or is ahead on |
 | Frontmatter / structure conventions | Anything that names the template's example domain |
@@ -86,6 +86,8 @@ If the target already has the change (or a more advanced local version), skip it
 
 ### 6. Validate and finish
 - Check the edited target files for broken links and markdown errors.
+- If the target has an `actions/verify-docs-in-sync.md` action, run it (or remind
+  the user to) so the synced changes are checked for consistency.
 - If the target builds a generated index (e.g. a `knowledge-base.md` produced by
   a script), remind the user to regenerate it after `.agents/` changes.
 - Summarize what was brought across and what was deliberately skipped and why.
