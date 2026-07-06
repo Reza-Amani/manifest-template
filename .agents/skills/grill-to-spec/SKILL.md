@@ -125,10 +125,8 @@ spec. Tell the user which branches remain unresolved.
 
 ## Phase 4: Offer manifest updates (permission-gated)
 
-After the spec is written, check whether the session's decisions made any
-**existing** manifest files in the target repo stale. Follow the placement
-rules in
-`[../../rules/manifest-structure.rule.md](../../rules/manifest-structure.rule.md)`.
+After the spec is written, check whether the session's decisions made any manifest files in the target repo stale. Follow the placement rules in target repo's manifest structure (.agents/rules/manifest-structure.rule.md if present)
+
 
 Candidates to check (only if the file/directory already exists in the target):
 
