@@ -15,6 +15,11 @@ settled questions or unknowingly violate constraints.
 We need a lightweight, durable, version-controlled way to capture the *why*
 behind decisions, not just the *what*.
 
+You need an ADR only when all these 3 conditions are met:
+1. **Hard to reverse** — the cost of changing your mind later is meaningful
+2. **Surprising without context** — a future reader will wonder "why did they do it this way?"
+3. **The result of a real trade-off** — there were genuine alternatives and you picked one for specific reasons
+
 ## Decision
 
 We record each architecturally significant decision as an **Architecture

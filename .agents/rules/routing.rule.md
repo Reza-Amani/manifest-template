@@ -46,6 +46,7 @@ Manifest skills for **software / development** repos:
 
 - Apply this template to a code repo in the workspace → [`skills/apply-manifest-template`](../skills/apply-manifest-template/SKILL.md)
 - Bring recent template updates into a code repo that already has a manifest → [`skills/sync-manifest-template`](../skills/sync-manifest-template/SKILL.md)
+- Grill the user about a plan, then write a spec into the target repo's `plans/` → [`skills/grill-to-spec`](../skills/grill-to-spec/SKILL.md)
 - _(coding example)_ Add a new module end-to-end → [`skills/example-add-module`](../skills/example-add-module/SKILL.md)
 
 Manifest skills for **operation / data** repos:
@@ -67,6 +68,13 @@ _(add your real runbooks here under `skills/<name>/SKILL.md`)_
 ## Task → Action (one-step checks)
 
 - _(example)_ Verify docs match code before declaring done → [`actions/verify-docs-in-sync.md`](../actions/verify-docs-in-sync.md)
+
+## Task → Plan (multi-step work across sessions)
+
+- _(example)_ Track a single feature across multiple sessions → [`plans/example-feature.plan.md`](../plans/example-feature.plan.md)
+- Important:
+  - when you are in the planning mode, or create a plan per user request, save the plan under `plans/` with a descriptive name and a `.plan.md` suffix. No other location is allowed for plans. 
+  - When the user asks to continue or edit a plan, look for the plan under `plans/`, regardless of the default plan directory for the agent.  
 
 ## Specialized agents
 

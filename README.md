@@ -135,8 +135,10 @@ an `operation-` prefixed example sit side by side:
 - **guides/** — `setup.md`, `commands.md`, and `notes.md`.
 - **skills/** — real `apply-manifest-template` / `sync-manifest-template`
   runbooks for code repos and `operation-apply-manifest-template` /
-  `operation-sync-manifest-template` for data/ops repos, plus an
-  `example-add-module` (coding) and `operation-add-data-source` (data) example.
+  `operation-sync-manifest-template` for data/ops repos, plus
+  [`grill-to-spec`](.agents/skills/grill-to-spec/SKILL.md) (grilling session
+  that ends in a spec), an `example-add-module` (coding) example, and an
+  `operation-add-data-source` (data) example.
 - **actions/** — a `verify-docs-in-sync` one-step check.
 - **personas/** — a `reviewer` and a `manifester` agent.
 - **plans/** — a canonical `backlog.plan.md` and an example feature plan.
@@ -154,6 +156,32 @@ an `operation-` prefixed example sit side by side:
 - **Plain language.** Write so a new contributor understands every line on the
   first read.
 
+## Third-party skills (Matt Pocock)
+
+Parts of this template pair with or adapt skills from
+[Matt Pocock's *Skills For Real Engineers*](https://github.com/mattpocock/skills)
+([skills.sh](https://www.skills.sh/mattpocock/skills)). Install them with the
+`skills` CLI:
+
+```sh
+npx skills add mattpocock/skills
+```
+
+| This template | Matt Pocock skill | Notes |
+| ------------- | ----------------- | ----- |
+| [`learning/`](.agents/learning/README.md) | [`teach`](https://www.skills.sh/mattpocock/skills/teach) | Session records in `learning/` pair with the `teach` skill. |
+| [`grill-to-spec`](.agents/skills/grill-to-spec/SKILL.md) | [`grilling`](https://www.skills.sh/mattpocock/skills/grilling), [`domain-modeling`](https://www.skills.sh/mattpocock/skills/domain-modeling) | Adapted for manifest repos: grilling loop + domain sharpening, ending in a `.agents/plans/*.spec.md` in the target repo. |
+
+For the original grilling workflow without manifest/spec output, use Matt's
+[`grill-me`](https://www.skills.sh/mattpocock/skills/grill-me) or
+[`grill-with-docs`](https://www.skills.sh/mattpocock/skills/grill-with-docs)
+skills directly.
+
+License terms for adapted material are in
+[`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
+
 ## License
 
-See [`LICENSE`](LICENSE).
+This project is licensed under the MIT License — see [`LICENSE`](LICENSE).
+Third-party material may be under separate terms; see
+[`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
