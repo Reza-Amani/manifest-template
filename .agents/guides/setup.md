@@ -68,11 +68,26 @@ If your platform does not support symlinks in version control, add a small
 script (or CI step) that copies `.agents/` subfolders into the tool-specific
 folders on build. Never hand-edit the mirrored copies.
 
-## 3. Keep mirrors out of accidental edits
+## 3. Keep mirrors out of git
 
-If a mirror folder is tracked separately, make it clear in the repo (a short
-note or a `.gitattributes`/`.gitignore` entry) that the canonical files live in
-`.agents/`. The goal: one source of truth, no divergent copies.
+Local mirror folders should **not** be committed. Add to the repo root
+`.gitignore` (merge with existing entries):
+
+```gitignore
+# Local IDE / tool mirrors (canonical source: .agents/). Recreate with this guide.
+.cursor/
+.github/skills
+.github/agents
+```
+
+- **`.cursor/`** — IDE wiring, symlinks, and user-specific state. Each developer
+  recreates this locally.
+- **`.github/skills`** and **`.github/agents`** — only when you use symlink
+  mirrors as above. Do not gitignore all of `.github/` if you commit workflows
+  under `.github/workflows/`.
+
+The canonical manifest lives in `.agents/`. The goal: one source of truth, no
+divergent copies in version control.
 
 ## 4. Verify
 

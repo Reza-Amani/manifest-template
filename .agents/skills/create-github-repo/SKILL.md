@@ -89,7 +89,7 @@ continuing.
 
 ### 3. Gather repo details from the user
 
-Ask for these four items. Use `AskQuestion` when available; otherwise ask in chat.
+Ask for these items. Use `AskQuestion` when available; otherwise ask in chat.
 
 | Input | Notes |
 |-------|-------|
@@ -97,8 +97,10 @@ Ask for these four items. Use `AskQuestion` when available; otherwise ask in cha
 | **Destination directory** | Parent folder where the repo will live. Final path: `<destination>/<repo-name>/`. |
 | **Visibility** | `public` or `private`. |
 | **Purpose** | One or two sentences on what the repo is for. Used to write the README. |
+| **Primary language** | Optional if obvious from purpose (e.g. C, Python, TypeScript). Used for `.gitignore`. Ask when unclear. |
 
-Do not guess the purpose. Do not create the repo until all four are confirmed.
+Do not guess the purpose. Do not create the repo until the required fields are
+confirmed.
 
 Optional: ask whether to use **MIT** (default) or another open license. If the
 user does not care, use MIT.
@@ -154,9 +156,43 @@ Keep it under ~40 lines unless the user asked for more.
 **LICENSE** — MIT by default. Copyright holder: the GitHub username from
 `gh auth status`, or the git `user.name` if clearer. Year: current year.
 
-**`.gitignore`** — add sensible defaults for the stack mentioned in the purpose
-(e.g. C build artifacts, Node `node_modules/`, Python `__pycache__/`). If
-unknown, use a minimal generic ignore (OS junk + editor files).
+**`.gitignore`** — always start with the **base block** below, then append the
+block for the **primary language** (from purpose or user). If language is
+unknown, use base + generic only.
+
+**Base block (always include):**
+
+```gitignore
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*~
+
+# Local IDE / tool mirrors (canonical agent manifest: .agents/ when present)
+.cursor/
+```
+
+**Language blocks (merge one that matches):**
+
+| Language | Add |
+|----------|-----|
+| **C / C++** | `*.o`, `*.obj`, `*.exe`, `*.out`, `*.a`, `*.so`, `*.dll`, `*.dylib`, `build/`, `dist/` |
+| **Python** | `__pycache__/`, `*.py[cod]`, `.venv/`, `venv/`, `env/`, `.pytest_cache/`, `*.egg-info/`, `dist/`, `build/` |
+| **Node / TypeScript** | `node_modules/`, `dist/`, `build/`, `.next/`, `coverage/`, `*.tsbuildinfo`, `.env`, `.env.*` |
+| **Go** | `*.exe`, `*.test`, `*.out`, `vendor/` (if not committed), `bin/`, `dist/` |
+| **Rust** | `target/` |
+| **Java / Kotlin** | `target/`, `*.class`, `*.jar`, `*.war`, `.gradle/`, `build/` |
+| **C# / .NET** | `bin/`, `obj/`, `*.user`, `*.suo`, `.vs/` |
+| **Generic / unknown** | `build/`, `dist/`, `out/`, `*.log` |
+
+When the user later applies the manifest template, `apply-manifest-template` may
+add `.github/skills` and `.github/agents` for local symlink mirrors — do not add
+those here unless the repo will use that layout from day one.
 
 Do not add application code unless the user asked for it.
 

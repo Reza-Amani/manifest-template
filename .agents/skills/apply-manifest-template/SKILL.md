@@ -61,8 +61,10 @@ Task progress:
 - [ ] 8. If any of the existing documents or system prompts are in a logically unfit place, move them to the correct place. For example, a mandate that has been written in docs directory, should move to the rules (or ADR) directory. Inform user about your intention to move it (if you are not sure) and if the user disagrees, keep it where it is, but flag it for review.
 - [ ] 9. If any of the existing documents or system prompts duplicates another document, merge them into one and put in the correct place and delete the other.   
 - [ ] 10. Replace every example with real content; keep one leftover example in each manifest directory, if no file exists there, but mark it clearly as an example for future reference.
-- [ ] 11. Verify links, naming, and placement; report a summary
-- [ ] 12. Do not remove the contents of existing ADRs, instructions, skills, etc without using them somewhere else in the target repo; edit them if required, move them if required, merge them if required. Delete the existing documents only if you have either moved them to the new manifest skeleton or merged them into another document.
+- [ ] 11. Ensure `.gitignore` excludes local tool mirrors (`.cursor/`; optional
+  `.github/skills` and `.github/agents` if setup uses symlinks)
+- [ ] 12. Verify links, naming, and placement; report a summary
+- [ ] 13. Do not remove the contents of existing ADRs, instructions, skills, etc without using them somewhere else in the target repo; edit them if required, move them if required, merge them if required. Delete the existing documents only if you have either moved them to the new manifest skeleton or merged them into another document.
 ```
 
 ### 1. Identify the repos
@@ -169,6 +171,23 @@ suffixes from `manifest-structure.rule.md`.
 - `.agents/skills/` — copy any existing skill found in the target repo. If no skill found, create an example skill relevant to the target's business, but mark it clearly as an example for future reference. 
 - `.agents/actions/verify-docs-in-sync.md`. Also, any other "action" or "prompt" that you find in the existing system prompts.
 
+**`.gitignore` (tool mirrors):** `.cursor/` holds local IDE wiring (symlinks to
+`.agents/`, caches, user settings). It should **not** be committed. Merge these
+entries into the target's `.gitignore` (create the file if missing); do not
+remove existing stack-specific rules:
+
+```gitignore
+# Local IDE / tool mirrors (canonical source: .agents/). Recreate via guides/setup.md
+.cursor/
+.github/skills
+.github/agents
+```
+
+Only add `.github/skills` and `.github/agents` when
+[`guides/setup.md`](../../guides/setup.md) recommends symlink mirrors there.
+Keep `.github/workflows/` and other real `.github/` content committable. Mention
+in the target's `guides/setup.md` that `.cursor/` is gitignored and recreated
+locally per developer.
 
 **Upgrade path specifics:** for an existing manifest, make the smallest set of
 changes that brings it in line with the structure — add missing required files,
@@ -222,4 +241,5 @@ Target has .agents/ ?
   remains.
 - Existing ADRs in the target were preserved (added to or flagged, never
   silently rewritten).
+- Target `.gitignore` excludes `.cursor/` (and symlink mirror paths if used).
 - The summary lists created/updated files and any items left for the user.
