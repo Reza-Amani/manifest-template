@@ -137,7 +137,8 @@ an `operation-` prefixed example sit side by side:
   runbooks for code repos and `operation-apply-manifest-template` /
   `operation-sync-manifest-template` for data/ops repos, plus
   [`grill-to-spec`](.agents/skills/grill-to-spec/SKILL.md) (grilling session
-  that ends in a spec), an `example-add-module` (coding) example, and an
+  that ends in a spec), [`spec-to-plan`](.agents/skills/spec-to-plan/SKILL.md)
+  (Cursor-style plan from a spec), an `example-add-module` (coding) example, and an
   `operation-add-data-source` (data) example.
 - **actions/** — a `verify-docs-in-sync` one-step check.
 - **personas/** — a `reviewer` and a `manifester` agent.

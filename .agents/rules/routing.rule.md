@@ -48,6 +48,7 @@ Manifest skills for **software / development** repos:
 - Apply this template to a code repo in the workspace → [`skills/apply-manifest-template`](../skills/apply-manifest-template/SKILL.md)
 - Bring recent template updates into a code repo that already has a manifest → [`skills/sync-manifest-template`](../skills/sync-manifest-template/SKILL.md)
 - Grill the user about a plan, then write a spec into the target repo's `plans/` → [`skills/grill-to-spec`](../skills/grill-to-spec/SKILL.md)
+- Turn a spec (or stated intent) into a Cursor-style plan under `plans/` → [`skills/spec-to-plan`](../skills/spec-to-plan/SKILL.md)
 - _(coding example)_ Add a new module end-to-end → [`skills/example-add-module`](../skills/example-add-module/SKILL.md)
 
 Manifest skills for **operation / data** repos:
