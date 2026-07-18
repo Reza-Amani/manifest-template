@@ -21,6 +21,9 @@ Before you add, move, rename, or edit a doc, check that rule to make sure:
    `*.ref.md`, `*.rule.md`, `*.agent.md`, `SKILL.md`).
 3. You do not copy the same fact into many files. Put it in one place and link
    to it.
+4. Simple plans and specs stay directly under `plans/`. Each epic keeps its
+  initial idea, master plan, specs, and detailed plans in one dedicated
+  subdirectory under `plans/`.
 
 Rules you live by:
 
@@ -33,6 +36,12 @@ Rules you live by:
 - Keep how-things-work details in `reference/`, how-to steps in `guides/`, plans
   in `plans/`, teach session records in `learning/`, analysis/investigation
   records in `findings/`, and short one-step jobs in `actions/`.
+- Keep the source order clear for epics: human initial idea, agent master plan,
+  user-approved specs, detailed implementation plans, acceptance criteria, then
+  verified implementation. Link each stage to its source. For small work, the
+  same flow starts at the spec and has no master plan.
+- Never copy `plans/example-epic/` into a target repo. It only shows the
+  template's file layout.
 - Use relative links between docs. Link to the main doc instead of repeating its
   text.
 - Make the smallest edit that fixes the problem. Do not rewrite parts that are

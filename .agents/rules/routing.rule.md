@@ -47,8 +47,11 @@ Manifest skills for **software / development** repos:
 - Create a new GitHub repo with README, license, and first push → [`skills/create-github-repo`](../skills/create-github-repo/SKILL.md)
 - Apply this template to a code repo in the workspace → [`skills/apply-manifest-template`](../skills/apply-manifest-template/SKILL.md)
 - Bring recent template updates into a code repo that already has a manifest → [`skills/sync-manifest-template`](../skills/sync-manifest-template/SKILL.md)
+- Grill a large task into a high-level phased master plan → [`skills/grill-to-master`](../skills/grill-to-master/SKILL.md)
 - Grill the user about a plan, then write a spec into the target repo's `plans/` → [`skills/grill-to-spec`](../skills/grill-to-spec/SKILL.md)
-- Turn a spec (or stated intent) into a Cursor-style plan under `plans/` → [`skills/spec-to-plan`](../skills/spec-to-plan/SKILL.md)
+- Turn a spec into a Cursor-style implementation plan without acceptance criteria → [`skills/spec-to-plan`](../skills/spec-to-plan/SKILL.md)
+- Add complete acceptance criteria and focused tests to a detailed plan → [`skills/plan-to-criteria`](../skills/plan-to-criteria/SKILL.md)
+- Implement a detailed plan and prove every acceptance criterion → [`skills/implement-plan`](../skills/implement-plan/SKILL.md)
 - _(coding example)_ Add a new module end-to-end → [`skills/example-add-module`](../skills/example-add-module/SKILL.md)
 
 Manifest skills for **operation / data** repos:
@@ -74,9 +77,22 @@ _(add your real runbooks here under `skills/<name>/SKILL.md`)_
 ## Task → Plan (multi-step work across sessions)
 
 - _(example)_ Track a single feature across multiple sessions → [`plans/example-feature.plan.md`](../plans/example-feature.plan.md)
+- Small-task and epic planning lifecycle → [`reference/planning-flow.ref.md`](../reference/planning-flow.ref.md)
+- Planning file layout and source-of-truth flow → [`manifest-structure.rule.md`](manifest-structure.rule.md#plans)
+- _(template-only example)_ See an epic split into an initial idea, master plan,
+  spec, and detailed plan → [`plans/example-epic/`](../plans/example-epic/)
 - Important:
-  - when you are in the planning mode, or create a plan per user request, save the plan under `plans/` with a descriptive name and a `.plan.md` suffix. No other location is allowed for plans. 
-  - When the user asks to continue or edit a plan, look for the plan under `plans/`, regardless of the default plan directory for the agent.  
+  - For simple work, save the descriptive `*.spec.md` and matching `*.plan.md`
+    directly under `plans/`.
+  - For an epic or big task, use one dedicated subdirectory under `plans/` for
+    its `*-initial.md`, `*-master.plan.md`, specs, and detailed plans.
+  - Acceptance criteria live in an independent section of the detailed plan.
+    They are added by `plan-to-criteria`, not by `grill-to-spec` or
+    `spec-to-plan`.
+  - When the user asks to continue or edit planning work, search the full
+    `plans/` tree, regardless of the agent's default plan directory.
+  - The `plans/example-epic/` directory belongs only to this template. Do not
+    copy it into a target repository.
 
 ## Specialized agents
 
@@ -89,7 +105,8 @@ Defined in `personas/*.agent.md`:
 
 ## Plans & actions
 
-- Multi-session plans live in `plans/`. The canonical backlog is
+- Multi-session planning files live in the `plans/` tree. The canonical
+  repository backlog is
   [`plans/backlog.plan.md`](../plans/backlog.plan.md).
 - Teach session records live in `learning/`. Start with
   [`learning/README.md`](../learning/README.md).

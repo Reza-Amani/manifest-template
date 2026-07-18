@@ -39,5 +39,9 @@ When you finish an item, check it off **and** update its status in the YAML
 ## Active Context
 
 - **Primary goal:** What the current focus is.
-- **Related plans:** Detailed multi-step plans live beside this file, e.g.
+- **Related simple work:** Top-level plan, e.g.
   [`example-feature.plan.md`](example-feature.plan.md).
+- **Related epic:** Link to its master roadmap, e.g.
+  [`example-epic/example-epic-master.plan.md`](example-epic/example-epic-master.plan.md).
+  The `example-epic/` directory is template-only and must not be copied into a
+  target repository.

@@ -3,10 +3,12 @@ name: grill-to-spec
 description: >-
   Relentlessly interviews the user about a plan or design (grilling), sharpening
   domain terminology as it goes, and — once shared understanding is reached —
-  writes a spec file to the *target* repo's `.agents/plans/<topic>.spec.md` as
-  the starting point for spec-driven development. Afterwards, lists any manifest
-  files in the target repo (terms.rule.md, adr/, reference/, guides/) made stale
-  by the decisions and asks the user's permission before updating them.
+  writes a spec file to the *target* repo's `.agents/plans/` tree as the starting
+  point for spec-driven development. Simple specs stay directly under `plans/`;
+  epic specs stay in the epic's dedicated subdirectory. Afterwards, lists any
+  manifest files in the target repo (terms.rule.md, adr/, reference/, guides/)
+  made stale by the decisions and asks the user's permission before updating
+  them.
   Use when the user asks to "grill me into a spec", "grill this plan",
   "stress-test this design and write a spec", or wants a spec-driven starting
   point for a task.
@@ -19,15 +21,18 @@ Adapted from [mattpocock/skills](https://github.com/mattpocock/skills) — see
 
 Interview the user relentlessly about a plan or design until shared
 understanding is reached, then capture that understanding as a **spec** the
-user can plan and implement from. This is the grilling loop plus active domain
-modeling, with two deliverables at the end: a spec file, and (with permission)
-manifest updates.
+user can read as a plain description of intended behavior. This is the grilling
+loop plus active domain modeling, with two deliverables at the end: a spec file,
+and (with permission) manifest updates.
 
 ## Inputs you must resolve first
 
 - **Template repo (source):** the folder that contains this skill. Never write
 the spec or manifest edits here. Also, the skill may be called from a different place. In that case, ignore the template repo and work with the target repo directly.
 - **Target repo (destination):** the repo the plan is about. The spec and any manifest updates go there.
+- **Planning source:** the user's stated intent, or the part of an epic master
+plan the user wants to turn into a spec. The user remains the authority for the
+spec's decisions.
 
 If the workspace has one directory, it is the target. If the workspace has exactly two folders, the one that is **not** this template
 is the target. If it is ambiguous, ask the user before writing anything.
@@ -77,48 +82,60 @@ of manifest files that the session's decisions make stale (see Phase 4).
 ## Phase 3: Write the spec
 
 When the user confirms shared understanding is reached — or asks to wrap up —
-write the spec to the **target repo** at:
+choose the path from the target's planning structure:
 
 ```
+# Simple work
 .agents/plans/<topic>.spec.md
+
+# One part of an epic
+.agents/plans/<epic>/<part>.spec.md
 ```
 
 Use a short, descriptive dash-case `<topic>` (e.g. `partial-refunds.spec.md`).
-Create `.agents/plans/` if it does not exist. Never place the spec anywhere
-else, and never in the template repo.
+For an epic, use the existing epic directory and a short dash-case `<part>`.
+If the user points to an epic master plan, save the spec beside it. Do not place
+an epic spec at the top level or create a second directory for the same epic.
+Create the chosen directory if needed. Never place the spec outside the target
+repo's `.agents/plans/` tree, and never in the template repo.
 
-The spec is the starting point of the user's task: complete enough to plan and
-implement from without re-deriving the conversation. Structure:
+The spec is the human-readable statement of what the task should do in the
+scenarios discussed. It describes observable behavior, not architecture,
+implementation steps, design rationale, tests, or acceptance criteria.
+
+Write short, direct statements in language close to the user's own words. Cover
+normal use, relevant alternatives, boundaries, errors, and recovery behavior.
+Prefer concrete sentences such as "When an admin repeats the same request, the
+existing export is returned" over formal requirement labels or implementation
+terms.
+
+Structure:
 
 ```markdown
 # <Title> Spec
 
 > Produced by a grilling session on YYYY-MM-DD. Status: ready for planning.
 
-## Goal
-What is being built or changed, and why. One or two paragraphs.
+One or two plain sentences about the intended outcome and who it is for.
 
-## Decisions
-The resolved design decisions from the session, each with its rationale.
-This is the heart of the spec — one entry per branch of the design tree.
+## Intended behavior
 
-## Scope
-What is in scope, and — just as important — what was explicitly ruled out.
-
-## Details
-Details of the task intended spec.
-
-## Constraints
-Mandates, invariants, and hard limits the implementation must respect; only those that are relevant to the spec, but absent in the ADRs and rules.
-
-## Open questions
-Anything deliberately deferred, with who/what resolves it.
+- When <situation>, <what the user or system observes>.
+- If <alternative or error>, <what happens instead>.
+- While <boundary condition>, <behavior that must remain true>.
 
 ```
 
-Omit sections that would be empty; add sections the topic demands. Link to the
-target's manifest documents (ADRs, references, rules) instead of duplicating
-their content.
+Use helpful scenario groups when one long list becomes hard to read, but keep
+the result informal and behavior-focused. Do not add `Decisions`, `Acceptance
+criteria`, file-level changes, test cases, or implementation steps. If an open
+question changes intended behavior, keep grilling instead of putting an
+unresolved design branch into a ready spec.
+
+Link to the target's manifest documents (ADRs, references, rules) instead of
+duplicating their content. For an epic spec, also link to its `*-initial.md` and
+`*-master.plan.md` sources when they exist. Do not copy the whole master plan
+into the spec.
 
 If the session ends **without** reaching shared understanding, do not write a
 spec. Tell the user which branches remain unresolved.
@@ -157,7 +174,9 @@ Workspace folders?
 
 Shared understanding confirmed?
 ├─ No .............................. keep grilling; no spec, no edits
-└─ Yes ............................. write .agents/plans/<topic>.spec.md
+└─ Yes
+  ├─ Simple work .................. write plans/<topic>.spec.md
+  └─ Epic part .................... write plans/<epic>/<part>.spec.md
 
 Stale manifest files found in target?
 ├─ No .............................. report "manifest untouched" and stop
@@ -171,8 +190,10 @@ Stale manifest files found in target?
 
 - Questions were asked one at a time; facts came from the repo, decisions from
 the user.
-- The spec exists at `<target>/.agents/plans/<topic>.spec.md` and is complete
-enough to plan from — or the user was told why no spec was written.
+- The spec exists directly under `<target>/.agents/plans/` for simple work or
+  inside the correct epic directory, covers the intended behavior and relevant
+  scenarios in plain language, and contains no design or acceptance section —
+  or the user was told why no spec was written.
 - No manifest file was edited without the user's explicit approval.
 - Nothing was written into the template repo.
 

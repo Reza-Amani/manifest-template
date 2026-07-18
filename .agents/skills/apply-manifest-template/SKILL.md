@@ -86,6 +86,8 @@ Read these template files so your output follows the conventions exactly:
 - The example docs in each folder (`adr/`, `reference/`, `guides/`, `skills/`,
   `actions/`, `personas/`, `plans/`, `findings/`, `learning/`) — use these for
   **format only**, not content.
+- `plans/example-epic/` shows the epic planning shape only. Never copy that
+  directory or its files into the target.
 
 ### 3. Detect an existing manifest in the target
 
@@ -157,10 +159,19 @@ suffixes from `manifest-structure.rule.md`.
 
 - `.agents/adr/` — start with the meta-ADR (record architecture decisions), then
   one ADR per real, already-settled decision from steps 4–5.
-- `.agents/reference/` — a `*.ref.md` per real subsystem worth documenting. If you didn't find anything, leave a spaceholder as an example for future reference, but mark it clearly as an example.
+- `.agents/reference/` — copy the generic `planning-flow.ref.md`, then add a
+  `*.ref.md` per real subsystem worth documenting. If you didn't find anything,
+  leave a placeholder as an example for future reference, but mark it clearly
+  as an example.
 - `.agents/guides/` — `setup.md` and `commands.md` filled with the target's real
   setup steps and commands; add `notes.md` with user's temporary notes.
-- `.agents/plans/backlog.plan.md` — seeded from the target's real open work, or leave it shallow with just some brief general guides.
+- `.agents/plans/backlog.plan.md` — seeded from the target's real open work, or
+  leave it shallow with just some brief general guides.
+- Other `.agents/plans/` content only when it comes from real target work:
+  simple `*.plan.md` or `*.spec.md` files stay at the top level; a real epic may
+  use its own directory for the human `*-initial.md`, agent
+  `*-master.plan.md`, specs, and detailed plans. Never invent or rewrite the
+  human initial idea.
 - `.agents/learning/README.md` — explains where `teach` skill session records
   belong and how they are named.
 - `.agents/findings/README.md` — explains where reproducible analysis and
@@ -168,7 +179,13 @@ suffixes from `manifest-structure.rule.md`.
   named.
 - `.agents/personas/` — only personas that fit the target (adapt `reviewer`;
   include `manifester` so the target can maintain its own docs).
-- `.agents/skills/` — copy any existing skill found in the target repo. If no skill found, create an example skill relevant to the target's business, but mark it clearly as an example for future reference. 
+- `.agents/skills/` — include the generic planning workflow skills
+  (`grill-to-master`, `grill-to-spec`, `spec-to-plan`, `plan-to-criteria`, and
+  `implement-plan`) and preserve any existing target skills. If no domain skill
+  exists, create one example skill relevant to the target's business and mark
+  it clearly as an example.
+- `THIRD_PARTY_NOTICES.md` — preserve or add the `mattpocock/skills` attribution
+  for `grill-to-master` and `grill-to-spec` when those adapted skills are copied.
 - `.agents/actions/verify-docs-in-sync.md`. Also, any other "action" or "prompt" that you find in the existing system prompts.
 
 **`.gitignore` (tool mirrors):** `.cursor/` holds local IDE wiring (symlinks to
@@ -201,6 +218,8 @@ This is the point of the skill. Every document you write must describe the
 
 - No "example subsystem", "example feature", "User Sync", or placeholder rows
   should remain in the target.
+- Never copy `.agents/plans/example-epic/`; create an epic directory only for
+  real target work and use the target's own names and content.
 - Delete any example file you scaffolded but did not turn into real content,
   rather than leaving filler in the target.
 - Keep `manifest-structure.rule.md` (generic and required) and the structural

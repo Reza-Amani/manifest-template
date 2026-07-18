@@ -56,7 +56,7 @@ your-repo/
    ├─ skills/                     # multi-step runbooks (<name>/SKILL.md)
    ├─ actions/                    # one-step checks/procedures
    ├─ personas/                   # role-focused agent definitions
-    ├─ plans/                      # multi-session plans + canonical backlog
+    ├─ plans/                      # simple plans/specs, epic folders, backlog
    ├─ findings/                   # reproducible analysis/investigation records
    └─ learning/                   # teach skill session records
 ```
@@ -71,7 +71,7 @@ your-repo/
 | `personas/`   | Role-specific agent behavior            | `<role>.agent.md`    |
 | `skills/`     | Multi-step procedures + assets          | `<name>/SKILL.md`    |
 | `guides/`     | Tutorials and operator how-to           | descriptive `*.md`   |
-| `plans/`      | Multi-session plans and the backlog     | `*.plan.md`          |
+| `plans/`      | Simple plans/specs, epic folders, backlog | `*.plan.md`, `*.spec.md`, epic files |
 | `findings/`   | Reproducible analysis/investigation records | `YYYY-MM-DD-topic.md` |
 | `learning/`   | Teach skill session records             | `YYYY-MM-DD-topic.md` |
 | `actions/`    | One-step checks and procedures          | descriptive `*.md`   |
@@ -83,6 +83,22 @@ this is the one required file; it explains the entire structure.
 **Decisions vs. mechanics** is the key distinction: an ADR says *we chose X
 because Y* and rarely changes; a reference says *here is how X is wired today*
 and changes whenever the code does.
+
+## Planning flow
+
+For small work, `grill-to-spec` turns plain user intent into a human-readable
+behavior spec. `spec-to-plan` creates a Cursor-style implementation plan without
+acceptance criteria. `plan-to-criteria` studies the test setup, writes focused
+tests where possible, and adds acceptance criteria to the plan. `implement-plan`
+then builds and validates until every criterion passes.
+
+An epic adds one stage at the front: `grill-to-master` preserves the human
+initial idea and creates a high-level phased roadmap. Each phase then follows
+the same spec, plan, criteria, and implementation flow in the epic's dedicated
+directory. See the canonical [planning flow reference](.agents/reference/planning-flow.ref.md),
+the [plan structure rule](.agents/rules/manifest-structure.rule.md#plans), and
+the [template-only epic example](.agents/plans/example-epic/). Do not copy the
+example directory into target repositories.
 
 ## Getting started
 
@@ -131,18 +147,24 @@ an `operation-` prefixed example sit side by side:
 - **adr/** — the meta-ADR (*record architecture decisions*), a coding decision
   example, and an operation/data decision. example (`operation-data-layering`).
 - **reference/** — a coding subsystem example and an operation/data connection
-  inventory example (`operation-connections`).
+  inventory example (`operation-connections`), plus the canonical planning-flow
+  reference.
 - **guides/** — `setup.md`, `commands.md`, and `notes.md`.
 - **skills/** — real `apply-manifest-template` / `sync-manifest-template`
   runbooks for code repos and `operation-apply-manifest-template` /
   `operation-sync-manifest-template` for data/ops repos, plus
-  [`grill-to-spec`](.agents/skills/grill-to-spec/SKILL.md) (grilling session
-  that ends in a spec), [`spec-to-plan`](.agents/skills/spec-to-plan/SKILL.md)
-  (Cursor-style plan from a spec), an `example-add-module` (coding) example, and an
+  [`grill-to-master`](.agents/skills/grill-to-master/SKILL.md),
+  [`grill-to-spec`](.agents/skills/grill-to-spec/SKILL.md),
+  [`spec-to-plan`](.agents/skills/spec-to-plan/SKILL.md),
+  [`plan-to-criteria`](.agents/skills/plan-to-criteria/SKILL.md), and
+  [`implement-plan`](.agents/skills/implement-plan/SKILL.md) for the planning
+  lifecycle, plus an `example-add-module` (coding) example and an
   `operation-add-data-source` (data) example.
 - **actions/** — a `verify-docs-in-sync` one-step check.
 - **personas/** — a `reviewer` and a `manifester` agent.
-- **plans/** — a canonical `backlog.plan.md` and an example feature plan.
+- **plans/** — a canonical `backlog.plan.md`, a simple example feature plan,
+  and a template-only `example-epic/` directory that must not be copied into
+  target repositories.
 - **findings/** — a README for recording reproducible analyses/investigations,
   plus an example finding.
 - **learning/** — a README for recording and resuming `teach` skill sessions,
@@ -171,7 +193,8 @@ npx skills add mattpocock/skills
 | This template | Matt Pocock skill | Notes |
 | ------------- | ----------------- | ----- |
 | [`learning/`](.agents/learning/README.md) | [`teach`](https://www.skills.sh/mattpocock/skills/teach) | Session records in `learning/` pair with the `teach` skill. |
-| [`grill-to-spec`](.agents/skills/grill-to-spec/SKILL.md) | [`grilling`](https://www.skills.sh/mattpocock/skills/grilling), [`domain-modeling`](https://www.skills.sh/mattpocock/skills/domain-modeling) | Adapted for manifest repos: grilling loop + domain sharpening, ending in a `.agents/plans/*.spec.md` in the target repo. |
+| [`grill-to-spec`](.agents/skills/grill-to-spec/SKILL.md) | [`grilling`](https://www.skills.sh/mattpocock/skills/grilling), [`domain-modeling`](https://www.skills.sh/mattpocock/skills/domain-modeling) | Adapted for manifest repos: grilling loop + domain sharpening, ending in a spec in the target repo's `.agents/plans/` tree. |
+| [`grill-to-master`](.agents/skills/grill-to-master/SKILL.md) | [`grilling`](https://www.skills.sh/mattpocock/skills/grilling) | Adapted for epic-level grilling and phased master plans. |
 
 For the original grilling workflow without manifest/spec output, use Matt's
 [`grill-me`](https://www.skills.sh/mattpocock/skills/grill-me) or

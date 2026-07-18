@@ -129,14 +129,38 @@ an operation / data repo. Name them `<category>.rule.md` and route to them from
 
 ### `plans/`
 
-**Project Plans and Tracking** — multi-session plans and backlog items.
+**Project Plans and Tracking** — simple plans, specs, epic roadmaps, detailed
+implementation plans, and backlog items.
 
 - **Format:** Markdown files.
-- **Naming:** Descriptive `*.plan.md` names when possible.
+- **Simple work:** Keep its files directly under `plans/`, without an epic
+  subdirectory. The standard flow uses `<topic>.spec.md` for intended behavior
+  and a matching `<topic>.plan.md` for implementation and acceptance criteria.
+- **Epics / big tasks:** Give each epic one dash-case subdirectory under
+  `plans/`. Keep all files for that epic in its directory:
+  - `<epic>-initial.md` — the human-written initial idea. It may be short and
+    informal, but it is the source of truth for the epic's starting intent.
+  - `<epic>-master.plan.md` — the high-level roadmap produced by
+    `grill-to-master` from the initial idea. It holds overall requirements,
+    architecture, and independently plannable phases. It is an epic backlog and
+    ordering guide, not an implementation plan, and has no acceptance criteria.
+  - `<part>.spec.md` — a spec produced by `grill-to-spec` from user input or
+    from one part of the master plan. It describes intended behavior and
+    scenarios in human language, without design or acceptance criteria.
+  - `<part>.plan.md` — a detailed implementation plan produced by
+    `spec-to-plan` from a spec. `plan-to-criteria` later adds its independent
+    acceptance section, then `implement-plan` builds and verifies it.
 - **Content:** Scope, milestones, tasks, status, checkboxes, dependencies, and
-  progress notes.
+  progress notes at the level implied by the file type.
 - **Purpose:** Track work that spans multiple sessions and help agents resume
   where prior work stopped.
+- **Source order:** Human input controls the initial idea and specs. The master
+  plan must stay consistent with the initial idea. A detailed plan must stay
+  consistent with its spec. Link between these files instead of copying them.
+- **Workflow:** The canonical small-task and epic lifecycle is documented in
+  [`../reference/planning-flow.ref.md`](../reference/planning-flow.ref.md).
+- **Examples:** `plans/example-epic/` exists only to show this template's epic
+  layout. Do not copy that directory into a target repository.
 
 ### `learning/`
 
@@ -188,7 +212,9 @@ root-cause analysis in a software repo).
    rules in `rules/`.
 4. Put repeatable multi-step workflows in `skills/`.
 5. Put short one-step procedures in `actions/`.
-6. Put long-lived progress tracking in `plans/`.
+6. Put simple plans and specs directly in `plans/`. Put each epic's initial
+  idea, master plan, specs, and detailed plans in one dedicated subdirectory
+  under `plans/`.
 7. Put role behavior and task focus in `personas/`.
 8. Put tutorials and operator how-to material in `guides/`.
 9. Put records from `teach` skill sessions in `learning/`.
@@ -250,7 +276,7 @@ requires it. Personas (`*.agent.md`) and skills (`SKILL.md`) usually need a
 | `personas/`   | `<role>.agent.md`     | yes (`name`, `description`) |
 | `skills/`     | `<skill>/SKILL.md`    | yes (`name`, `description`) |
 | `guides/`     | descriptive `*.md`    | no                        |
-| `plans/`      | `*.plan.md`           | optional (`todos` block)  |
+| `plans/`      | `*.plan.md`, `*.spec.md`, or epic subdirectory files described above | optional (`todos` block) |
 | `learning/`   | `YYYY-MM-DD-topic.md` | optional                  |
 | `findings/`   | `YYYY-MM-DD-topic.md` | optional                  |
 | `actions/`    | descriptive `*.md`    | optional                  |

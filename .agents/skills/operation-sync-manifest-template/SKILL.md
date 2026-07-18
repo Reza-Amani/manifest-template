@@ -36,6 +36,10 @@ Bring across only structural progress that helps **any** manifest:
 
 - New folder types (for example `findings/`) and their naming rules.
 - Updated placement, routing, and cross-link conventions.
+- Updated simple-plan and epic-directory conventions, without copying the
+  template's `plans/example-epic/` files.
+- The generic planning-flow reference and workflow skills, adapted to the
+  target without copying template plan examples.
 - Persona and frontmatter convention updates.
 
 Skip template example content entirely (anything named `operation-*` example,

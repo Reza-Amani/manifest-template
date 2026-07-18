@@ -70,6 +70,9 @@ Use this table:
 |---|---|
 | New folder type documented (e.g. adding `learning/`) | Template example files: `*example*` ADRs, refs, skills, `example/` dirs |
 | New naming-suffix / placement / cross-link rules | The apply/sync meta-skills, incl. `operation-*` variants (template-only) |
+| Simple-plan vs. epic-directory conventions | `plans/example-epic/` and all files inside it |
+| Generic planning-flow reference and workflow skills | Target-specific plans, specs, tests, and implementation content |
+| Required third-party attribution for copied adapted skills | Unrelated template notices or licenses |
 | Routing discipline and discovery-flow wording | This template's `README.md` describing the template itself |
 | Persona convention updates (plain-English rules, folder lists) | Edits the target already has, or is ahead on |
 | Frontmatter / structure conventions | Anything that names the template's example domain |
