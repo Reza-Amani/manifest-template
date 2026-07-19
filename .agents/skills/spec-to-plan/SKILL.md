@@ -165,7 +165,8 @@ Write → beside the spec
 
 ## Completion checks
 
-- Plan exists beside its spec with Cursor-style frontmatter and body.
+- The detailed plan is named `*.planning.md` and exists beside its spec with
+  Cursor-style frontmatter and body.
 - Spec was not modified.
 - Spec problems were reported to the user when found.
 - No acceptance criteria were added; the hand-off points to `plan-to-criteria`.

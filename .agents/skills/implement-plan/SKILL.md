@@ -97,6 +97,8 @@ Only after every acceptance criterion passes:
 
 ## Completion checks
 
+- The implementation input was a `*.planning.md` detailed plan, never a
+  `*.master.plan`.
 - Work stayed inside the detailed plan and one epic phase when applicable.
 - Plan/spec prose and criteria were not edited without user approval.
 - Tests were not weakened to obtain a pass.

@@ -124,6 +124,8 @@ unless the user explicitly asks.
 ## Completion checks
 
 - The initial idea faithfully preserves user input.
+- The master plan is named `<epic>.master.plan` and is inside the epic's
+  dedicated plans directory.
 - The master plan links to the initial idea.
 - The roadmap is high-level and each phase is independently plannable.
 - Frontmatter todos and body phase checkboxes match.

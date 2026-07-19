@@ -209,6 +209,10 @@ locally per developer.
 **Upgrade path specifics:** for an existing manifest, make the smallest set of
 changes that brings it in line with the structure — add missing required files,
 fix misplaced docs, repair naming suffixes and links, and fill obvious gaps.
+Rename legacy epic master plans to `*.master.plan` and legacy detailed
+implementation plans to `*.planning.md`, repairing inbound and outbound links
+in the same change. Do not rename the canonical `backlog.plan.md`; it is neither
+a master plan nor a detailed implementation plan.
 List anything that needs human judgment instead of guessing.
 
 ### 7. Replace examples with real content

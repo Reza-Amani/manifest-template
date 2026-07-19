@@ -96,7 +96,8 @@ behavior.
 
 ## Completion checks
 
-- The spec and detailed plan were both read.
+- The spec and matching `*.planning.md` detailed plan were both read; no
+  `*.master.plan` was treated as a detailed plan.
 - Existing test infrastructure and nearby tests were inspected first.
 - Automated tests cover as much intended behavior as the existing setup allows.
 - Tests are referenced by path and command in the acceptance section.
