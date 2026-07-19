@@ -1,7 +1,7 @@
 ---
 name: implement-plan
 description: >-
-  Implements a detailed `.agents/plans/*.plan.md` using a Cursor Build-style
+  Implements a detailed `.agents/plans/*.planning.md` using a Cursor Build-style
   workflow, updates applicable plan task status, and repeatedly validates every
   acceptance criterion until all pass. The spec is optional. It avoids editing
   plan/spec prose and, for epics, marks only the matching master-plan phase
@@ -19,8 +19,8 @@ Follow the canonical [planning flow](../../reference/planning-flow.ref.md).
 
 ## Inputs
 
-- **Plan (required):** one detailed `*.plan.md`. Reject a
-  `*-master.plan.md` as the implementation input.
+- **Plan (required):** one detailed `*.planning.md`. Reject a
+  `*.master.plan` as the implementation input.
 - **Spec (optional):** use the linked `*.spec.md` when present for behavioral
   context. The plan remains the implementation guide.
 - **Master plan (epics only, optional context):** read it to identify the

@@ -21,8 +21,8 @@ Follow the canonical [planning flow](../../reference/planning-flow.ref.md).
 
 - **Target repo:** the repository being changed.
 - **Spec:** the `*.spec.md` source of intended behavior.
-- **Plan:** the matching `*.plan.md` implementation plan. A
-  `*-master.plan.md` is not a valid input.
+- **Plan:** the matching `*.planning.md` implementation plan. A
+  `*.master.plan` is not a valid input.
 
 If either file is missing or their relationship is unclear, ask the user for
 the correct path. Never run this skill against the template when a separate

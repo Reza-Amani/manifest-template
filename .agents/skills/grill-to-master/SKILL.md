@@ -79,7 +79,7 @@ them.
 Write:
 
 ```text
-.agents/plans/<epic>/<epic>-master.plan.md
+.agents/plans/<epic>/<epic>.master.plan
 ```
 
 Use YAML frontmatter with `name`, `overview`, `todos`, and `isProject: true`.

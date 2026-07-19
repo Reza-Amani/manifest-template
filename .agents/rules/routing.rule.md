@@ -76,16 +76,17 @@ _(add your real runbooks here under `skills/<name>/SKILL.md`)_
 
 ## Task → Plan (multi-step work across sessions)
 
-- _(example)_ Track a single feature across multiple sessions → [`plans/example-feature.plan.md`](../plans/example-feature.plan.md)
+- _(example)_ Track a single feature across multiple sessions → [`plans/example-feature.planning.md`](../plans/example-feature.planning.md)
 - Small-task and epic planning lifecycle → [`reference/planning-flow.ref.md`](../reference/planning-flow.ref.md)
 - Planning file layout and source-of-truth flow → [`manifest-structure.rule.md`](manifest-structure.rule.md#plans)
 - _(template-only example)_ See an epic split into an initial idea, master plan,
   spec, and detailed plan → [`plans/example-epic/`](../plans/example-epic/)
 - Important:
-  - For simple work, save the descriptive `*.spec.md` and matching `*.plan.md`
-    directly under `plans/`.
+  - For simple work, save the descriptive `*.spec.md` and matching
+    `*.planning.md` directly under `plans/`.
   - For an epic or big task, use one dedicated subdirectory under `plans/` for
-    its `*-initial.md`, `*-master.plan.md`, specs, and detailed plans.
+    its `*-initial.md`, `*.master.plan`, specs, and detailed `*.planning.md`
+    plans.
   - Acceptance criteria live in an independent section of the detailed plan.
     They are added by `plan-to-criteria`, not by `grill-to-spec` or
     `spec-to-plan`.

@@ -40,8 +40,8 @@ When you finish an item, check it off **and** update its status in the YAML
 
 - **Primary goal:** What the current focus is.
 - **Related simple work:** Top-level plan, e.g.
-  [`example-feature.plan.md`](example-feature.plan.md).
+  [`example-feature.planning.md`](example-feature.planning.md).
 - **Related epic:** Link to its master roadmap, e.g.
-  [`example-epic/example-epic-master.plan.md`](example-epic/example-epic-master.plan.md).
+  [`example-epic/example-epic.master.plan`](example-epic/example-epic.master.plan).
   The `example-epic/` directory is template-only and must not be copied into a
   target repository.

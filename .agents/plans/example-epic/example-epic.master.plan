@@ -60,7 +60,7 @@ enforces retention after completion.
   create one durable job, and return without generating the file. This phase
   has no worker or download behavior.
   - Spec: [`export-request.spec.md`](export-request.spec.md)
-  - Detailed plan: [`export-request.plan.md`](export-request.plan.md)
+  - Detailed plan: [`export-request.planning.md`](export-request.planning.md)
 - [ ] **job-lifecycle: Process and track jobs** — run queued work and expose
   progress, failure, retry, and cancellation. Depends on `export-request`.
 - [ ] **secure-downloads: Deliver and expire files** — authorize completed-file

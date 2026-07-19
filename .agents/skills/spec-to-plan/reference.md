@@ -111,7 +111,7 @@ Everything in standard, plus:
 - Editing the spec from this skill.
 - Adding acceptance criteria before `plan-to-criteria` studies the test setup.
 - Adding test-authoring todos that belong to `plan-to-criteria`.
-- Turning an epic `*-master.plan.md` roadmap directly into an implementation
+- Turning an epic `*.master.plan` roadmap directly into an implementation
   plan instead of producing a spec for one part first.
 - Saving under `~/.cursor/plans/` or `.cursor/plans/` instead of
   `.agents/plans/`.

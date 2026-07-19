@@ -16,9 +16,9 @@ Read a spec, research the repo, and write an implementation plan the way
 the spec and do not add acceptance criteria.
 
 This skill pairs with [CODE0](../grill-to-spec/SKILL.md): that skill
-writes `*.spec.md`; this one turns a ready spec into a detailed `*.plan.md` in
-the same planning directory. `plan-to-criteria` adds the acceptance section and
-tests in the next stage.
+writes `*.spec.md`; this one turns a ready spec into a detailed `*.planning.md`
+in the same planning directory. `plan-to-criteria` adds the acceptance section
+and tests in the next stage.
 
 Follow the canonical [planning flow](../../reference/planning-flow.ref.md).
 
@@ -92,16 +92,16 @@ Save to the **target** repo only:
 
 ```
 # Simple work
-.agents/plans/<topic>.plan.md
+.agents/plans/<topic>.planning.md
 
 # One part of an epic
-.agents/plans/<epic>/<part>.plan.md
+.agents/plans/<epic>/<part>.planning.md
 ```
 
-Use a short dash-case name (for example `partial-refunds.plan.md`). When a spec
-file exists, save the plan beside that spec: a top-level spec produces a
+Use a short dash-case name (for example `partial-refunds.planning.md`). When a
+spec file exists, save the plan beside that spec: a top-level spec produces a
 top-level plan, and an epic spec produces a plan in the same epic directory.
-The `*-master.plan.md` suffix is reserved for epic roadmaps and must not be used
+The `*.master.plan` suffix is reserved for epic roadmaps and must not be used
 for a detailed implementation plan. Create the chosen directory if needed.
 
 **Never** put the plan in `~/.cursor/plans/`, `.cursor/plans/`, or the template

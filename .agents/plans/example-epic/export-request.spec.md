@@ -4,7 +4,7 @@
 > show the epic planning layout. Do not copy them into a target repository.
 >
 > Produced from user input for one part of
-> [`example-epic-master.plan.md`](example-epic-master.plan.md). Status: ready
+> [`example-epic.master.plan`](example-epic.master.plan). Status: ready
 > for planning.
 
 Workspace admins should be able to ask for a large report export without

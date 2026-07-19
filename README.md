@@ -71,7 +71,7 @@ your-repo/
 | `personas/`   | Role-specific agent behavior            | `<role>.agent.md`    |
 | `skills/`     | Multi-step procedures + assets          | `<name>/SKILL.md`    |
 | `guides/`     | Tutorials and operator how-to           | descriptive `*.md`   |
-| `plans/`      | Simple plans/specs, epic folders, backlog | `*.plan.md`, `*.spec.md`, epic files |
+| `plans/`      | Simple plans/specs, epic folders, backlog | `*.planning.md`, `*.master.plan`, `*.spec.md`, epic files |
 | `findings/`   | Reproducible analysis/investigation records | `YYYY-MM-DD-topic.md` |
 | `learning/`   | Teach skill session records             | `YYYY-MM-DD-topic.md` |
 | `actions/`    | One-step checks and procedures          | descriptive `*.md`   |
@@ -162,8 +162,9 @@ an `operation-` prefixed example sit side by side:
   `operation-add-data-source` (data) example.
 - **actions/** — a `verify-docs-in-sync` one-step check.
 - **personas/** — a `reviewer` and a `manifester` agent.
-- **plans/** — a canonical `backlog.plan.md`, a simple example feature plan,
-  and a template-only `example-epic/` directory that must not be copied into
+- **plans/** — a canonical `backlog.plan.md`, a simple example
+  `*.planning.md` feature plan, a template-only `example-epic/` with
+  `*.master.plan` / `*.planning.md` examples that must not be copied into
   target repositories.
 - **findings/** — a README for recording reproducible analyses/investigations,
   plus an example finding.

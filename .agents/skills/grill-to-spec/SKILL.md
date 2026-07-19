@@ -134,7 +134,7 @@ unresolved design branch into a ready spec.
 
 Link to the target's manifest documents (ADRs, references, rules) instead of
 duplicating their content. For an epic spec, also link to its `*-initial.md` and
-`*-master.plan.md` sources when they exist. Do not copy the whole master plan
+`*.master.plan` sources when they exist. Do not copy the whole master plan
 into the spec.
 
 If the session ends **without** reaching shared understanding, do not write a

@@ -9,10 +9,10 @@ but they must not silently rewrite them.
 | File | Owner | Purpose |
 | --- | --- | --- |
 | `*.spec.md` | User, with `grill-to-spec` | Plain-language intended behavior and scenarios |
-| `*.plan.md` | `spec-to-plan` | Cursor-style implementation steps and technical approach |
-| `## Acceptance criteria` in `*.plan.md` | `plan-to-criteria` | Complete, verifiable proof that the spec was implemented |
+| `*.planning.md` | `spec-to-plan` | Cursor-style implementation steps and technical approach |
+| `## Acceptance criteria` in `*.planning.md` | `plan-to-criteria` | Complete, verifiable proof that the spec was implemented |
 | `*-initial.md` | User | Starting intent for an epic |
-| `*-master.plan.md` | `grill-to-master` | High-level epic roadmap, architecture, and independent phases |
+| `*.master.plan` | `grill-to-master` | High-level epic roadmap, architecture, and independent phases |
 
 The spec says **what should happen**. The detailed plan says **how to build
 it**. Acceptance criteria say **how to prove it works**. Do not merge these
@@ -23,7 +23,7 @@ roles into one document stage.
 1. The user gives `grill-to-spec` a plain task definition. The skill asks
    focused questions and writes a human-readable `plans/<topic>.spec.md`.
 2. `spec-to-plan` researches the repo and writes
-   `plans/<topic>.plan.md` in Cursor Plan Mode style. At this point the plan has
+   `plans/<topic>.planning.md` in Cursor Plan Mode style. At this point the plan has
    implementation steps but no formal acceptance criteria.
 3. `plan-to-criteria` reads both files, studies the existing test setup, and
    adds or updates tests where the repository already supports them. It then
@@ -37,7 +37,7 @@ roles into one document stage.
 
 1. The user gives `grill-to-master` a plain explanation of the intended epic.
    The skill preserves that intent in `<epic>-initial.md` and produces
-   `<epic>-master.plan.md` in a dedicated `plans/<epic>/` directory.
+   `<epic>.master.plan` in a dedicated `plans/<epic>/` directory.
 2. The master plan contains only the overall outcome, high-level requirements,
    high-level architecture, and a phased roadmap. Each phase must be small
    enough for one spec and one detailed plan, and independent enough to

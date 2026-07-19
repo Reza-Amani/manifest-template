@@ -168,10 +168,10 @@ suffixes from `manifest-structure.rule.md`.
 - `.agents/plans/backlog.plan.md` — seeded from the target's real open work, or
   leave it shallow with just some brief general guides.
 - Other `.agents/plans/` content only when it comes from real target work:
-  simple `*.plan.md` or `*.spec.md` files stay at the top level; a real epic may
-  use its own directory for the human `*-initial.md`, agent
-  `*-master.plan.md`, specs, and detailed plans. Never invent or rewrite the
-  human initial idea.
+  simple `*.planning.md` or `*.spec.md` files stay at the top level; a real
+  epic may use its own directory for the human `*-initial.md`, agent
+  `*.master.plan`, specs, and detailed `*.planning.md` plans. Never invent or
+  rewrite the human initial idea.
 - `.agents/learning/README.md` — explains where `teach` skill session records
   belong and how they are named.
 - `.agents/findings/README.md` — explains where reproducible analysis and
