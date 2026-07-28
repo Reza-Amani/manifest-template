@@ -7,23 +7,21 @@ description: >-
   point for spec-driven development. Simple specs stay directly under `plans/`;
   epic specs stay in the epic's dedicated subdirectory. Afterwards, lists any
   manifest files in the target repo (terms.rule.md, adr/, reference/, guides/)
-  made stale by the decisions and asks the user's permission before updating
+  made stale by the decisions and lists them at the end of the spec file with a short summary of what would change in each.
   them.
   Use when the user asks to "grill me into a spec", "grill this plan",
   "stress-test this design and write a spec", or wants a spec-driven starting
   point for a task.
 ---
 
-Adapted from [mattpocock/skills](https://github.com/mattpocock/skills) — see
-[`THIRD_PARTY_NOTICES.md`](../../../THIRD_PARTY_NOTICES.md).
+Adapted from mattpocock/skills — see the 3rd party notices.
 
 # Grill to Spec
 
 Interview the user relentlessly about a plan or design until shared
 understanding is reached, then capture that understanding as a **spec** the
 user can read as a plain description of intended behavior. This is the grilling
-loop plus active domain modeling, with two deliverables at the end: a spec file,
-and (with permission) manifest updates.
+loop plus active domain modeling, with one deliverable at the end: a spec file only.
 
 ## Inputs you must resolve first
 
@@ -55,6 +53,10 @@ If a *fact* can be found by exploring the target repo, look it up rather than
 asking. The *decisions*, though, are the user's — put each one to them and wait
 for their answer.
 
+If the user asks for a brief grilling session (e.g. "grill me briefly"), ask only critical questions; whenevr you can guess the intended behavior with relatively high confidence, don't ask the user and only list them at the end, before writing the spec (phase 3).
+
+If there is previous chat messages between the user and the agent, use them to prune the list of questions to ask; whatever discussed and the user seems to be ok with, don't ask the user and only list them at the end, before writing the spec (phase 3).
+
 Do not write the spec, and do not enact the plan, until the user confirms you
 have reached a shared understanding. Do not implement any of the decisions until the spec is written. Even then, recommend the user to plan and implement the spec in a separate chat.
 
@@ -77,7 +79,7 @@ concepts.
 check whether the target repo's code agrees. Surface contradictions.
 
 Do **not** edit manifest files during this phase. Instead, keep a running list
-of manifest files that the session's decisions make stale (see Phase 4).
+of manifest files that the session's decisions make stale. You will add them to the spec file in Phase 4.
 
 ## Phase 3: Write the spec
 
@@ -125,6 +127,11 @@ One or two plain sentences about the intended outcome and who it is for.
 - If <alternative or error>, <what happens instead>.
 - While <boundary condition>, <behavior that must remain true>.
 
+## Potential manifest files to update
+
+-
+-
+
 ```
 
 Use helpful scenario groups when one long list becomes hard to read, but keep
@@ -141,10 +148,11 @@ into the spec.
 If the session ends **without** reaching shared understanding, do not write a
 spec. Tell the user which branches remain unresolved.
 
-## Phase 4: Offer manifest updates (permission-gated)
+## Phase 4: Offer manifest updates
 
-After the spec is written, check whether the session's decisions made any manifest files in the target repo stale. Follow the placement rules in target repo's manifest structure (.agents/rules/manifest-structure.rule.md if present)
+After the spec is written, check whether the session's decisions made any manifest files in the target repo stale. Follow the placement rules in target repo's manifest structure (.agents/rules/manifest-structure.rule.md if present).
 
+List them at the end of the spec file with a short summary of what would change in each. Do not apply them yet; delegate them to the planning and implementation phase.
 
 Candidates to check (only if the file/directory already exists in the target):
 
@@ -155,15 +163,6 @@ three is missing, skip the ADR.
 - `.agents/reference/` — mechanics described in the session that contradict or
 extend an existing `*.ref.md`.
 - `.agents/guides/` — procedures or commands the session changed.
-
-Then:
-
-1. **List** the files that need an update and what would change in each, in one
-  short summary.
-2. **Ask the user's permission** before editing any of them.
-3. Update **only** the files the user approves, following the target's naming
-  suffixes (`*.adr.md`, `*.ref.md`, `<category>.rule.md`) and cross-linking
-   conventions.
 
 ## Decision tree
 
@@ -181,8 +180,7 @@ Shared understanding confirmed?
 
 Stale manifest files found in target?
 ├─ No .............................. report "manifest untouched" and stop
-└─ Yes ............................. list them → ask permission → update
-                                     only the approved ones
+└─ Yes ............................. list them at the end of the spec file with a short summary of what would change in each
 ```
 
 
@@ -195,6 +193,6 @@ the user.
   inside the correct epic directory, covers the intended behavior and relevant
   scenarios in plain language, and contains no design or acceptance section —
   or the user was told why no spec was written.
-- No manifest file was edited without the user's explicit approval.
+- The spec file lists potential manifest files to update with a short summary of what would change in each.
 - Nothing was written into the template repo.
 

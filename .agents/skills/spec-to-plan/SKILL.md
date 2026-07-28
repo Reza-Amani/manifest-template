@@ -122,6 +122,7 @@ Required shape:
   - File-level changes with real paths and what to do in each
   - Optional mermaid diagram when architecture or data flow matters
   - Out of scope / what does not change
+  - Potential manifest files to update with a short summary of what would change in each
   - Risks or watch-outs
 
 Do not add an `Acceptance criteria` section. That section is created later by
@@ -172,3 +173,4 @@ Write → beside the spec
 - No acceptance criteria were added; the hand-off points to `plan-to-criteria`.
 - Detail level matches Phase 3.
 - Nothing was written into the template repo when a separate target was open.
+- The spec file lists potential manifest files to update with a short summary of what would change in each. They are not updated yet; the plan file lists them as todos. They will be updated by the implementation phase. They are inspired by the notes in the spec file, but you add more details to them, and you add any missing ones.

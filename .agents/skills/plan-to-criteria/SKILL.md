@@ -88,6 +88,7 @@ include:
 - exact automated test files and commands that prove each covered area;
 - precise manual checks for anything automation cannot prove;
 - any required build, typecheck, lint, migration, or integration validation.
+- any manifest files to update. They sould be already in the planning file, but if more updates get needed during the implementation phase, they have to be applied too. Do not update them yet. They are only part of the acceptance criteria for the implementation phase.
 
 Do not use vague criteria such as "works correctly" or "tests pass." Name the
 input, action, and observable result. Distinguish tests that already pass from
