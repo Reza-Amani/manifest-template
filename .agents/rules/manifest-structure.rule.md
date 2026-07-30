@@ -204,6 +204,20 @@ root-cause analysis in a software repo).
 - **Purpose:** Provide agents with simple repeatable procedures without the
   ceremony of a full skill.
 
+### `scratch/`
+
+**Ephemeral Workspaces** — temporary artifacts used while executing a detailed
+plan.
+
+- **Format:** One directory per plan at `<plan-stem>/`, where `<plan-stem>` is
+  the detailed plan filename without `.planning.md`.
+- **Content:** Temporary backups, baselines, comparison outputs, and similar
+  disposable working files.
+- **Purpose:** Keep implementation ephemerals isolated from plans and durable
+  repository content.
+- **Lifecycle:** The `implement-plan` skill inventories these files after
+  acceptance passes and removes them only with user authorization.
+
 ## Placement Rules
 
 1. Put decisions in `adr/`.
@@ -219,6 +233,8 @@ root-cause analysis in a software repo).
 8. Put tutorials and operator how-to material in `guides/`.
 9. Put records from `teach` skill sessions in `learning/`.
 10. Put reproducible analysis and investigation records in `findings/`.
+11. Put temporary implementation artifacts in `scratch/<plan-stem>/`; never
+  place them beside plans.
 
 If content seems to belong in more than one place, keep the canonical rule or
 decision in the most authoritative place and link to it from the operational
@@ -280,6 +296,7 @@ requires it. Personas (`*.agent.md`) and skills (`SKILL.md`) usually need a
 | `learning/`   | `YYYY-MM-DD-topic.md` | optional                  |
 | `findings/`   | `YYYY-MM-DD-topic.md` | optional                  |
 | `actions/`    | descriptive `*.md`    | optional                  |
+| `scratch/`    | `<plan-stem>/`        | no                        |
 
 ## Syncing Across Mirrors
 

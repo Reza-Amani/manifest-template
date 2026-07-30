@@ -31,6 +31,18 @@ If the plan has no `## Acceptance criteria` section, stop and recommend running
 itself in a way that changes scope or behavior, explain the problem and ask the
 user before editing planning files.
 
+## Ephemeral files
+
+Put any temporary backups, baselines, comparison outputs, or other ephemeral
+artifacts under `.agents/scratch/<plan-stem>/`, where `<plan-stem>` is the
+detailed plan filename without `.planning.md`. Never put them beside the plan
+or elsewhere in the repository. Create the scratch directory only when needed,
+and do not treat its contents as implementation deliverables.
+
+If the user asks at any point to clean up ephemeral files when the work is
+done, record that as advance authorization for this run. Otherwise, cleanup
+requires explicit confirmation during plan closeout.
+
 ## Protected files
 
 - Do not edit spec text.
@@ -50,6 +62,7 @@ user before editing planning files.
    earlier phases are complete.
 4. Inspect the named implementation files, tests, and commands.
 5. Establish the narrowest check for the first todo.
+6. Note whether the user has already authorized scratch cleanup on completion.
 
 Do not expand scope to adjacent master-plan phases or unrelated cleanup.
 
@@ -61,7 +74,8 @@ Follow a Cursor Build-style loop:
 2. Make the smallest coherent implementation change for that todo.
 3. Run the narrowest relevant test, compile, lint, or behavior check.
 4. If it fails because of the implementation, fix the implementation and rerun.
-5. Mark the todo complete only when its work and focused check are complete.
+5. Record the todo as verified only when its work and focused check are
+  complete. Defer plan status and checkbox edits until Phase 4.
 6. Continue to the next todo.
 
 Follow the target repo's existing architecture, helpers, and style. Do not
@@ -89,11 +103,21 @@ confirmation before editing it.
 
 Only after every acceptance criterion passes:
 
-1. Confirm all detailed-plan todos and checkboxes are complete.
-2. For an epic, mark only the matching master-plan phase todo and checkbox as
-   complete. Leave all other phase text and status untouched.
-3. Report changed files, validation commands, and acceptance results.
-4. Report any residual risk that the stated criteria could not cover.
+1. Confirm all detailed-plan work and acceptance checks are complete, but defer
+  final status updates until the scratch decision is resolved.
+2. List the contents of `.agents/scratch/<plan-stem>/`, or state that the
+  directory does not exist or is empty.
+3. If scratch artifacts exist and the user did not authorize cleanup earlier,
+  ask whether to remove them. Do not delete them without confirmation.
+4. In one closeout step after the user's answer:
+  - remove the listed artifacts and `<plan-stem>` directory if cleanup was
+    authorized, including by an earlier request;
+  - otherwise preserve them and report their location;
+  - update the detailed-plan todo statuses and checkboxes;
+  - for an epic, update only the matching master-plan phase todo and checkbox.
+5. Report changed files, validation commands, acceptance results, retained
+  scratch artifacts, and any residual risk the stated criteria could not
+  cover.
 
 ## Completion checks
 
@@ -105,3 +129,6 @@ Only after every acceptance criterion passes:
 - Every acceptance criterion passed; otherwise the task is reported blocked,
   not complete.
 - Plan status and the matching master phase status reflect actual completion.
+- Ephemeral files were kept only under `.agents/scratch/<plan-stem>/`.
+- Existing scratch contents were inventoried at closeout and were removed only
+  with advance authorization or explicit confirmation.
