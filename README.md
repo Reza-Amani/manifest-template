@@ -158,8 +158,10 @@ an `operation-` prefixed example sit side by side:
   [`spec-to-plan`](.agents/skills/spec-to-plan/SKILL.md),
   [`plan-to-criteria`](.agents/skills/plan-to-criteria/SKILL.md), and
   [`implement-plan`](.agents/skills/implement-plan/SKILL.md) for the planning
-  lifecycle, plus an `example-add-module` (coding) example and an
-  `operation-add-data-source` (data) example.
+  lifecycle; [`debug-agent`](.agents/skills/debug-agent/SKILL.md) for
+  evidence-driven issue diagnosis and fixes; [`review-changes`](.agents/skills/review-changes/SKILL.md)
+  for read-only pre-commit reviews; plus an `example-add-module` (coding)
+  example and an `operation-add-data-source` (data) example.
 - **actions/** — a `verify-docs-in-sync` one-step check.
 - **personas/** — a `reviewer` and a `manifester` agent.
 - **plans/** — a canonical `backlog.plan.md`, a simple example

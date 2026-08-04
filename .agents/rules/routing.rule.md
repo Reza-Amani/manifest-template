@@ -52,6 +52,8 @@ Manifest skills for **software / development** repos:
 - Turn a spec into a Cursor-style implementation plan without acceptance criteria → [`skills/spec-to-plan`](../skills/spec-to-plan/SKILL.md)
 - Add complete acceptance criteria and focused tests to a detailed plan → [`skills/plan-to-criteria`](../skills/plan-to-criteria/SKILL.md)
 - Implement a detailed plan and prove every acceptance criterion → [`skills/implement-plan`](../skills/implement-plan/SKILL.md)
+- Diagnose and fix a user-identified issue with runtime evidence and temporary instrumentation → [`skills/debug-agent`](../skills/debug-agent/SKILL.md)
+- Review uncommitted changes for bugs, architecture flaws, and introduced technical debt without editing files → [`skills/review-changes`](../skills/review-changes/SKILL.md)
 - _(coding example)_ Add a new module end-to-end → [`skills/example-add-module`](../skills/example-add-module/SKILL.md)
 
 Manifest skills for **operation / data** repos:
