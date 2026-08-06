@@ -159,6 +159,11 @@ implementation plans, and backlog items.
   consistent with its spec. Link between these files instead of copying them.
 - **Workflow:** The canonical small-task and epic lifecycle is documented in
   [`../reference/planning-flow.ref.md`](../reference/planning-flow.ref.md).
+- **Archive:** After `implement-plan` finishes and the user confirms, the
+  `archive-plan` skill may move one completed task's detailed plan and eligible
+  companions to `plans/archive/`, preserving their relative layout. Master
+  plans, backlog files, unrelated task files, and files with unfinished work
+  remain active and must not move.
 - **Examples:** `plans/example-epic/` exists only to show this template's epic
   layout. Do not copy that directory into a target repository.
 
@@ -226,9 +231,10 @@ plan.
    rules in `rules/`.
 4. Put repeatable multi-step workflows in `skills/`.
 5. Put short one-step procedures in `actions/`.
-6. Put simple plans and specs directly in `plans/`. Put each epic's initial
-  idea, master plan, specs, and detailed plans in one dedicated subdirectory
-  under `plans/`.
+6. Put active simple plans and specs directly in `plans/`. Put each active
+  epic's initial idea, master plan, specs, and detailed plans in one dedicated
+  subdirectory under `plans/`. Preserve the same relative organization under
+  `plans/archive/` for user-confirmed completed task artifacts.
 7. Put role behavior and task focus in `personas/`.
 8. Put tutorials and operator how-to material in `guides/`.
 9. Put records from `teach` skill sessions in `learning/`.

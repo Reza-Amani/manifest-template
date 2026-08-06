@@ -32,6 +32,9 @@ roles into one document stage.
 4. `implement-plan` follows the plan, updates applicable task checkboxes, and
    runs every acceptance check. It fixes the implementation and retries until
    all criteria pass or a real blocker needs user input.
+5. After implementation finishes and the user confirms the task is complete,
+   `archive-plan` may move that task's completed plan and matching spec to
+   `plans/archive/`.
 
 ## Epics
 
@@ -48,6 +51,9 @@ roles into one document stage.
 5. After all acceptance criteria pass, `implement-plan` may mark only the
    matching phase complete in the master plan. It may read the rest of the
    master plan for context, but must not implement or edit other phases.
+6. After the user confirms phase completion, `archive-plan` may archive only
+   that phase's detailed plan and matching spec. It leaves the epic initial
+   idea, master plan, other phases, and every unfinished file active.
 
 ## Change boundaries
 
@@ -58,5 +64,8 @@ roles into one document stage.
   acceptance section and the tests it adds or updates.
 - `implement-plan` avoids changing specs and plan prose. It may update plan
   task status and, for an epic, the matching master-plan phase status.
+- `archive-plan` runs only after implementation and user confirmation. It moves
+   one completed task's eligible planning artifacts without moving master plans,
+   unrelated files, or anything with unfinished work.
 - If any stage finds an obvious error in an earlier source file, it explains
   the problem and gets user approval before changing that file.
