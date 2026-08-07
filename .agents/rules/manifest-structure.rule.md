@@ -160,10 +160,11 @@ implementation plans, and backlog items.
 - **Workflow:** The canonical small-task and epic lifecycle is documented in
   [`../reference/planning-flow.ref.md`](../reference/planning-flow.ref.md).
 - **Archive:** After `implement-plan` finishes and the user confirms, the
-  `archive-plan` skill may move one completed task's detailed plan and eligible
-  companions to `plans/archive/`, preserving their relative layout. Master
-  plans, backlog files, unrelated task files, and files with unfinished work
-  remain active and must not move.
+  `archive-plan` or `wrap-up-plan` skill may move one completed task's detailed
+  plan and eligible companions to `plans/archive/`, preserving their relative
+  layout. `wrap-up-plan` also creates or updates a `reference/*.ref.md` when the
+  finished design is worth capturing. Master plans, backlog files, unrelated
+  task files, and files with unfinished work remain active and must not move.
 - **Examples:** `plans/example-epic/` exists only to show this template's epic
   layout. Do not copy that directory into a target repository.
 

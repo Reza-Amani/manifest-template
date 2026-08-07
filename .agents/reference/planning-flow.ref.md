@@ -34,7 +34,8 @@ roles into one document stage.
    all criteria pass or a real blocker needs user input.
 5. After implementation finishes and the user confirms the task is complete,
    `archive-plan` may move that task's completed plan and matching spec to
-   `plans/archive/`.
+   `plans/archive/`. Prefer `wrap-up-plan` when the shipped design should also
+   be captured or refreshed in `reference/*.ref.md`.
 
 ## Epics
 
@@ -52,8 +53,10 @@ roles into one document stage.
    matching phase complete in the master plan. It may read the rest of the
    master plan for context, but must not implement or edit other phases.
 6. After the user confirms phase completion, `archive-plan` may archive only
-   that phase's detailed plan and matching spec. It leaves the epic initial
-   idea, master plan, other phases, and every unfinished file active.
+   that phase's detailed plan and matching spec. Prefer `wrap-up-plan` when the
+   phase's design should also be captured or refreshed in `reference/`. Either
+   skill leaves the epic initial idea, master plan, other phases, and every
+   unfinished file active.
 
 ## Change boundaries
 
@@ -67,5 +70,8 @@ roles into one document stage.
 - `archive-plan` runs only after implementation and user confirmation. It moves
    one completed task's eligible planning artifacts without moving master plans,
    unrelated files, or anything with unfinished work.
+- `wrap-up-plan` is the same archive closeout plus a documentation pass: create
+   or update a `reference/*.ref.md` when the finished design is non-trivial and
+   not already documented; skip when capture would not help future tasks.
 - If any stage finds an obvious error in an earlier source file, it explains
   the problem and gets user approval before changing that file.

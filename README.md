@@ -92,7 +92,8 @@ acceptance criteria. `plan-to-criteria` studies the test setup, writes focused
 tests where possible, and adds acceptance criteria to the plan. `implement-plan`
 then builds and validates until every criterion passes. After the user confirms
 completion, `archive-plan` moves only that completed task's eligible planning
-artifacts to `plans/archive/`.
+artifacts to `plans/archive/`. Prefer `wrap-up-plan` when closeout should also
+create or refresh a `reference/*.ref.md` for non-trivial design.
 
 An epic adds one stage at the front: `grill-to-master` preserves the human
 initial idea and creates a high-level phased roadmap. Each phase then follows
@@ -161,7 +162,8 @@ an `operation-` prefixed example sit side by side:
   [`plan-to-criteria`](.agents/skills/plan-to-criteria/SKILL.md), and
   [`implement-plan`](.agents/skills/implement-plan/SKILL.md), followed by
   [`archive-plan`](.agents/skills/archive-plan/SKILL.md) for confirmed completed
-  work; [`debug-agent`](.agents/skills/debug-agent/SKILL.md) for
+  work or [`wrap-up-plan`](.agents/skills/wrap-up-plan/SKILL.md) to archive plus
+  document non-trivial design; [`debug-agent`](.agents/skills/debug-agent/SKILL.md) for
   evidence-driven issue diagnosis and fixes; [`review-changes`](.agents/skills/review-changes/SKILL.md)
   for read-only pre-commit reviews; plus an `example-add-module` (coding)
   example and an `operation-add-data-source` (data) example.

@@ -181,9 +181,9 @@ suffixes from `manifest-structure.rule.md`.
   include `manifester` so the target can maintain its own docs).
 - `.agents/skills/` — include the generic planning workflow skills
   (`grill-to-master`, `grill-to-spec`, `spec-to-plan`, `plan-to-criteria`, and
-  `implement-plan`), the post-confirmation `archive-plan` skill, the
-  `debug-agent` debugging skill, and the read-only `review-changes` pre-commit
-  review skill. Preserve any existing target skills.
+  `implement-plan`), the post-confirmation `archive-plan` and `wrap-up-plan`
+  skills, the `debug-agent` debugging skill, and the read-only `review-changes`
+  pre-commit review skill. Preserve any existing target skills.
   If no domain skill exists, create one example skill relevant to the target's
   business and mark it clearly as an example. Keep `debug-agent` generic. Keep
   `review-changes` generic, but ensure its links resolve to the target's adapted

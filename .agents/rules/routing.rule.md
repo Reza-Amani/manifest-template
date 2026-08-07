@@ -53,6 +53,7 @@ Manifest skills for **software / development** repos:
 - Add complete acceptance criteria and focused tests to a detailed plan → [`skills/plan-to-criteria`](../skills/plan-to-criteria/SKILL.md)
 - Implement a detailed plan and prove every acceptance criterion → [`skills/implement-plan`](../skills/implement-plan/SKILL.md)
 - Archive one user-confirmed completed task's plan, spec, and eligible initial plan → [`skills/archive-plan`](../skills/archive-plan/SKILL.md)
+- Wrap up a completed task: archive plus create/update reference docs for non-trivial design → [`skills/wrap-up-plan`](../skills/wrap-up-plan/SKILL.md)
 - Diagnose and fix a user-identified issue with runtime evidence and temporary instrumentation → [`skills/debug-agent`](../skills/debug-agent/SKILL.md)
 - Review uncommitted changes for bugs, architecture flaws, and introduced technical debt without editing files → [`skills/review-changes`](../skills/review-changes/SKILL.md)
 - _(coding example)_ Add a new module end-to-end → [`skills/example-add-module`](../skills/example-add-module/SKILL.md)
@@ -96,7 +97,8 @@ _(add your real runbooks here under `skills/<name>/SKILL.md`)_
   - When the user asks to continue or edit planning work, search the full
     `plans/` tree, regardless of the agent's default plan directory.
   - Completed task artifacts may be moved to `plans/archive/` only by the
-    confirmation-gated `archive-plan` workflow. Master plans remain active.
+    confirmation-gated `archive-plan` or `wrap-up-plan` workflow. Master plans
+    remain active.
   - The `plans/example-epic/` directory belongs only to this template. Do not
     copy it into a target repository.
 
