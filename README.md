@@ -88,11 +88,12 @@ and changes whenever the code does.
 
 For small work, `grill-to-spec` turns plain user intent into a human-readable
 behavior spec. `spec-to-plan` creates a Cursor-style implementation plan without
-acceptance criteria. `plan-to-criteria` studies the test setup, writes focused
-tests where possible, and adds acceptance criteria to the plan. `implement-plan`
-then builds and validates until every criterion passes. After the user confirms
-completion, `archive-plan` moves only that completed task's eligible planning
-artifacts to `plans/archive/`.
+acceptance criteria. `plan-to-criteria` studies the test setup, writes failing
+tests for the planned behavior when the change is not a test-invalidating
+redesign, and adds behavioral plus narrative acceptance criteria to the plan.
+`implement-plan` then implements until those tests pass and every criterion is
+proved. After the user confirms completion, `archive-plan` moves only that
+completed task's eligible planning artifacts to `plans/archive/`.
 
 An epic adds one stage at the front: `grill-to-master` preserves the human
 initial idea and creates a high-level phased roadmap. Each phase then follows

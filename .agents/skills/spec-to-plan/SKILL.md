@@ -18,7 +18,7 @@ the spec and do not add acceptance criteria.
 This skill pairs with [CODE0](../grill-to-spec/SKILL.md): that skill
 writes `*.spec.md`; this one turns a ready spec into a detailed `*.planning.md`
 in the same planning directory. `plan-to-criteria` adds the acceptance section
-and tests in the next stage.
+and plan-derived red tests in the next stage.
 
 Follow the canonical [planning flow](../../reference/planning-flow.ref.md).
 

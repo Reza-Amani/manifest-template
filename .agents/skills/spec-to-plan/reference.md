@@ -81,8 +81,9 @@ Easy mistakes, ordering constraints, backward-compat traps.
 ```
 
 Keep test discovery and acceptance-test authoring out of this stage.
-`plan-to-criteria` inspects the real test infrastructure and adds those tests
-after this implementation plan exists.
+`plan-to-criteria` inspects the real test infrastructure after this
+implementation plan exists, writes red tests for planned behavior when
+applicable, and records the redesign or infrastructure skip otherwise.
 
 ## Detail levels
 

@@ -57,6 +57,20 @@ Replace these example paths with real paths when creating a target plan:
 > plan exists. The paths and commands are illustrative because this is a
 > template-only epic.
 
+### Pre-implementation test contract
+
+- [ ] Classification: normal change. The planned request/idempotency/auth
+  behavior can be expressed through the existing export test files without
+  invalidating the rest of the unit suite.
+- [ ] `tests/exports/export-request.service.test.ts` and
+  `tests/exports/export-request.integration.test.ts` specify the planned
+  request behavior and fail before implementation because the service and
+  endpoint do not exist yet.
+- [ ] Narrow command:
+  `npm test -- tests/exports/export-request.service.test.ts tests/exports/export-request.integration.test.ts`.
+
+### Behavioral criteria
+
 - [ ] A valid admin request with report filters returns a queued job identifier
   without waiting for generation. Covered by
   `tests/exports/export-request.integration.test.ts`.
@@ -70,6 +84,16 @@ Replace these example paths with real paths when creating a target plan:
   `tests/exports/export-request.service.test.ts`.
 - [ ] A non-admin request is denied, reveals no job details, and creates no job.
   Covered by `tests/exports/export-request.integration.test.ts`.
+
+### Narrative and design criteria
+
+- [ ] Idempotency is enforced at the storage boundary, not only in process.
+- [ ] Authorization happens before existing job details are returned.
+- [ ] Job processing, progress, cancellation, and download stay out of this
+  part.
+
+### Final validation
+
 - [ ] The focused tests pass with
   `npm test -- tests/exports/export-request.service.test.ts tests/exports/export-request.integration.test.ts`.
 - [ ] The repository's normal build, typecheck, and test commands pass.

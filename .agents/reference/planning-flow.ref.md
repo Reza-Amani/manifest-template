@@ -10,7 +10,7 @@ but they must not silently rewrite them.
 | --- | --- | --- |
 | `*.spec.md` | User, with `grill-to-spec` | Plain-language intended behavior and scenarios |
 | `*.planning.md` | `spec-to-plan` | Cursor-style implementation steps and technical approach |
-| `## Acceptance criteria` in `*.planning.md` | `plan-to-criteria` | Complete, verifiable proof that the spec was implemented |
+| `## Acceptance criteria` in `*.planning.md` | `plan-to-criteria` | Plan-derived test contract plus behavioral, narrative, and final proof requirements |
 | `*-initial.md` | User | Starting intent for an epic |
 | `*.master.plan` | `grill-to-master` | High-level epic roadmap, architecture, and independent phases |
 
@@ -26,12 +26,20 @@ roles into one document stage.
    `plans/<topic>.planning.md` in Cursor Plan Mode style. At this point the plan has
    implementation steps but no formal acceptance criteria.
 3. `plan-to-criteria` reads both files, studies the existing test setup, and
-   adds or updates tests where the repository already supports them. It then
-   adds a standalone `## Acceptance criteria` section to the plan while leaving
-   the rest of the plan unchanged.
-4. `implement-plan` follows the plan, updates applicable task checkboxes, and
-   runs every acceptance check. It fixes the implementation and retries until
-   all criteria pass or a real blocker needs user input.
+   classifies the work. For a normal change it writes tests for the planned
+   behavior, confirms they fail because implementation is missing, and records
+   that red state. For a redesign that makes all or effectively all relevant
+   unit tests obsolete, it skips pre-implementation test authoring. It
+   likewise skips test authoring when no suitable test infrastructure exists
+   rather than adding an unapproved framework. It then adds a standalone
+   `## Acceptance criteria` section containing the test strategy, behavioral
+   criteria, narrative/design requirements, and final validations while
+   leaving the rest of the plan unchanged.
+4. `implement-plan` follows the plan. For a normal change it first reproduces
+   the intentional test failures, then implements until those tests pass. For a
+   test-invalidating redesign it honors the test-authoring skip and proves the
+   narrative and other validation criteria. It updates applicable task
+   checkboxes only after every required acceptance check passes.
 5. After implementation finishes and the user confirms the task is complete,
    `archive-plan` may move that task's completed plan and matching spec to
    `plans/archive/`.
@@ -61,9 +69,13 @@ roles into one document stage.
   criteria.
 - `spec-to-plan` does not edit the spec or add acceptance criteria.
 - `plan-to-criteria` avoids changing the existing plan body. It owns only the
-  acceptance section and the tests it adds or updates.
-- `implement-plan` avoids changing specs and plan prose. It may update plan
-  task status and, for an epic, the matching master-plan phase status.
+  acceptance section and pre-implementation tests derived from planned
+  behavior. It does not add tests merely to characterize current code, and it
+  skips test authoring for test-invalidating redesigns.
+- `implement-plan` avoids changing specs, plan prose, criteria, and
+  plan-derived tests. It changes implementation to make the red tests green,
+  validates narrative/design criteria, and may update plan task status and, for
+  an epic, the matching master-plan phase status.
 - `archive-plan` runs only after implementation and user confirmation. It moves
    one completed task's eligible planning artifacts without moving master plans,
    unrelated files, or anything with unfinished work.
