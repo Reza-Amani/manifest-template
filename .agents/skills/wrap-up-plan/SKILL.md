@@ -39,7 +39,11 @@ completed plans and ask them to select one.
 3. Require every todo, task checkbox, and acceptance checkbox to be complete;
    reject blockers, skipped required checks, and unverified criteria. For an
    epic, also require the matching master phase to be complete.
-4. Never rewrite planning content to satisfy the completion gate.
+4. Do not rewrite, remove, weaken, or redefine a criterion to satisfy the
+   completion gate. After implementation, you may update acceptance-checkbox
+   markers and add concise evidence or verification notes when the existing
+   criterion is actually satisfied. Leave unmet criteria unchecked and report
+   them as blockers.
 5. Include a spec only through an explicit plan link or exact sibling stem.
    Include an initial file only through an explicit link and only when it is
    exclusive to this task. Omit ambiguous or still-referenced companions.
@@ -87,8 +91,12 @@ Wrap-up progress:
 
 ### 1. Completion gate
 
-Read the whole plan and apply the archive completion rules. Prose such as
-"implemented" or a passing build alone is insufficient evidence.
+Read the whole plan and apply the archive completion rules. When the shipped
+implementation and available evidence satisfy an existing acceptance
+criterion, update its checkbox and record concise evidence in the plan before
+continuing. Do not change the criterion's wording or scope just to make it
+pass. Prose such as "implemented" or a passing build alone is insufficient
+evidence.
 
 ### 2. Resolve archive companions
 
