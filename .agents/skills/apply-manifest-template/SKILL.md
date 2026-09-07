@@ -170,7 +170,7 @@ suffixes from `manifest-structure.rule.md`.
 - Other `.agents/plans/` content only when it comes from real target work:
   simple `*.planning.md` or `*.spec.md` files stay at the top level; a real
   epic may use its own directory for the human `*-initial.md`, agent
-  `*.master.plan`, specs, and detailed `*.planning.md` plans. Never invent or
+  `*.master.md`, specs, and detailed `*.planning.md` plans. Never invent or
   rewrite the human initial idea.
 - `.agents/learning/README.md` — explains where `teach` skill session records
   belong and how they are named.
@@ -213,10 +213,11 @@ locally per developer.
 **Upgrade path specifics:** for an existing manifest, make the smallest set of
 changes that brings it in line with the structure — add missing required files,
 fix misplaced docs, repair naming suffixes and links, and fill obvious gaps.
-Rename legacy epic master plans to `*.master.plan` and legacy detailed
-implementation plans to `*.planning.md`, repairing inbound and outbound links
-in the same change. Do not rename the canonical `backlog.plan.md`; it is neither
-a master plan nor a detailed implementation plan.
+Rename legacy epic master plans (including former `*.master.plan` files) to
+`*.master.md` and legacy detailed implementation plans to `*.planning.md`,
+repairing inbound and outbound links in the same change. Do not rename the
+canonical `backlog.plan.md`; it is neither a master plan nor a detailed
+implementation plan.
 List anything that needs human judgment instead of guessing.
 
 ### 7. Replace examples with real content

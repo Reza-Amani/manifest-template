@@ -82,9 +82,10 @@ If the target already has the change (or a more advanced local version), skip it
 ### 5. Apply surgically
 - Edit only the shared structural files in the **target**, matching the target's
   existing tone and link style (relative links, local terminology).
-- When syncing the plan-naming convention, rename legacy master plans to
-  `*.master.plan` and legacy detailed plans to `*.planning.md`, then repair all
-  affected links. Keep `backlog.plan.md` unchanged because it is neither type.
+- When syncing the plan-naming convention, rename legacy master plans
+  (including former `*.master.plan` files) to `*.master.md` and legacy
+  detailed plans to `*.planning.md`, then repair all affected links.
+  Keep `backlog.plan.md` unchanged because it is neither type.
 - If a template change references scaffolding the target doesn't have (e.g.
   `learning/README.md`), point at the target's real path instead, or omit the
   dead link.

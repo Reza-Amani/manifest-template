@@ -89,7 +89,7 @@ _(add your real runbooks here under `skills/<name>/SKILL.md`)_
   - For simple work, save the descriptive `*.spec.md` and matching
     `*.planning.md` directly under `plans/`.
   - For an epic or big task, use one dedicated subdirectory under `plans/` for
-    its `*-initial.md`, `*.master.plan`, specs, and detailed `*.planning.md`
+    its `*-initial.md`, `*.master.md`, specs, and detailed `*.planning.md`
     plans.
   - Acceptance criteria live in an independent section of the detailed plan.
     They are added by `plan-to-criteria`, not by `grill-to-spec` or

@@ -23,7 +23,7 @@ Follow the canonical [planning flow](../../reference/planning-flow.ref.md).
 ## Inputs
 
 - **Plan (required):** one detailed `*.planning.md`. Reject a
-  `*.master.plan` as the implementation input.
+  `*.master.md` as the implementation input.
 - **Spec (optional):** use the linked `*.spec.md` when present for behavioral
   context. The plan remains the implementation guide.
 - **Master plan (epics only, optional context):** read it to identify the
@@ -155,7 +155,7 @@ Only after every acceptance criterion passes:
 ## Completion checks
 
 - The implementation input was a `*.planning.md` detailed plan, never a
-  `*.master.plan`.
+  `*.master.md`.
 - Work stayed inside the detailed plan and one epic phase when applicable.
 - Plan/spec prose and criteria were not edited without user approval.
 - Normal-change tests were observed red before production edits when

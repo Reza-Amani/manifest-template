@@ -26,7 +26,7 @@ Follow the canonical [planning flow](../../reference/planning-flow.ref.md).
 - **Target repo:** the repository being changed.
 - **Spec:** the `*.spec.md` source of intended behavior.
 - **Plan:** the matching `*.planning.md` implementation plan. A
-  `*.master.plan` is not a valid input.
+  `*.master.md` is not a valid input.
 
 If either file is missing or their relationship is unclear, ask the user for
 the correct path. Never run this skill against the template when a separate
@@ -187,7 +187,7 @@ constraint it must satisfy.
 ## Completion checks
 
 - The spec and matching `*.planning.md` detailed plan were both read; no
-  `*.master.plan` was treated as a detailed plan.
+  `*.master.md` was treated as a detailed plan.
 - Existing test infrastructure and nearby tests were inspected first.
 - The relevant existing suite's baseline state was established.
 - A normal change with suitable test infrastructure has plan-derived tests

@@ -140,7 +140,7 @@ implementation plans, and backlog items.
   `plans/`. Keep all files for that epic in its directory:
   - `<epic>-initial.md` — the human-written initial idea. It may be short and
     informal, but it is the source of truth for the epic's starting intent.
-  - `<epic>.master.plan` — the high-level roadmap produced by
+  - `<epic>.master.md` — the high-level roadmap produced by
     `grill-to-master` from the initial idea. It holds overall requirements,
     architecture, and independently plannable phases. It is an epic backlog and
     ordering guide, not an implementation plan, and has no acceptance criteria.
@@ -299,7 +299,7 @@ requires it. Personas (`*.agent.md`) and skills (`SKILL.md`) usually need a
 | `personas/`   | `<role>.agent.md`     | yes (`name`, `description`) |
 | `skills/`     | `<skill>/SKILL.md`    | yes (`name`, `description`) |
 | `guides/`     | descriptive `*.md`    | no                        |
-| `plans/`      | `*.planning.md`, `*.master.plan`, `*.spec.md`, `backlog.plan.md`, or epic subdirectory files described above | optional (`todos` block) |
+| `plans/`      | `*.planning.md`, `*.master.md`, `*.spec.md`, `backlog.plan.md`, or epic subdirectory files described above | optional (`todos` block) |
 | `learning/`   | `YYYY-MM-DD-topic.md` | optional                  |
 | `findings/`   | `YYYY-MM-DD-topic.md` | optional                  |
 | `actions/`    | descriptive `*.md`    | optional                  |

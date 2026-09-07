@@ -12,7 +12,7 @@ but they must not silently rewrite them.
 | `*.planning.md` | `spec-to-plan` | Cursor-style implementation steps and technical approach |
 | `## Acceptance criteria` in `*.planning.md` | `plan-to-criteria` | Plan-derived test contract plus behavioral, narrative, and final proof requirements |
 | `*-initial.md` | User | Starting intent for an epic |
-| `*.master.plan` | `grill-to-master` | High-level epic roadmap, architecture, and independent phases |
+| `*.master.md` | `grill-to-master` | High-level epic roadmap, architecture, and independent phases |
 
 The spec says **what should happen**. The detailed plan says **how to build
 it**. Acceptance criteria say **how to prove it works**. Do not merge these
@@ -49,7 +49,7 @@ roles into one document stage.
 
 1. The user gives `grill-to-master` a plain explanation of the intended epic.
    The skill preserves that intent in `<epic>-initial.md` and produces
-   `<epic>.master.plan` in a dedicated `plans/<epic>/` directory.
+   `<epic>.master.md` in a dedicated `plans/<epic>/` directory.
 2. The master plan contains only the overall outcome, high-level requirements,
    high-level architecture, and a phased roadmap. Each phase must be small
    enough for one spec and one detailed plan, and independent enough to

@@ -87,7 +87,7 @@ Beyond the required core (`AGENTS.md`, `manifest-structure.rule.md`,
   left shallow with just some brief general guides.
 - Other planning files only for real target work. Keep simple `*.planning.md` /
   `*.spec.md` files at the top level and each real epic in its own directory
-  (`*-initial.md`, `*.master.plan`, specs, detailed `*.planning.md`). Do not
+  (`*-initial.md`, `*.master.md`, specs, detailed `*.planning.md`). Do not
   copy the template-only `plans/example-epic/` directory.
 
 ## Handle existing documents and system prompts

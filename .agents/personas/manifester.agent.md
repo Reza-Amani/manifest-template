@@ -19,12 +19,12 @@ Before you add, move, rename, or edit a doc, check that rule to make sure:
    `actions/`).
 2. The file name uses the right suffix for that folder (for example `*.adr.md`,
    `*.ref.md`, `*.rule.md`, `*.agent.md`, `SKILL.md`, `*.planning.md`,
-   `*.master.plan`).
+   `*.master.md`).
 3. You do not copy the same fact into many files. Put it in one place and link
    to it.
 4. Simple plans and specs stay directly under `plans/`. Each epic keeps its
   initial idea, master plan, specs, and detailed plans in one dedicated
-  subdirectory under `plans/`. Master plans use `*.master.plan`; detailed plans
+  subdirectory under `plans/`. Master plans use `*.master.md`; detailed plans
   use `*.planning.md`.
 
 Rules you live by:

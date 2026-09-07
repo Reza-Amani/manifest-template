@@ -97,7 +97,7 @@ choose the path from the target's planning structure:
 Use a short, descriptive dash-case `<topic>` (e.g. `partial-refunds.spec.md`).
 For an epic, use the existing epic directory and a short dash-case `<part>`.
 If the user points to an epic master plan, verify that it uses the
-`*.master.plan` suffix and save the spec beside it. Do not place an epic spec at
+`*.master.md` suffix and save the spec beside it. Do not place an epic spec at
 the top level or create a second directory for the same epic. Create the chosen
 directory if needed. Never place the spec outside the target repo's
 `.agents/plans/` tree, and never in the template repo.
@@ -142,7 +142,7 @@ unresolved design branch into a ready spec.
 
 Link to the target's manifest documents (ADRs, references, rules) instead of
 duplicating their content. For an epic spec, also link to its `*-initial.md` and
-`*.master.plan` sources when they exist. Do not copy the whole master plan
+`*.master.md` sources when they exist. Do not copy the whole master plan
 into the spec.
 
 If the session ends **without** reaching shared understanding, do not write a

@@ -79,7 +79,7 @@ them.
 Write:
 
 ```text
-.agents/plans/<epic>/<epic>.master.plan
+.agents/plans/<epic>/<epic>.master.md
 ```
 
 Use YAML frontmatter with `name`, `overview`, `todos`, and `isProject: true`.
@@ -124,7 +124,7 @@ unless the user explicitly asks.
 ## Completion checks
 
 - The initial idea faithfully preserves user input.
-- The master plan is named `<epic>.master.plan` and is inside the epic's
+- The master plan is named `<epic>.master.md` and is inside the epic's
   dedicated plans directory.
 - The master plan links to the initial idea.
 - The roadmap is high-level and each phase is independently plannable.
