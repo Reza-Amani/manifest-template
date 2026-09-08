@@ -5,7 +5,8 @@ description: >-
   repo's existing test infrastructure, writes failing pre-implementation tests
   for the planned behavior when appropriate, and adds automated and narrative
   acceptance criteria while avoiding other plan edits. It skips test authoring
-  for test-invalidating redesigns. Use when the user asks to "add
+  for test-invalidating redesigns and uses alternative proof where unit testing
+  would require test-only production changes. Use when the user asks to "add
   acceptance criteria", "make this plan verifiable", "plan to criteria", or
   wants tests and completion checks prepared before implementation.
 ---
@@ -20,6 +21,12 @@ requirements and high-level validation that are not meaningfully proved by
 unit tests. Do not implement production behavior.
 
 Follow the canonical [planning flow](../../reference/planning-flow.ref.md).
+
+Never trade production readability, performance, design integrity, code size,
+or execution speed for unit tests or coverage. This skill must not edit
+plan of the production code, including preparatory changes intended only to enable tests.
+Do not expose private internals, widen APIs or visibility, add test hooks or
+  test-conditioned production paths
 
 ## Inputs
 
@@ -43,7 +50,8 @@ target repo is open.
 4. For any of the above add a high-level validation criterion.
 5. For any of the above that can be meaningfully proved by unit tests, write a
    pre-implementation test for it. These tests can be red before implementation
-   and become green after a proper implementation.
+  and become green after a proper implementation. Apply the per-behavior
+  production-integrity fallback below when unit proof is impractical.
 
 Do not rewrite the plan's approach, todos, risks, or file-level steps.
 
@@ -79,6 +87,22 @@ Classify the plan before editing tests:
 Do not call a change a redesign merely because testing is difficult or several
 tests need updates. Record the classification and evidence in the acceptance
 section.
+
+### Per-behavior production-integrity fallback
+
+For a difficult-to-test part of a normal change, first check existing public
+boundaries and test-side fixtures or helpers. If unit testing would require
+production changes solely for test convenience or coverage, do not make or
+request those changes. Keep the normal-change classification and author tests
+for the remaining testable behavior.
+
+For the affected behavior, specify an existing integration, system, simulation,
+command-based, inspection, or precise manual check with inputs and expected
+results. Record the limitation, alternative proof, and residual coverage gap in
+the acceptance section. Do not label difficult testing as a redesign or absence
+of infrastructure. If a mandatory coverage gate conflicts with this fallback,
+report the blocker and request a verification or scope decision; do not silently
+relax the gate or weaken the behavior being verified.
 
 ## Phase 3: Create the pre-implementation proof
 
@@ -203,3 +227,4 @@ constraint it must satisfy.
 - Plan content outside the acceptance section was not changed unless the user
   approved a necessary correction.
 - No production implementation was added.
+- No production files were changed for unittest convenience, or coverage.

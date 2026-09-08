@@ -74,13 +74,18 @@ Purpose and outline of contents.
 ## Out of scope / what this does not change
 
 Explicit non-goals and untouched call sites when that prevents scope creep.
+Exclude production changes made solely for unit-test convenience or coverage.
 
 ## Risks / things to watch
 
 Easy mistakes, ordering constraints, backward-compat traps.
+For known unit-test limitations, name the affected behavior, why unit proof is
+impractical without test-only production changes, a feasible alternative check,
+and residual risk for the criteria stage to resolve.
 ```
 
-Keep test discovery and acceptance-test authoring out of this stage.
+Keep detailed test-infrastructure discovery and acceptance-test authoring out
+of this stage. Nearby tests may inform feasibility and risks during planning.
 `plan-to-criteria` inspects the real test infrastructure after this
 implementation plan exists, writes red tests for planned behavior when
 applicable, and records the redesign or infrastructure skip otherwise.
@@ -112,6 +117,8 @@ Everything in standard, plus:
 - Editing the spec from this skill.
 - Adding acceptance criteria before `plan-to-criteria` studies the test setup.
 - Adding test-authoring todos that belong to `plan-to-criteria`.
+- Planning production hooks, API exposure, indirection, or refactors solely to
+  make unit tests easier or reach a coverage target.
 - Turning an epic `*.master.md` roadmap directly into an implementation
   plan instead of producing a spec for one part first.
 - Saving under `~/.cursor/plans/` or `.cursor/plans/` instead of

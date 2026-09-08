@@ -63,7 +63,7 @@ Research the **target** repo the same way Plan Mode does:
 1. Using the manifest files and routing rule, find the files, modules, and tests the change will touch.
 2. Read relevant ADRs, references, and rules from the target's `.agents/` when
 the task touches their domain (use the target's `routing.rule.md` if present).
-1. Prefer facts from the repo over guesses.
+3. Prefer facts from the repo over guesses.
 
 Do not implement code in this skill. Planning only.
 
@@ -172,5 +172,8 @@ Write → beside the spec
 - Spec problems were reported to the user when found.
 - No acceptance criteria were added; the hand-off points to `plan-to-criteria`.
 - Detail level matches Phase 3.
+- No production change is planned solely for unit-test convenience or coverage.
 - Nothing was written into the template repo when a separate target was open.
-- The spec file lists potential manifest files to update with a short summary of what would change in each. They are not updated yet; the plan file lists them as todos. They will be updated by the implementation phase. They are inspired by the notes in the spec file, but you add more details to them, and you add any missing ones.
+- The plan lists potential manifest updates as todos, refining any notes already
+  present in the spec and adding missing items without editing the spec. Those
+  manifest files are updated during implementation, not in this skill.

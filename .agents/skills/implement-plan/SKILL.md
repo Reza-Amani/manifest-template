@@ -5,7 +5,8 @@ description: >-
   workflow, reproduces the plan's intentional pre-implementation test failures,
   implements until those tests pass, and validates automated and narrative
   acceptance criteria. It respects the test-authoring exception recorded for
-  test-invalidating redesigns. The spec is optional. Use when the user asks to
+  test-invalidating redesigns and per-behavior production-integrity fallbacks.
+  The spec is optional. Use when the user asks to
   "implement this plan", "build the plan", "execute this plan", or "finish
   this phase".
 ---
@@ -13,12 +14,15 @@ description: >-
 # Implement Plan
 
 Implement one detailed plan end to end. For a normal change, start from the red
-tests written by `plan-to-criteria` and make them green by changing production
-code, not by weakening the contract. For a test-invalidating redesign, honor
+tests written by `plan-to-criteria` and make them green by implementing required
+production behavior, not by weakening the contract or adding test-only production
+changes. Honor recorded alternative proof for difficult-to-unit-test behavior.
+For a test-invalidating redesign, honor
 the recorded pre-implementation test skip and prove the work through the
 plan's other behavioral, narrative, and validation criteria.
 
 Follow the canonical [planning flow](../../reference/planning-flow.ref.md).
+
 
 ## Inputs
 
@@ -68,14 +72,16 @@ requires explicit confirmation during plan closeout.
    earlier phases are complete.
 4. Read the `Pre-implementation test contract` and classify the run:
    - **Normal change:** inspect every named plan-derived test and its recorded
-     expected red result.
+     expected red result, and each production-integrity fallback's alternative
+     proof and residual risk. Do not demand red unit tests for documented
+     fallback behavior, even when the contract has no new unit tests.
    - **Test-invalidating redesign:** confirm the criteria explain why
      pre-implementation tests were skipped and identify the invalidated unit
      suite.
    - **No suitable test infrastructure:** confirm the criteria record that
      limitation and provide non-unit proof.
 5. Inspect the named implementation files, tests, and commands.
-6. Before production edits on a normal change, run the exact narrow test
+6. Before production edits on a normal change with plan-derived red tests, run the exact narrow test
    command and reproduce the expected red state. Confirm that failure comes
    from missing planned behavior, not an unrelated baseline defect.
 7. If a plan-derived test unexpectedly passes before implementation, determine
@@ -92,11 +98,17 @@ Do not expand scope to adjacent master-plan phases or unrelated cleanup.
 Follow a Cursor Build-style loop:
 
 1. Take the next pending plan todo.
-2. Make the smallest coherent implementation change for that todo.
+2. Make the smallest coherent implementation change for that todo. Require a
+  production justification independent of unit-test convenience or coverage.
 3. Run the narrowest relevant plan-derived test, compile, lint, or behavior
    check. On a normal change, use the red tests as the primary implementation
    target and turn them green incrementally.
-4. If it fails because of the implementation, fix the implementation and rerun.
+4. If it fails because required production behavior is wrong, fix that behavior
+  and rerun. If the difficulty is accessing or controlling code for a unit test,
+  use existing boundaries or test-side helpers instead of altering production
+  code. If that is insufficient, report the affected behavior, alternative
+  proof, and residual risk; get approval before changing the protected test
+  contract or criteria. Do not silently skip the check or force a coverage gate. In case of no responce from the useer, skip the unit test, rather than forcing it red or modifying production code solely for test convenience.
 5. Record the todo as verified only when its work and focused check are
   complete. Defer plan status and checkbox edits until Phase 4.
 6. Continue to the next todo.
@@ -118,19 +130,28 @@ After implementation, evaluate every acceptance checkbox precisely:
 - perform each manual check that the environment allows;
 - inspect each narrative and design requirement against the named code,
   configuration, schema, migration, or documentation artifact;
+- inspect the production diff for test-only refactors, hooks, widened visibility,
+  mock-only indirection, and other coverage-driven changes; remove changes made
+  by this run that have no independent production justification;
+- execute each recorded production-integrity fallback and relevant size,
+  performance, or timing check; disclose coverage gaps and unavailable evidence;
 - compare observed behavior with the exact expected result;
 - record any check that cannot run and why; do not mark it passed;
 - run broader regression checks when the criteria require them.
 
-If a criterion fails, repair the implementation and repeat the relevant focused
-checks, then rerun the acceptance set. Keep iterating until every criterion
-passes or a genuine blocker requires the user.
+If a criterion fails because production behavior or design is wrong, repair the
+implementation and repeat the relevant focused checks, then rerun the acceptance
+set. Never alter production code solely to satisfy a test harness or coverage
+gate. Keep iterating until every criterion passes or a genuine blocker requires
+the user.
 
-Do not weaken, remove, skip, or rewrite a plan-derived test or criterion during
-retries, unless the test or criterion is obviously wrong. If a test or
-criterion is obviously wrong or outdated, or a unit test is testing the old
-behavior rather than the new one, fix it and explain the evidence; no
-confirmation is needed.
+Do not weaken, remove, skip, or rewrite a plan-derived test or criterion merely
+to obtain a pass. A test implementation that demonstrably contradicts the
+unchanged spec and criteria may be corrected with recorded evidence and a
+focused rerun. Changing the intended behavior, test strategy, coverage gate, or
+any acceptance criterion always requires user approval, including when a
+criterion appears wrong or outdated. Production-integrity conflicts are
+blockers to resolve, not permission to silently rewrite the contract.
 
 ## Phase 4: Close the plan
 
@@ -159,8 +180,11 @@ Only after every acceptance criterion passes:
 - Work stayed inside the detailed plan and one epic phase when applicable.
 - Plan/spec prose and criteria were not edited without user approval.
 - Normal-change tests were observed red before production edits when
-  implementation had not already begun, then made green through implementation.
+  implementation had not already begun, then made green through implementation;
+  documented fallback behavior was verified by its specified alternative checks.
 - Tests were not weakened to obtain a pass.
+- Production code was not changed solely to ease unit testing or raise coverage;
+  production-integrity checks and residual coverage gaps were reported.
 - A test-invalidating redesign did not acquire unplanned tests or use the
   skip to evade behavioral, narrative, or final validation criteria.
 - Every acceptance criterion passed; otherwise the task is reported blocked,
