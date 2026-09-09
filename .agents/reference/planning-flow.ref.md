@@ -23,6 +23,14 @@ speed must never be compromised for unit tests or coverage. Do not change
 production code solely to simplify testing; record alternative proof and
 residual coverage gaps when unit testing is impractical.
 
+Acceptance evidence is prioritized as complete narrative and design criteria,
+then integration tests when suitable infrastructure exists, then unit tests.
+Unit tests remain required when the repository has unit-test infrastructure and
+the planned unit boundary is clear. When interfaces or function signatures are
+not yet clear enough for meaningful pre-implementation tests,
+`plan-to-criteria` records the required unit cases and desired outcomes for
+`implement-plan` instead of guessing the production contract.
+
 ## Small tasks
 
 1. The user gives `grill-to-spec` a plain task definition. The skill asks
@@ -31,9 +39,14 @@ residual coverage gaps when unit testing is impractical.
    `plans/<topic>.planning.md` in Cursor Plan Mode style. At this point the plan has
    implementation steps but no formal acceptance criteria. 
 3. `plan-to-criteria` reads both files, studies the existing test setup, and
-   classifies the work. For a normal change it writes tests for the planned
-   behavior, confirms they fail because implementation is missing, and records
-   that red state. For a redesign that makes all or effectively all relevant
+   classifies the work. For a normal change it completes the narrative/design
+   criteria first, writes integration tests when suitable infrastructure
+   exists, and writes unit tests when the unit boundary is clear. It confirms
+   authored tests fail because implementation is missing and records that red
+   state. When a module interface or function signature is too unclear for a
+   meaningful unit test, it records an implement-plan note containing the
+   required cases, desired outcomes, unresolved decision, interim proof, and
+   residual gap. For a redesign that makes all or effectively all relevant
    unit tests obsolete, it skips pre-implementation test authoring. It
    records per-behavior production-integrity fallbacks when unit tests would
    require test-only production changes, preserving the normal-change
@@ -46,9 +59,12 @@ residual coverage gaps when unit testing is impractical.
    leaving the rest of the plan unchanged.
 4. `implement-plan` follows the plan. For a normal change with red tests it first
    reproduces the intentional test failures, then implements required production
-   behavior until those tests pass. It executes the specified alternative checks
-   for production-integrity fallbacks and reviews production changes for
-   test-only modifications. For a
+   behavior until those tests pass. After resolving an interface named in a
+   deferred unit-test note, it adds the specified unit cases against the settled
+   boundary and confirms their desired outcomes, unless the boundary remains
+   unsuitable under the production-integrity rule. It executes the specified
+   alternative checks and reviews production changes for test-only
+   modifications. For a
    test-invalidating redesign it honors the test-authoring skip and proves the
    narrative and other validation criteria. It updates applicable task
    checkboxes only after every required acceptance check passes.
@@ -87,8 +103,9 @@ residual coverage gaps when unit testing is impractical.
   acceptance section and pre-implementation tests derived from planned
   behavior. It does not add tests merely to characterize current code, and it
    skips test authoring for test-invalidating redesigns. It never changes
-   production code to enable tests and records per-behavior alternatives where
-   the production-integrity rule prevents unit proof.
+   production code to enable tests and records per-behavior unit-test notes and
+   alternatives where an unclear interface or the production-integrity rule
+   prevents pre-implementation unit proof.
 - `implement-plan` avoids changing specs, plan prose, criteria, and
    plan-derived tests. It implements required behavior to make the red tests green,
   validates narrative/design criteria, and may update plan task status and, for

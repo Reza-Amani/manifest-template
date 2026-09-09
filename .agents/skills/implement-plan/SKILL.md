@@ -11,6 +11,34 @@ description: >-
   this phase".
 ---
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Implement Plan
 
 Implement one detailed plan end to end. For a normal change, start from the red
@@ -23,7 +51,6 @@ plan's other behavioral, narrative, and validation criteria.
 
 Follow the canonical [planning flow](../../reference/planning-flow.ref.md).
 
-
 ## Inputs
 
 - **Plan (required):** one detailed `*.planning.md`. Reject a
@@ -35,7 +62,8 @@ Follow the canonical [planning flow](../../reference/planning-flow.ref.md).
 
 If the plan has no `## Acceptance criteria` section, stop and recommend running
 `plan-to-criteria` first. The section must identify its pre-implementation test
-strategy: plan-derived red tests, or an explicit test-authoring skip for a
+strategy: plan-derived red tests, a per-behavior unit-test deferral with an
+`Implement-plan unit-test note`, or an explicit test-authoring skip for a
 test-invalidating redesign or unavailable test infrastructure. If it does not,
 stop and recommend rerunning `plan-to-criteria`. If the plan, optional spec, or
 repository contradicts itself in a way that changes scope or behavior, explain
@@ -71,10 +99,11 @@ requires explicit confirmation during plan closeout.
 3. For an epic, identify the exact master-plan phase ID and verify required
    earlier phases are complete.
 4. Read the `Pre-implementation test contract` and classify the run:
+
    - **Normal change:** inspect every named plan-derived test and its recorded
-     expected red result, and each production-integrity fallback's alternative
-     proof and residual risk. Do not demand red unit tests for documented
-     fallback behavior, even when the contract has no new unit tests.
+     expected red result, each deferred `Implement-plan unit-test note`, and
+     each alternative proof and residual risk. Do not demand red unit tests for
+     documented deferred behavior, even when the contract has no new unit tests.
    - **Test-invalidating redesign:** confirm the criteria explain why
      pre-implementation tests were skipped and identify the invalidated unit
      suite.
@@ -99,19 +128,28 @@ Follow a Cursor Build-style loop:
 
 1. Take the next pending plan todo.
 2. Make the smallest coherent implementation change for that todo. Require a
-  production justification independent of unit-test convenience or coverage.
+   production justification independent of unit-test convenience or coverage.
 3. Run the narrowest relevant plan-derived test, compile, lint, or behavior
    check. On a normal change, use the red tests as the primary implementation
    target and turn them green incrementally.
-4. If it fails because required production behavior is wrong, fix that behavior
-  and rerun. If the difficulty is accessing or controlling code for a unit test,
-  use existing boundaries or test-side helpers instead of altering production
-  code. If that is insufficient, report the affected behavior, alternative
-  proof, and residual risk; get approval before changing the protected test
-  contract or criteria. Do not silently skip the check or force a coverage gate. In case of no responce from the useer, skip the unit test, rather than forcing it red or modifying production code solely for test convenience.
-5. Record the todo as verified only when its work and focused check are
-  complete. Defer plan status and checkbox edits until Phase 4.
-6. Continue to the next todo.
+4. When implementation settles an interface or function signature named in an
+  `Implement-plan unit-test note`, add the specified unit cases against that
+  boundary and verify the stated desired outcomes. If the boundary remains
+  unclear or unsuitable, execute the note's interim proof and report the
+  residual gap instead of guessing an API or changing production code for the
+  test.
+5. If a check fails because required production behavior is wrong, fix that behavior
+   and rerun. If the difficulty is accessing or controlling code for a unit test,
+   use existing boundaries or test-side helpers instead of altering production
+   code. If that is insufficient, report the affected behavior, alternative
+   proof, and residual risk; get approval before changing the protected test
+  contract or criteria. Do not silently skip the check or force a coverage gate.
+  If the user does not respond, preserve the documented deferral and alternative
+  proof rather than forcing the unit test or modifying production code solely
+  for test convenience.
+6. Record the todo as verified only when its work and focused check are
+   complete. Defer plan status and checkbox edits until Phase 4.
+7. Continue to the next todo.
 
 Follow the target repo's existing architecture, helpers, and style. Do not
 rewrite tests merely to make the implementation appear correct. For a
@@ -145,8 +183,11 @@ set. Never alter production code solely to satisfy a test harness or coverage
 gate. Keep iterating until every criterion passes or a genuine blocker requires
 the user.
 
+Do not create unit tests beyond plan-derived tests and the cases specified by an
+`Implement-plan unit-test note`, unless the user requests them.
+
 Do not weaken, remove, skip, or rewrite a plan-derived test or criterion merely
-to obtain a pass. A test implementation that demonstrably contradicts the
+to obtain a pass. If a test seems too hard to pass, report to the user and seek further instructions. A test implementation that demonstrably contradicts the
 unchanged spec and criteria may be corrected with recorded evidence and a
 focused rerun. Changing the intended behavior, test strategy, coverage gate, or
 any acceptance criterion always requires user approval, including when a
@@ -158,38 +199,50 @@ blockers to resolve, not permission to silently rewrite the contract.
 Only after every acceptance criterion passes:
 
 1. Confirm all detailed-plan work and acceptance checks are complete, but defer
-  final status updates until the scratch decision is resolved.
+   final status updates until the scratch decision is resolved.
 2. List the contents of `.agents/scratch/<plan-stem>/`, or state that the
-  directory does not exist or is empty.
+   directory does not exist or is empty.
 3. If scratch artifacts exist and the user did not authorize cleanup earlier,
-  ask whether to remove them. Do not delete them without confirmation.
+   ask whether to remove them. Do not delete them without confirmation.
 4. In one closeout step after the user's answer:
-  - remove the listed artifacts and `<plan-stem>` directory if cleanup was
-    authorized, including by an earlier request;
-  - otherwise preserve them and report their location;
-  - update the detailed-plan todo statuses and checkboxes;
-  - for an epic, update only the matching master-plan phase todo and checkbox.
-5. Report changed files, validation commands, acceptance results, retained
-  scratch artifacts, and any residual risk the stated criteria could not
-  cover.
+
+- remove the listed artifacts and `<plan-stem>` directory if cleanup was
+  authorized, including by an earlier request;
+- otherwise preserve them and report their location;
+- update the detailed-plan todo statuses and checkboxes;
+- for an epic, update only the matching master-plan phase todo and checkbox.
+
+1. Report changed files, validation commands, acceptance results, retained
+   scratch artifacts, and any residual risk the stated criteria could not
+   cover.
 
 ## Completion checks
 
 - The implementation input was a `*.planning.md` detailed plan, never a
   `*.master.md`.
+
 - Work stayed inside the detailed plan and one epic phase when applicable.
+
 - Plan/spec prose and criteria were not edited without user approval.
+
 - Normal-change tests were observed red before production edits when
   implementation had not already begun, then made green through implementation;
   documented fallback behavior was verified by its specified alternative checks.
+
 - Tests were not weakened to obtain a pass.
+
 - Production code was not changed solely to ease unit testing or raise coverage;
   production-integrity checks and residual coverage gaps were reported.
+
 - A test-invalidating redesign did not acquire unplanned tests or use the
   skip to evade behavioral, narrative, or final validation criteria.
+
 - Every acceptance criterion passed; otherwise the task is reported blocked,
   not complete.
+
 - Plan status and the matching master phase status reflect actual completion.
+
 - Ephemeral files were kept only under `.agents/scratch/<plan-stem>/`.
+
 - Existing scratch contents were inventoried at closeout and were removed only
   with advance authorization or explicit confirmation.

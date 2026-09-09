@@ -2,13 +2,14 @@
 name: plan-to-criteria
 description: >-
   Reads a spec and its Cursor-style implementation plan, studies the target
-  repo's existing test infrastructure, writes failing pre-implementation tests
-  for the planned behavior when appropriate, and adds automated and narrative
-  acceptance criteria while avoiding other plan edits. It skips test authoring
-  for test-invalidating redesigns and uses alternative proof where unit testing
-  would require test-only production changes. Use when the user asks to "add
-  acceptance criteria", "make this plan verifiable", "plan to criteria", or
-  wants tests and completion checks prepared before implementation.
+  repo's existing test infrastructure, prioritizes narrative criteria and
+  available integration tests, writes practical failing pre-implementation unit tests for planned
+  behavior , and adds acceptance criteria while avoiding other plan edits. It
+  may defer unit-test authoring when the module interface or function signatures
+  are not clear enough, leaving a precise handoff for implement-plan. Use when
+  the user asks to "add acceptance criteria", "make this plan verifiable",
+  "plan to criteria", or wants tests and completion checks prepared before
+  implementation.
 ---
 
 # Plan to Criteria
@@ -16,9 +17,11 @@ description: >-
 Turn a spec and detailed plan into a TDD/SDD implementation contract. Write
 tests against the behavior the plan will introduce, not against the current
 implementation. Those tests can be red before implementation and become
-green through `implement-plan`. Always add narrative criteria, including design
-requirements and high-level validation that are not meaningfully proved by
-unit tests. Do not implement production behavior.
+green through `implement-plan`. Give first priority to complete narrative and
+design criteria, then to integration tests when suitable infrastructure exists,
+then to unit tests. Unit tests are required when unit-test infrastructure and a
+clear, stable test boundary exist, but they must not crowd out higher-value
+integration or narrative proof. Do not implement production behavior.
 
 Follow the canonical [planning flow](../../reference/planning-flow.ref.md).
 
@@ -47,11 +50,14 @@ target repo is open.
 3. List every normal, alternative, boundary, error, and recovery scenario the
    spec describes, plus every architecture, ownership, compatibility,
    migration, security, performance, and documentation requirement in scope.
-4. For any of the above add a high-level validation criterion.
-5. For any of the above that can be meaningfully proved by unit tests, write a
-   pre-implementation test for it. These tests can be red before implementation
-  and become green after a proper implementation. Apply the per-behavior
-  production-integrity fallback below when unit proof is impractical.
+4. Add a concrete narrative or design criterion for every item above.
+5. For behavior that can be meaningfully proved through existing integration
+  test infrastructure, write a pre-implementation integration test (temporarily failing).
+6. When unit-test infrastructure is present, write pre-implementation unit
+  tests for behavior with a clear, stable unit boundary. These tests can be red
+  before implementation and become green after a proper implementation. Apply
+  the per-behavior unit-test deferral below when unit proof is premature or
+  impractical.
 
 Do not rewrite the plan's approach, todos, risks, or file-level steps.
 
@@ -60,7 +66,8 @@ Do not rewrite the plan's approach, todos, risks, or file-level steps.
 Before proposing tests, inspect the target repo's existing test system:
 
 - test commands and configuration;
-- nearby unit and integration tests;
+- nearby integration and unit tests, treating integration coverage as the
+  higher-value automated proof when both can express the behavior;
 - fixtures, factories, mocks, helpers, and naming conventions;
 - which layer owns each behavior in the spec;
 - the relevant suite's baseline result before adding tests; (if applicable and
@@ -88,31 +95,42 @@ Do not call a change a redesign merely because testing is difficult or several
 tests need updates. Record the classification and evidence in the acceptance
 section.
 
-### Per-behavior production-integrity fallback
+### Per-behavior unit-test deferral
 
 For a difficult-to-test part of a normal change, first check existing public
-boundaries and test-side fixtures or helpers. If unit testing would require
-production changes solely for test convenience or coverage, do not make or
-request those changes. Keep the normal-change classification and author tests
+boundaries and test-side fixtures or helpers. Unit tests may be deferred when
+the module interface, function signatures, ownership boundary, or observable
+contract is not yet clear enough to write a meaningful test, or when testing
+would require production changes solely for test convenience or coverage. Keep
+the normal-change classification and author integration tests and unit tests
 for the remaining testable behavior.
 
-For the affected behavior, specify an existing integration, system, simulation,
-command-based, inspection, or precise manual check with inputs and expected
-results. Record the limitation, alternative proof, and residual coverage gap in
-the acceptance section. Do not label difficult testing as a redesign or absence
-of infrastructure. If a mandatory coverage gate conflicts with this fallback,
-report the blocker and request a verification or scope decision; do not silently
-relax the gate or weaken the behavior being verified.
+For each deferred unit-test behavior, add an `Implement-plan unit-test note` to
+the acceptance section. State why authoring is premature, the behavior and cases
+the eventual tests must cover, the desired observable outcome of each case, the
+likely test boundary or file if known, and which interface or signature decision
+must be resolved first. Also specify an existing integration, system,
+simulation, command-based, inspection, or precise manual check with inputs and
+expected results for interim proof. Record the residual coverage gap. Do not
+label difficult testing as a redesign or absence of infrastructure. If a
+mandatory coverage gate conflicts with this deferral, report the blocker and
+request a verification or scope decision; do not silently relax the gate or
+weaken the behavior being verified.
 
 ## Phase 3: Create the pre-implementation proof
 
-### Normal changes: write red tests
+### Normal changes: write integration and practical unit tests
 
 Write new tests, or extend an existing test file when that is the clearest
 local pattern, before production implementation:
 
 - Derive every assertion from the spec and plan's intended post-change
   behavior. Do not add characterization tests that merely freeze existing code.
+- Write integration tests first when the existing suite can exercise the
+  behavior through a stable boundary.
+- When unit-test infrastructure exists, write unit tests for every meaningful
+  planned behavior whose interface and signatures are sufficiently clear. Unit
+  tests are the lower priority when they duplicate stronger integration proof.
 - Cover as much of the planned normal, error, boundary, and
   idempotency/retry behavior as the existing test infrastructure can prove.
 - Prefer public behavior and stable boundaries over private implementation
@@ -128,6 +146,9 @@ local pattern, before production implementation:
 - If a new test unexpectedly passes, investigate whether the test is
   non-discriminating, the behavior already exists, or the plan is stale. Do not
   manufacture a failure; ask the user when the finding changes scope.
+- If a unit test qualifies for the per-behavior deferral, do not guess the
+  production interface or function signatures. Add the required implement-plan
+  note and interim proof instead.
 
 Unrelated baseline failures are not a valid red state. Separate them from the
 new, intentional failures and report a blocker if they prevent reliable proof.
@@ -171,6 +192,10 @@ organize it into the following subsections:
 - For a normal change, name every added or changed test file, the exact narrow
   command, the planned behavior it specifies, and its observed pre-implementation
   red result.
+- For each deferred unit test, include an `Implement-plan unit-test note` with
+  the reason for deferral, required cases, desired outcomes, likely boundary or
+  file when known, the unresolved interface decision, interim proof, and
+  residual coverage gap.
 - For a redesign, state that pre-implementation test authoring was
   intentionally skipped, name the invalidated unit suite, and state that no
   new pre-implementation tests were added.
@@ -188,6 +213,8 @@ organize it into the following subsections:
 
 ### Narrative and design criteria
 
+- Treat this subsection as the primary acceptance contract; automated tests
+  support it rather than replacing it.
 - Include every in-scope architecture, dependency direction, data ownership,
   API/schema, compatibility, migration, security, performance, operability,
   usability, and documentation requirement.
@@ -202,6 +229,7 @@ organize it into the following subsections:
 
 - Include required build, typecheck, lint, migration, integration, and
   regression commands.
+- List integration tests before unit tests when both are present.
 - Include precise manual checks for anything automation cannot prove.
 
 Do not use vague criteria such as "works correctly" or "tests pass." Name the
@@ -214,8 +242,12 @@ constraint it must satisfy.
   `*.master.md` was treated as a detailed plan.
 - Existing test infrastructure and nearby tests were inspected first.
 - The relevant existing suite's baseline state was established.
-- A normal change with suitable test infrastructure has plan-derived tests
-  that are red only because the planned behavior is missing.
+- A normal change has complete narrative/design criteria, plan-derived
+  integration tests when suitable infrastructure exists, and plan-derived unit
+  tests when unit infrastructure and a clear test boundary exist.
+- Every deferred unit test has an `Implement-plan unit-test note` that states
+  the required cases, desired outcomes, unresolved interface decision, interim
+  proof, and residual coverage gap.
 - A test-invalidating redesign has no pre-implementation test edits and
   records the reason for skipping them.
 - A repository without suitable test infrastructure records that limitation
