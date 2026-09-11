@@ -47,6 +47,7 @@ Manifest skills for **software / development** repos:
 - Create a new GitHub repo with README, license, and first push → [`skills/create-github-repo`](../skills/create-github-repo/SKILL.md)
 - Apply this template to a code repo in the workspace → [`skills/apply-manifest-template`](../skills/apply-manifest-template/SKILL.md)
 - Bring recent template updates into a code repo that already has a manifest → [`skills/sync-manifest-template`](../skills/sync-manifest-template/SKILL.md)
+- One-time move from the legacy single `.agents/` tree to `.team_manifest/` + `.local_manifest/` + shim; repairs addresses after the user's manual split → [`skills/migrate-manifest-layout`](../skills/migrate-manifest-layout/SKILL.md)
 - Grill a large task into a high-level phased master plan → [`skills/grill-to-master`](../skills/grill-to-master/SKILL.md)
 - Grill the user about a plan, then write a spec into the target repo's `plans/` → [`skills/grill-to-spec`](../skills/grill-to-spec/SKILL.md)
 - Turn a spec into a Cursor-style implementation plan without acceptance criteria → [`skills/spec-to-plan`](../skills/spec-to-plan/SKILL.md)
