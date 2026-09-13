@@ -29,10 +29,11 @@ plain English, one fact in one place, correct placement and links.
 
 ## Division of labour
 
-The **user** does the judgement work before invoking this skill:
+The **user** does the judgement work before invoking this skill, following
+[`user-setup.md`](user-setup.md):
 
-- creates `.team_manifest/` and `.local_manifest/` (the latter may be a symlink
-  into a private git repo),
+- creates `.team_manifest/` and `.local_manifest/` (in `team` repos the latter
+  is one symlink into a private git repo),
 - decides which `skills/` and `reference/` items are team and which are local,
   and moves every file into its new tree,
 - creates the `.agents/skills/team` and `.agents/skills/local` symlinks.
@@ -61,8 +62,8 @@ document content. Anything ambiguous is listed for the user.
      are gitignored; `.local_manifest/` is a symlink into a private repo that
      tracks it (`scratch/` is gitignored there).
 3. **Moves are done.** Confirm the user has finished creating trees, moving
-   files, and creating symlinks. If not, stop and hand them the checklist in
-   [`reference.md`](reference.md#manual-pre-migration-checklist).
+   files, and creating symlinks. If not, stop and hand them
+   [`user-setup.md`](user-setup.md).
 
 ## Hard rules
 
@@ -238,7 +239,7 @@ private repo).
 
 ```
 Manual moves done?
-├─ No .............................. STOP: hand over the pre-migration checklist
+├─ No .............................. STOP: hand over user-setup.md
 └─ Yes
    Legacy leftovers under .agents/ ?
    ├─ Yes ........................... STOP: list them, user resolves

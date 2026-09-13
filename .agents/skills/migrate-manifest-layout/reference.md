@@ -72,67 +72,11 @@ Typical split (the user decides; this is only the expected default):
 Retired and deleted, not migrated: all `operation-*` skills, rules, ADRs, and
 reference docs, plus their routing rows.
 
-## Manual pre-migration checklist
+## Manual pre-migration work
 
-Hand this to the user if the moves are not done yet.
-
-1. In the tree that will become local: keep `plans/`, `findings/`,
-   `learning/`, `scratch/`, and the reference docs and skills you consider
-   personal. Add `AGENTS.md` and `rules/routing.rule.md` stubs (the skill fills
-   them).
-2. Create `.team_manifest/{actions,adr,guides,personas,rules,reference,skills}`
-   and move team content in. Move `backlog.plan.md` to its root.
-3. Delete `operation-*` files.
-4. Remove the old `.agents/` contents (for per-folder symlinks use
-   `cmd /c rmdir <link>` so only the link is deleted, never the target).
-5. Create the shim symlinks (commands below).
-6. Make sure no skill folder name exists in both `skills/` trees.
-7. Then invoke `migrate-manifest-layout`.
-
-## Symlink commands
-
-PowerShell, elevated or with Developer Mode enabled. Absolute targets are
-fine; the shim is gitignored and machine-specific. `LOCAL` is the folder that
-holds the personal tree (for a `solo` repo, `<repo>\.local_manifest`; for a
-`team` repo, the project folder inside the private repo).
-
-```powershell
-cd <repo>
-$local = '<LOCAL>'
-# team repos only: the personal tree itself
-New-Item -ItemType SymbolicLink -Path .\.local_manifest      -Target $local
-# the shim (both repo types)
-New-Item -ItemType Directory    -Force -Path .\.agents\skills
-New-Item -ItemType SymbolicLink -Path .\.agents\skills\team  -Target "$PWD\.team_manifest\skills"
-New-Item -ItemType SymbolicLink -Path .\.agents\skills\local -Target "$local\skills"
-```
-
-cmd equivalents:
-
-```cmd
-mklink /D <repo>\.local_manifest       <LOCAL>
-mklink /D <repo>\.agents\skills\team   <repo>\.team_manifest\skills
-mklink /D <repo>\.agents\skills\local  <LOCAL>\skills
-```
-
-macOS/Linux:
-
-```bash
-ln -s <LOCAL>                      .local_manifest      # team repos only
-mkdir -p .agents/skills
-ln -s ../../.team_manifest/skills  .agents/skills/team
-ln -s <LOCAL>/skills               .agents/skills/local
-```
-
-Verify:
-
-```powershell
-Get-ChildItem .\.agents\skills -Force | Select-Object Name, LinkType, Target
-Get-Item .\.local_manifest | Select-Object Name, LinkType, Target
-```
-
-Point `.agents/skills/local` straight at the personal `skills` folder, not
-through `.local_manifest/skills`, to avoid chained-symlink resolution.
+Folders, moves, symlinks, and the verification checklist the user completes
+before invoking this skill live in [`user-setup.md`](user-setup.md), split by
+repo type. Hand that file to the user if the moves are not done yet.
 
 ## `.gitignore` blocks
 

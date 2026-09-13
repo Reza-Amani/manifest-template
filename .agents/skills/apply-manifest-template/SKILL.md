@@ -45,6 +45,14 @@ folder is open, stop and tell the user to add their repo to the workspace.
 > **Safety:** Never write manifest files into the template repo itself. All
 > creates/edits in this skill target the destination repo.
 
+**Tree roots and symlinks are the user's job.** Before running, the target must
+already have `.team_manifest/`, `.local_manifest/` (a real folder in `solo`
+repos, one symlink into a private repo in `team` repos), and the gitignored
+`.agents/skills/{team,local}` shim. If any of these is missing, stop and hand
+the user [`user-setup.md`](user-setup.md); do not create roots or symlinks
+yourself. Ask the repo type (`solo` or `team`) if it is not obvious from
+`.local_manifest`'s `LinkType`.
+
 ## Procedure
 
 Copy this checklist into your working notes and track progress:
