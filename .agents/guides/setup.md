@@ -19,11 +19,8 @@ toolchain.
 
 The manifest fits two repo types: **software / development** and **operation /
 data** (data sources, dashboards, data collection). The structure is identical;
-only the content differs. If you are letting an agent scaffold it, use the apply
-skill that matches your repo type:
-
-- Software / development → [`apply-manifest-template`](../skills/apply-manifest-template/SKILL.md)
-- Operation / data → [`operation-apply-manifest-template`](../skills/operation-apply-manifest-template/SKILL.md)
+only the content differs. If you are letting an agent scaffold it, use
+[`apply-manifest-template`](../skills/apply-manifest-template/SKILL.md).
 
 ## 1. Copy the template into your repo
 

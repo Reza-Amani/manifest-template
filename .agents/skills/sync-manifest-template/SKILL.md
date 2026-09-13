@@ -69,7 +69,7 @@ Use this table:
 | Bring across (logical manifest progress) | Skip (not for the target) |
 |---|---|
 | New folder type documented (e.g. adding `learning/`) | Template example files: `*example*` ADRs, refs, skills, `example/` dirs |
-| New naming-suffix / placement / cross-link rules | The apply/sync meta-skills, incl. `operation-*` variants (template-only) |
+| New naming-suffix / placement / cross-link rules | The apply/sync meta-skills (template-only) |
 | Simple-plan vs. epic-directory conventions | `plans/example-epic/` and all files inside it |
 | Generic planning, debugging, and review workflow skills, including `debug-agent` and `review-changes` | Target-specific plans, specs, tests, and implementation content |
 | Required third-party attribution for copied adapted skills | Unrelated template notices or licenses |

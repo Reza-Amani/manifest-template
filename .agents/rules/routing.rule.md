@@ -59,12 +59,6 @@ Manifest skills for **software / development** repos:
 - Review uncommitted changes for bugs, architecture flaws, and introduced technical debt without editing files → [`skills/review-changes`](../skills/review-changes/SKILL.md)
 - _(coding example)_ Add a new module end-to-end → [`skills/example-add-module`](../skills/example-add-module/SKILL.md)
 
-Manifest skills for **operation / data** repos:
-
-- Apply this template to a data/ops repo in the workspace → [`skills/operation-apply-manifest-template`](../skills/operation-apply-manifest-template/SKILL.md)
-- Bring recent template updates into a data/ops repo that already has a manifest → [`skills/operation-sync-manifest-template`](../skills/operation-sync-manifest-template/SKILL.md)
-- _(operation/data example)_ Onboard a new data source end-to-end → [`skills/operation-add-data-source`](../skills/operation-add-data-source/SKILL.md)
-
 _(add your real runbooks here under `skills/<name>/SKILL.md`)_
 
 ## Task → Learning (teach session records)

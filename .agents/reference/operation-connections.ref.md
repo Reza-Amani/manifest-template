@@ -46,8 +46,7 @@ flowchart LR
 
 ## Refresh & ownership notes
 
-- Each source has one extract job; see the per-source runbook produced by
-  [`../skills/operation-add-data-source/SKILL.md`](../skills/operation-add-data-source/SKILL.md).
+- Each source has one extract job and its own per-source runbook.
 - A failed refresh is retried on the next schedule; there is no mid-run retry.
 - Mark any source that holds personal data (PII) here and follow
   [`../rules/operation-secrets.rule.md`](../rules/operation-secrets.rule.md).

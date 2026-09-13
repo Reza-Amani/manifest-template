@@ -113,17 +113,14 @@ Let an agent do the work:
 
 1. Open **your repo** in a VS Code workspace.
 2. **Add this template repo** as a second folder in the same workspace.
-3. Ask the agent to run the right apply skill for your repo type:
-   - Software / development repo →
-     [`apply-manifest-template`](.agents/skills/apply-manifest-template/SKILL.md)
-   - Operation / data repo →
-     [`operation-apply-manifest-template`](.agents/skills/operation-apply-manifest-template/SKILL.md)
+3. Ask the agent to run
+   [`apply-manifest-template`](.agents/skills/apply-manifest-template/SKILL.md).
 
    It studies your repo, then creates a tailored `.agents/` manifest (or upgrades
    an existing one) with real, project-specific content — replacing all the
    examples for you. To pull later template updates into an existing manifest,
-   use the matching `sync-manifest-template` /
-   `operation-sync-manifest-template` skill.
+   use the [`sync-manifest-template`](.agents/skills/sync-manifest-template/SKILL.md)
+   skill.
 
 ### Option B — Manual
 
@@ -156,8 +153,7 @@ an `operation-` prefixed example sit side by side:
   reference.
 - **guides/** — `setup.md`, `commands.md`, and `notes.md`.
 - **skills/** — real `apply-manifest-template` / `sync-manifest-template`
-  runbooks for code repos and `operation-apply-manifest-template` /
-  `operation-sync-manifest-template` for data/ops repos, plus
+  runbooks, plus
   [`grill-to-master`](.agents/skills/grill-to-master/SKILL.md),
   [`grill-to-spec`](.agents/skills/grill-to-spec/SKILL.md),
   [`spec-to-plan`](.agents/skills/spec-to-plan/SKILL.md),
@@ -168,7 +164,7 @@ an `operation-` prefixed example sit side by side:
   document non-trivial design; [`debug-agent`](.agents/skills/debug-agent/SKILL.md) for
   evidence-driven issue diagnosis and fixes; [`review-changes`](.agents/skills/review-changes/SKILL.md)
   for read-only pre-commit reviews; plus an `example-add-module` (coding)
-  example and an `operation-add-data-source` (data) example.
+  example.
 - **actions/** — a `verify-docs-in-sync` one-step check.
 - **personas/** — a `reviewer` and a `manifester` agent.
 - **plans/** — a canonical `backlog.plan.md`, a simple example
