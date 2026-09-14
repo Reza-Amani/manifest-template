@@ -1,26 +1,31 @@
 # AGENTS.md
 
 Entry point for all AI agents and contributors working in this repository
-(GitHub Copilot, Cursor, Claude, openCode, and future tools).
+(GitHub Copilot, Cursor, OpenCode, and future tools).
 
-**Before acting, read [`.agents/rules/routing.rule.md`](.agents/rules/routing.rule.md)**
-and follow its routing table to find the specific decision record, reference,
-guide, skill, or persona for your task. Read only what the current task needs.
-Do not bulk-read every file under `.agents/` at once.
+The manifest lives in two directories plus a discovery shim. Both directories
+are tracked.
+
+- `.team_manifest/` — decisions (`adr/`), rules, guides, personas, actions,
+  and `backlog.plan.md`.
+- `.local_manifest/` — plans, findings, learning, scratch, reference docs,
+  skills, and `AGENTS.md`.
+- `.agents/` — gitignored shim holding a `skills/local` symlink so tools
+  auto-discover skills. Nothing else lives there.
+
+**Before acting, read
+[`.team_manifest/rules/routing.rule.md`](.team_manifest/rules/routing.rule.md)
+and
+[`.local_manifest/AGENTS.md`](.local_manifest/AGENTS.md)
+and follow their routing.** Read only what the current task needs; do not
+bulk-read either directory.
 
 ## Generic rules
 
-- **Read the decisions first.** The files in [`.agents/adr/`](.agents/adr/) are the
-  durable laws of this codebase and override generic conventions.
-- **Keep docs in sync.** If your change makes a reference or guide wrong, fix it
-  in the same change. See [`.agents/rules/manifest-structure.rule.md`](.agents/rules/manifest-structure.rule.md).
-- **Check the backlog before proposing work.** The canonical task list lives in
-  [`.agents/plans/backlog.plan.md`](.agents/plans/backlog.plan.md).
-
-## What is `.agents/`?
-
-`.agents/` is the source tree for agent-facing project context: decisions,
-mechanics, conventions, runbooks, and role definitions. It is tool-agnostic.
-Tool-specific folders such as `.github/` or `.cursor/` may mirror or link to it,
-but the canonical content lives here. See the
-[root README](README.md) for the full tour.
+- **Read the decisions first.** `.team_manifest/adr/` holds the durable laws
+  of this codebase and overrides generic conventions.
+- **Keep docs in sync.** If your change makes a reference or guide wrong, fix
+  it in the same change. See
+  [`.team_manifest/rules/manifest-structure.rule.md`](.team_manifest/rules/manifest-structure.rule.md).
+- **Check the backlog before proposing work.** Future tasks live in
+  [`.team_manifest/backlog.plan.md`](.team_manifest/backlog.plan.md).

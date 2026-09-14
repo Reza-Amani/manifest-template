@@ -1,0 +1,3 @@
+# Agent manifest: .agents/ is a discovery shim of symlinks, recreated per machine
+.agents/
+.local_manifest/scratch/

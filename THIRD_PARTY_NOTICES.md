@@ -12,9 +12,9 @@ Material from this repository is used as follows:
 
 | In this repo | Source skill(s) | Relationship |
 | ------------ | --------------- | ------------ |
-| `.agents/skills/grill-to-spec/SKILL.md` | `grilling`, `domain-modeling` | Adapted |
-| `.agents/skills/grill-to-master/SKILL.md` | `grilling` | Adapted |
-| `.agents/learning/` | `teach` | Pairs with (external install; not copied) |
+| `.local_manifest/skills/grill-to-spec/SKILL.md` | `grilling`, `domain-modeling` | Adapted |
+| `.local_manifest/skills/grill-to-master/SKILL.md` | `grilling` | Adapted |
+| `.local_manifest/learning/` | `teach` | Pairs with (external install; not copied) |
 
 When adding more skills or docs derived from `mattpocock/skills`, append a row
 to the table above.
