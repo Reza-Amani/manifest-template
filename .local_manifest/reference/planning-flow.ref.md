@@ -68,10 +68,9 @@ not yet clear enough for meaningful pre-implementation tests,
    test-invalidating redesign it honors the test-authoring skip and proves the
    narrative and other validation criteria. It updates applicable task
    checkboxes only after every required acceptance check passes.
-5. After implementation finishes and the user confirms the task is complete,
-   `archive-plan` may move that task's completed plan and matching spec to
-   `plans/archive/`. Prefer `wrap-up-plan` when the shipped design should also
-   be captured or refreshed in `reference/*.ref.md`.
+5. After implementation finishes, `wrap-up-plan` may move that task's completed
+   plan and matching spec to `plans/archive/`, and captures or refreshes a
+   `reference/*.ref.md` when the shipped design is worth retaining.
 
 ## Epics
 
@@ -88,11 +87,14 @@ not yet clear enough for meaningful pre-implementation tests,
 5. After all acceptance criteria pass, `implement-plan` may mark only the
    matching phase complete in the master plan. It may read the rest of the
    master plan for context, but must not implement or edit other phases.
-6. After the user confirms phase completion, `archive-plan` may archive only
-   that phase's detailed plan and matching spec. Prefer `wrap-up-plan` when the
-   phase's design should also be captured or refreshed in `reference/`. Either
-   skill leaves the epic initial idea, master plan, other phases, and every
-   unfinished file active.
+6. While an epic has remaining phases, `wrap-up-plan` leaves all phase records
+   active by default. It archives a completed phase plan and matching spec only
+   when the user explicitly asks to wrap up that phase. It leaves the epic
+   initial idea, master plan, other phases, and every unfinished file active.
+7. When every master phase is complete, `wrap-up-plan` closes the epic: it
+   archives the master plan, linked initial idea, and every remaining active,
+   completed phase plan and matching spec. It does not move unrelated or
+   ambiguous files; previously archived phases remain in place.
 
 ## Change boundaries
 
@@ -115,11 +117,10 @@ not yet clear enough for meaningful pre-implementation tests,
    test strategy, coverage gates, or acceptance criteria require user approval.
    Conflicting mandatory gates remain blockers, not permission for test-only
    production changes or silent reductions in verification.
-- `archive-plan` runs only after implementation and user confirmation. It moves
-   one completed task's eligible planning artifacts without moving master plans,
-   unrelated files, or anything with unfinished work.
-- `wrap-up-plan` is the same archive closeout plus a documentation pass: create
-   or update a `reference/*.ref.md` when the finished design is non-trivial and
-   not already documented; skip when capture would not help future tasks.
+- `wrap-up-plan` runs after implementation. It closes a completed task, an
+  explicitly requested completed epic phase, or a fully completed epic without
+  a second confirmation. It creates or updates a `reference/*.ref.md` when the
+  finished design is non-trivial and not already documented; skip when capture
+  would not help future tasks.
 - If any stage finds an obvious error in an earlier planning source file, it
    explains the problem and gets user approval before changing that file.

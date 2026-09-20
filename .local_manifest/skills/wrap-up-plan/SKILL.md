@@ -1,44 +1,45 @@
 ---
 name: wrap-up-plan
 description: >-
-  Combination of archiving and documentation. Does everything `archive-plan`
-  does for one completed task, then scans the finished work's design and logic
-  and creates or updates a `reference/*.ref.md` when future tasks would need
-  that technical understanding — skipping when the logic is trivial, useless to
-  capture, or already documented. Use when the user asks to "wrap up this plan",
-  "wrap-up-plan", archive and document a completed task, or close out finished
-  work with reference docs.
+   Archives completed planning work and captures lasting technical understanding
+   in `reference/*.ref.md` when useful. It closes a small task, explicitly named
+   completed epic phase, or a fully completed epic. Use when the user asks to
+   "wrap up this plan", "wrap-up-plan", archive a completed task or epic, or
+   close out finished work with reference docs.
 ---
 
 # Wrap Up Plan
 
-Close out one completed task: archive its planning artifacts (same rules as
-[`archive-plan`](../archive-plan/SKILL.md)), and ensure lasting technical
-understanding lives in `reference/` when it is worth capturing.
+Close out completed planning work and ensure lasting technical understanding
+lives in `reference/` when it is worth capturing. Archive after the completion
+gate passes; no separate confirmation is required.
 
 Follow the canonical [planning flow](../../reference/planning-flow.ref.md).
 
-## Inputs
+## Modes and Inputs
 
-Same as `archive-plan`:
+Choose exactly one mode:
 
-- One completed `*.planning.md` outside `archive/`. Reject master plans,
-  `backlog.plan.md`, specs, and initial files as the primary input.
-- Optionally, its one matching `*.spec.md` and task-exclusive `*-initial.md`.
+| Mode | Primary input | Eligible archive set |
+| --- | --- | --- |
+| **Task** | One completed `*.planning.md` outside `archive/` | The plan, its matching spec, and a task-exclusive initial file when one exists |
+| **Epic phase** | One completed phase `*.planning.md` under an epic | The phase plan and matching spec only |
+| **Epic** | One completed `*.master.md` | The master plan, its linked initial file, and every remaining active, completed phase plan and matching spec in that epic |
 
-If the user does not identify the detailed plan unambiguously, list plausible
-completed plans and ask them to select one.
+Reject `backlog.plan.md`, specs, and initial files as primary inputs. If the
+input is ambiguous, list plausible completed candidates and ask the user to
+select one.
 
 ## Hard Rules
 
-### Archive (identical to `archive-plan`)
+### Archive
 
-1. Archive exactly one task per invocation.
-2. Never move or edit master plans, backlogs, unrelated task files, or files
-   with unfinished work.
-3. Require every todo, task checkbox, and acceptance checkbox to be complete;
-   reject blockers, skipped required checks, and unverified criteria. For an
-   epic, also require the matching master phase to be complete.
+1. Archive exactly one task, phase, or fully completed epic per invocation.
+2. Never move backlogs, unrelated files, or files with unfinished work.
+3. Require every todo, task checkbox, and acceptance checkbox in each detailed
+   plan being moved to be complete; reject blockers, skipped required checks,
+   and unverified criteria. A phase also requires its matching master phase to
+   be complete.
 4. Do not rewrite, remove, weaken, or redefine a criterion to satisfy the
    completion gate. After implementation, you may update acceptance-checkbox
    markers and add concise evidence or verification notes when the existing
@@ -46,11 +47,17 @@ completed plans and ask them to select one.
    them as blockers.
 5. Include a spec only through an explicit plan link or exact sibling stem.
    Include an initial file only through an explicit link and only when it is
-   exclusive to this task. Omit ambiguous or still-referenced companions.
-6. For an epic phase, normally archive only its plan and spec. Keep the epic
-   initial file with its master plan.
-7. Preserve relative layout under `plans/archive/` and never overwrite files.
-8. Do not move code, tests, scratch artifacts, or other manifest documents as
+   exclusive to the archived task or epic. Omit ambiguous companions.
+6. For an epic with any remaining phase, do not archive a completed phase unless
+   the user explicitly asks to wrap up that phase. Keep its master plan and
+   initial file active. When every master phase is complete, use **Epic** mode
+   and archive the full remaining epic record instead.
+7. **Epic** mode requires every master todo and mirrored phase checkbox to be
+   complete, every active phase artifact to be complete, and all moved files to
+   belong unambiguously to that epic. It may move the master plan and initial
+   file only in this mode.
+8. Preserve relative layout under `plans/archive/` and never overwrite files.
+9. Do not move code, tests, scratch artifacts, or other manifest documents as
    part of the archive step.
 
 ### Documentation
@@ -83,20 +90,20 @@ Wrap-up progress:
 - [ ] 2. Resolve archive companions
 - [ ] 3. Scan design/logic vs reference/
 - [ ] 4. Draft create / update / skip decision
-- [ ] 5. User confirms archive set + doc action
-- [ ] 6. Apply documentation
-- [ ] 7. Archive moves
-- [ ] 8. Validate and report
+- [ ] 5. Apply documentation
+- [ ] 6. Archive moves
+- [ ] 7. Validate and report
 ```
 
 ### 1. Completion gate
 
-Read the whole plan and apply the archive completion rules. When the shipped
-implementation and available evidence satisfy an existing acceptance
-criterion, update its checkbox and record concise evidence in the plan before
-continuing. Do not change the criterion's wording or scope just to make it
-pass. Prose such as "implemented" or a passing build alone is insufficient
-evidence.
+Read every primary artifact and apply the archive completion rules. For **Epic**
+mode, verify every master phase and all active phase artifacts before selecting
+any move. When the shipped implementation and available evidence satisfy an
+existing acceptance criterion, update its checkbox and record concise evidence
+in the plan before continuing. Do not change the criterion's wording or scope
+just to make it pass. Prose such as "implemented" or a passing build alone is
+insufficient evidence.
 
 ### 2. Resolve archive companions
 
@@ -104,11 +111,14 @@ Resolve companions conservatively, then search active plans for references.
 Leave any companion needed by another task or unfinished phase in place.
 Build the exact archive move set (paths relative to `plans/`, destinations under
 `plans/archive/`). Reject sources outside `.local_manifest/plans/` and existing
-destinations.
+destinations. In **Epic** mode, include the completed master, linked initial,
+and all remaining active completed phase plans and matching specs. Previously
+archived phase records stay where they are.
 
 ### 3. Scan design and logic
 
-From the plan, spec (if any), and the code that was actually shipped:
+From the plan, spec (if any), master and initial documents for an epic, and the
+code that was actually shipped:
 
 1. Identify the non-trivial design and logic this task introduced or changed
    (flows, invariants, module boundaries, algorithms, integration contracts).
@@ -131,32 +141,21 @@ before any file moves:
   sequences, config, caveats). Use diagrams only when they clarify control flow.
 - Name new files `.local_manifest/reference/<topic>.ref.md` using the repo's naming conventions.
 
-### 5. Confirm with the user
+### 5. Apply documentation
 
-Show in one confirmation:
+Create or update the reference (or skip). Update routing when a new reference
+is added or a topic/path changes. Leave the reference accurate if archive later
+moves the plan -- references must not depend on active plan paths.
 
-- The exact archive move set and retained nearby files
-- The documentation decision: **skip** (with one-line reason), **create**
-  (path + short outline), or **update** (path + what will change)
+### 6. Archive moves
 
-Move nothing and write no reference changes until the user confirms this exact
-set after implementation has finished.
+Move the resolved planning files. Remove a source directory only if it is empty.
 
-### 6. Apply documentation
-
-On confirmation, create or update the reference (or skip). Update routing when a
-new reference is added or a topic/path changes. Leave the reference accurate if
-archive later moves the plan — references must not depend on active plan paths.
-
-### 7. Archive moves
-
-Move the confirmed planning files. Remove a source directory only if it is
-empty.
-
-### 8. Validate and report
+### 7. Validate and report
 
 Verify sources are gone, destinations exist, and protected files stayed put.
-Repair valid links to moved files without changing master-plan status or scope.
+Repair valid links to moved files. For an **Epic** closeout, confirm no active
+documents still reference the archived epic sources.
 If a reference was written, spot-check it against the shipped code for obvious
 drift. Run available documentation checks, then report:
 

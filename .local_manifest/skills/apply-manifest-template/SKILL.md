@@ -143,6 +143,7 @@ Build an accurate picture of the target before writing. Gather:
   `terms.rule.md`.
 - **Existing decisions & constraints:** anything already written down that should
   become an ADR or a mandate.
+- **Implementation mechanics:** document these in `*.ref.md`, not in ADRs.
 - **Open work:** `TODO`/`FIXME` markers, issue trackers, or a backlog to seed
   `.team_manifest/backlog.plan.md`.
 
@@ -217,8 +218,8 @@ naming suffixes from `manifest-structure.rule.md`.
   include `manifester` so the target can maintain its own docs).
 - `.local_manifest/skills/` — include the generic planning workflow skills
   (`grill-to-master`, `grill-to-spec`, `spec-to-plan`, `plan-to-criteria`, and
-  `implement-plan`), the post-confirmation `archive-plan` and `wrap-up-plan`
-  skills, the `debug-agent` debugging skill, and the read-only `review-changes`
+  `implement-plan`), the `wrap-up-plan` closeout skill, the `debug-agent`
+  debugging skill, and the read-only `review-changes`
   pre-commit review skill. Preserve any existing target skills.
   If no domain skill exists, create one example skill relevant to the target's
   business and mark it clearly as an example. Keep `debug-agent` generic. Keep

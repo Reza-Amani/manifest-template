@@ -148,12 +148,15 @@ implementation plans, and backlog items.
   consistent with its spec. Link between these files instead of copying them.
 - **Workflow:** The canonical small-task and epic lifecycle is documented in
   [`../../.local_manifest/reference/planning-flow.ref.md`](../../.local_manifest/reference/planning-flow.ref.md).
-- **Archive:** After `implement-plan` finishes and the user confirms, the
-  `archive-plan` or `wrap-up-plan` skill may move one completed task's detailed
-  plan and eligible companions to `plans/archive/`, preserving their relative
-  layout. `wrap-up-plan` also creates or updates a `reference/*.ref.md` when the
-  finished design is worth capturing. Master plans, backlog files, unrelated
-  task files, and files with unfinished work remain active and must not move.
+- **Archive:** After `implement-plan` finishes, `wrap-up-plan` may move a
+  completed task's detailed plan and eligible companions to `plans/archive/`,
+  preserving their relative layout, and creates or updates a
+  `reference/*.ref.md` when the finished design is worth capturing. While an
+  epic has remaining phases, it archives a completed phase only on the user's
+  explicit request. Once every epic phase is complete, it may archive the
+  master plan, linked initial document, and all remaining completed phase
+  artifacts. Backlog files, unrelated files, and files with unfinished work
+  remain active and must not move.
 - **Examples:** `plans/example-epic/` exists only to show this template's epic
   layout. Do not copy that directory into a target repository.
 

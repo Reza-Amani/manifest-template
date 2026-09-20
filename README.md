@@ -58,10 +58,11 @@ acceptance criteria. `plan-to-criteria` studies the test setup, writes failing
 tests for the planned behavior when the change is not a test-invalidating
 redesign, and adds behavioral plus narrative acceptance criteria to the plan.
 `implement-plan` then implements until those tests pass and every criterion is
-proved. After the user confirms completion, `archive-plan` moves only that
-completed task's eligible planning artifacts to `plans/archive/`. Prefer
-`wrap-up-plan` when closeout should also create or refresh a
-`reference/*.ref.md` for non-trivial design.
+proved. `wrap-up-plan` then archives the completed planning artifacts and
+creates or refreshes a `reference/*.ref.md` when the finished design is
+non-trivial. While an epic has remaining phases, it archives a phase only when
+the user explicitly requests that phase's closeout; once every phase is
+complete, it archives the master plan, initial idea, and remaining epic record.
 
 An epic adds one stage at the front: `grill-to-master` preserves the human
 initial idea and creates a high-level phased roadmap. Each phase then follows
@@ -120,15 +121,17 @@ the format and the expected level of detail.
 - **guides/** — the canonical `manifest-layout.md`, plus project-specific
   `setup.md`, `commands.md`, and `notes.md`.
 - **skills/** — real `apply-manifest-template` / `sync-manifest-template` /
-  `migrate-manifest-layout` runbooks, plus
+  `migrate-manifest-layout` runbooks;
+  [`sanitise-manifest`](.local_manifest/skills/sanitise-manifest/SKILL.md) to
+  repair duplicate, stale, conflicting, or misplaced content and trim fluff; plus
   [`grill-to-master`](.local_manifest/skills/grill-to-master/SKILL.md),
   [`grill-to-spec`](.local_manifest/skills/grill-to-spec/SKILL.md),
   [`spec-to-plan`](.local_manifest/skills/spec-to-plan/SKILL.md),
   [`plan-to-criteria`](.local_manifest/skills/plan-to-criteria/SKILL.md), and
   [`implement-plan`](.local_manifest/skills/implement-plan/SKILL.md), followed by
-  [`archive-plan`](.local_manifest/skills/archive-plan/SKILL.md) for confirmed completed
-  work or [`wrap-up-plan`](.local_manifest/skills/wrap-up-plan/SKILL.md) to archive plus
-  document non-trivial design; [`debug-agent`](.local_manifest/skills/debug-agent/SKILL.md) for
+  [`wrap-up-plan`](.local_manifest/skills/wrap-up-plan/SKILL.md) to archive
+  completed planning work and document non-trivial design;
+  [`debug-agent`](.local_manifest/skills/debug-agent/SKILL.md) for
   evidence-driven issue diagnosis and fixes; [`review-changes`](.local_manifest/skills/review-changes/SKILL.md)
   for read-only pre-commit reviews; plus an `example-add-module` (coding)
   example.

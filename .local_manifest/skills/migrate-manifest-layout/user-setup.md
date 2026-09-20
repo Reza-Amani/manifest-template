@@ -68,7 +68,7 @@ Rules for the split folders on `team`:
   discovery.
 - Repo-specific runbooks that everyone needs are team; the SDD flow
   (`grill-*`, `spec-to-plan`, `plan-to-criteria`,
-  `implement-plan`, `archive-plan`, `wrap-up-plan`), `debug-agent`,
+  `implement-plan`, `wrap-up-plan`), `debug-agent`,
   `review-changes`, and `planning-flow.ref.md` are local.
 
 On `solo` there is no split: do not leave any skill or `*.ref.md` under

@@ -124,6 +124,7 @@ Required shape:
   - Optional mermaid diagram when architecture or data flow matters
   - Out of scope / what does not change
   - Potential manifest files to update with a short summary of what would change in each
+    (put implementation mechanics in `*.ref.md`, not ADRs)
   - Risks or watch-outs
 
 Do not add an `Acceptance criteria` section. That section is created later by

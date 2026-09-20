@@ -36,14 +36,14 @@ Manifest skills:
 - Create a new GitHub repo with README, license, and first push → [`skills/create-github-repo`](../skills/create-github-repo/SKILL.md)
 - Apply this template to a code repo in the workspace → [`skills/apply-manifest-template`](../skills/apply-manifest-template/SKILL.md)
 - Bring recent template updates into a code repo that already has a manifest → [`skills/sync-manifest-template`](../skills/sync-manifest-template/SKILL.md)
+- Sanitise a target manifest: repair duplication, stale or conflicting information, misplaced ADR mechanics, and fluff → [`skills/sanitise-manifest`](../skills/sanitise-manifest/SKILL.md)
 - One-time move from the legacy single `.agents/` tree to `.team_manifest/` + `.local_manifest/` + shim; repairs addresses after the user's manual split → [`skills/migrate-manifest-layout`](../skills/migrate-manifest-layout/SKILL.md)
 - Grill a large task into a high-level phased master plan → [`skills/grill-to-master`](../skills/grill-to-master/SKILL.md)
 - Grill the user about a plan, then write a spec into the target repo's `plans/` → [`skills/grill-to-spec`](../skills/grill-to-spec/SKILL.md)
 - Turn a spec into a Cursor-style implementation plan without acceptance criteria → [`skills/spec-to-plan`](../skills/spec-to-plan/SKILL.md)
 - Add plan-derived red tests plus behavioral and narrative acceptance criteria → [`skills/plan-to-criteria`](../skills/plan-to-criteria/SKILL.md)
 - Implement a detailed plan, make its red tests green, and prove every criterion → [`skills/implement-plan`](../skills/implement-plan/SKILL.md)
-- Archive one user-confirmed completed task's plan, spec, and eligible initial plan → [`skills/archive-plan`](../skills/archive-plan/SKILL.md)
-- Wrap up a completed task: archive plus create/update reference docs for non-trivial design → [`skills/wrap-up-plan`](../skills/wrap-up-plan/SKILL.md)
+- Wrap up completed planning work: archive a task, an explicitly requested epic phase, or a finished epic; create/update reference docs for non-trivial design → [`skills/wrap-up-plan`](../skills/wrap-up-plan/SKILL.md)
 - Diagnose and fix a user-identified issue with runtime evidence and temporary instrumentation → [`skills/debug-agent`](../skills/debug-agent/SKILL.md)
 - Review uncommitted changes for bugs, architecture flaws, and introduced technical debt without editing files → [`skills/review-changes`](../skills/review-changes/SKILL.md)
 - _(coding example)_ Add a new module end-to-end → [`skills/example-add-module`](../skills/example-add-module/SKILL.md)
@@ -76,8 +76,9 @@ _(add your real runbooks here under `skills/<name>/SKILL.md`)_
     `spec-to-plan`.
   - When the user asks to continue or edit planning work, search the full
     `plans/` tree, regardless of the agent's default plan directory.
-  - Completed task artifacts may be moved to `plans/archive/` only by the
-    confirmation-gated `archive-plan` or `wrap-up-plan` workflow. Master plans
-    remain active.
+  - Completed task artifacts may be moved to `plans/archive/` only by
+    `wrap-up-plan`. A master plan and its initial document move only when every
+    epic phase is complete; otherwise, phase archival requires the user's
+    explicit request.
   - The `plans/example-epic/` directory belongs only to this template. Do not
     copy it into a target repository.
