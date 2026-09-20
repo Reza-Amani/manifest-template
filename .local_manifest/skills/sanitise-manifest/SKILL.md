@@ -1,6 +1,6 @@
 ---
 name: sanitise-manifest
-description: "Sanitise or sanitize a target repository's manifest: repair duplicate, outdated, conflicting, or misplaced information; separate durable ADR decisions from implementation references; trim fluff. Use when asked to clean up, deduplicate, audit, or shorten a manifest."
+description: "Sanitise or sanitize a target repository's manifest: repair duplicate, outdated, conflicting, or misplaced information; de-bloat ADRs by moving mechanics, recommendations, and future ideas to their proper homes; trim fluff. Use when asked to clean up, deduplicate, audit, shorten, or de-bloat a manifest or its ADRs."
 ---
 
 # Sanitise Manifest
@@ -8,6 +8,9 @@ description: "Sanitise or sanitize a target repository's manifest: repair duplic
 Repair the target repository's manifest in place. Keep one authoritative home
 for each fact, preserve decision intent, and leave less text to maintain.
 This is a repair workflow, not just a report or a template upgrade.
+
+The manifest better to end smaller and sharper than it started. Work autonomously:
+make obvious repairs without asking, and do not narrate them as you go.
 
 ## Inputs and Scope
 
@@ -57,42 +60,56 @@ tests, or history only as needed to verify a concrete claim.
   behavior; code establishes current mechanics. If they disagree, describe the
   implementation gap accurately and flag it, rather than silently changing
   the decision or claiming the code complies.
-- **Uncertainty:** ask only for an unresolved decision, ownership question, or
-  permission that blocks a repair. Continue independent repairs. Do not invent
-  facts, choose between equally authoritative decisions, or accept a proposal
-  on the user's behalf.
+- **Autonomy:** make obvious repairs on your own judgment, including moving
+  clearly misplaced content out of an ADR. Ask only when a repair would change
+  what a decision requires, move personal content into shared storage, or rests
+  on a fact you cannot verify. Collect those few questions for the final
+  summary instead of interrupting. Do not invent facts, choose between equally
+  authoritative decisions, or accept a proposal on the user's behalf.
 
-### 3. Separate Decisions from Mechanics
+### 3. Keep ADRs to Decisions
 
-Inspect every ADR section, not just its title. Keep the durable choice, its
-context and rationale, real alternatives or trade-offs, constraints, and
-consequences. Technical detail belongs in an ADR when it defines or explains
-the decision; it is not misplaced merely because it mentions an API or tool.
+Inspect every ADR section, not just its title. An ADR is bloated when it also
+carries current mechanics, command walkthroughs, configuration samples,
+inventories, advisory preferences, interim habits, or future ideas.
 
-Move changeable wiring, file inventories, command walkthroughs, configuration
-examples, API indices, rollout steps, and debugging recipes to their proper
-homes under the target's placement rules:
+Apply the commitment test to each passage. Keep it in the ADR when it states a
+choice the project committed to, or supplies the context, trade-offs,
+constraints, or consequences needed to understand that choice. Interim and
+reversible decisions still pass. Guidance an agent could reasonably set aside
+within an ordinary task does not; neither does detail that merely mentions an
+API or tool. Move what fails the test to its proper home under the target's
+placement rules, without inventing new document types:
 
-| Content | Home |
+| Content found in an ADR | Home |
 | --- | --- |
-| Current implementation mechanics and inventories | `reference/*.ref.md` |
-| Operator tutorials and how-to instructions | `guides/` |
-| Repeatable multi-step or one-step agent procedures | `skills/` or `actions/` |
+| Current mechanics, wiring, inventories, config, API detail | `reference/*.ref.md` |
+| Recommended defaults and "best way for now" guidance | `reference/*.ref.md`, worded plainly as guidance rather than a requirement |
 | Project-wide conventions or canonical terminology | `rules/` |
-| Pending work or point-in-time investigation results | Plans/backlog or findings |
+| Repeatable multi-step or one-step agent procedures | `skills/` or `actions/` |
+| Human-facing tutorials and operator how-to material | `guides/` |
+| Future idea or improvement worth keeping | Backlog, or a new initial plan under `plans/` |
+| Evidence from an investigation or measurement | `findings/` |
 
-Use an existing document where possible. For an editable ADR, extract only
-the misplaced material, leave a concise decision-focused record, and add
-relative links between it and the destination when useful. Check the extracted
-mechanics against current evidence before presenting them as current guidance.
-Never remove the reasoning that makes a decision understandable.
+Relocation is not preservation. Delete stale, self-evident, or low-value
+material instead of rehoming it, and prefer an existing owner over a new file.
+Verify extracted mechanics against current evidence before presenting them as
+current, and keep the reasoning that makes a decision understandable.
 
-Respect ADR immutability. If the target forbids editing accepted ADRs, leave
-their bodies intact and report the proposed extraction and destination as
-blocked pending explicit authorization. Do not create a replacement ADR just
-to relocate prose. A genuine decision change follows the target's supersession
-process and requires user confirmation; cleanup alone is not a new decision.
-Preserve ADR identifiers, statuses, and historical context.
+Preserve ADR identifiers, statuses, supersession links, and historical context.
+Extraction leaves the decision itself intact, so it is neither a decision
+change nor grounds for a replacement ADR. Demoting an accepted requirement to
+advice, or altering what a decision requires, follows the target's supersession
+process and needs user confirmation. Where the target forbids editing accepted
+ADRs outright, leave those bodies intact and list the proposed extractions in
+the summary.
+
+Where the target already documents ADR authority, make sure it separates the
+binding decision from the claims around it: accepted decisions govern
+implementation within their scope, factual claims and assumptions inside an ADR
+stay open to verification, and agents may propose a superseding decision with
+evidence instead of treating every ADR sentence as settled. Correct that wording
+in place; do not add a document for it.
 
 ### 4. Trim and Repair Discovery
 
@@ -100,6 +117,10 @@ Remove filler, repeated introductions, redundant examples, and restatements
 of linked authority. Prefer short, direct sentences. Retain necessary caveats,
 safety checks, rationale, and actionable detail; brevity is not a word quota.
 Do not split a small coherent document into many tiny files.
+
+Hold the line on volume. Do not add framing, transitional prose, migration
+notes, or fresh caveats to justify a repair, and do not let a move turn two
+lines of ADR text into a page elsewhere.
 
 Preserve plan progress, checkboxes, and historical records. Do not rewrite
 archives as current guidance, archive active work, delete scratch artifacts,
@@ -115,6 +136,8 @@ the old path and distinctive section names to catch non-link references.
 
 - Review the diff for lost meaning, accidental decision changes, ownership
   changes, and unrelated edits. Each repair must have an evidence-based reason.
+- Confirm the manifest did not grow: no new document that an existing owner
+  could have absorbed, and no section that only restates what it replaced.
 - Check moved content has one canonical home, remaining references resolve,
   routing points to the right documents, and skill frontmatter remains valid.
 - Run the target's relevant documentation checks and whitespace check. Report
@@ -126,5 +149,7 @@ the old path and distinctive section names to catch non-link references.
 
 Leave the repaired files in the target repository. Give a brief summary of
 what was consolidated, corrected, moved, or removed, followed by verification
-results and any unresolved issues with paths and the decision needed. State
-any coverage exclusions. Do not add a permanent audit report unless requested.
+results and a short closing list of anything that needs the user: unresolved
+issues, blocked extractions, and proposed decision changes, each with its path
+and the decision needed. State any coverage exclusions. Do not add a permanent
+audit report unless requested.
