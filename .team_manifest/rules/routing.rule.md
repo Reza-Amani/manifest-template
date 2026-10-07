@@ -54,6 +54,9 @@ Defined in `personas/*.agent.md`:
   compliance → [`personas/reviewer.agent.md`](../personas/reviewer.agent.md)
 - `manifester` — manifest keeper who writes and fixes manifest docs in plain
   English → [`personas/manifester.agent.md`](../personas/manifester.agent.md)
+- `delegator` — user-invoked only, when a heavy model orchestrates and
+  cheaper subagents do the token-heavy work →
+  [`personas/delegator.agent.md`](../personas/delegator.agent.md)
 
 ## Task → Backlog
 
