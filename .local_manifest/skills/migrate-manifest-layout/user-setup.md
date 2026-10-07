@@ -151,10 +151,17 @@ content moves out of it into the tracked `.team_manifest\`.
 
 ## 3. The `.agents\` shim
 
-Create the links exactly as shown in
-[`manifest-layout.md`](../../../.team_manifest/guides/manifest-layout.md).
-The solo local link intentionally uses the relative target
-`../../.local_manifest/skills`.
+Copy this template's `.team_manifest\scripts\` folder into the repo's
+`.team_manifest\`, then run the script from `<repo>`. It creates one link per
+skill in `.agents\skills\`, which is the only layout tools discover:
+
+```powershell
+.\.team_manifest\scripts\sync-skill-links.ps1
+```
+
+On macOS/Linux use `bash .team_manifest/scripts/sync-skill-links.sh`. Details
+are in
+[`manifest-layout.md`](../../../.team_manifest/guides/manifest-layout.md#create-the-discovery-shim).
 
 ## 4. `.gitignore`
 
@@ -172,8 +179,8 @@ Get-ChildItem .\.local_manifest -Force | Select-Object Name
 
 Checklist:
 
-- `.agents\` contains only the skill symlink(s): `solo` has `local`; `team`
-  has `team` and `local`. Each is `SymbolicLink`.
+- `.agents\skills\` contains one link (`Junction` or `SymbolicLink`) per skill
+  folder and nothing else. There is no `local` or `team` link.
 - `team`: `.local_manifest` is a `SymbolicLink` to `<LOCAL>`; `solo`: it is a
   real folder and is **not** listed in `.gitignore`.
 - `solo`: no `reference\` or `skills\` under `.team_manifest\`.

@@ -10,8 +10,19 @@ variable; never put secret values in this file.
 ## Manifest tooling
 
 The canonical solo/team layouts, discovery-shim commands, and ignore rules live
-in [`manifest-layout.md`](manifest-layout.md). After a clone, recreate the
-machine-local shim and confirm the skill links resolve.
+in [`manifest-layout.md`](manifest-layout.md). `.agents/skills/` is gitignored,
+so it is empty after a clone. Rebuild it from the repo root, and again whenever
+a skill is added, renamed, or removed:
+
+```powershell
+.\.team_manifest\scripts\sync-skill-links.ps1
+```
+
+```bash
+bash .team_manifest/scripts/sync-skill-links.sh
+```
+
+Then restart the editor and type `/` in chat to confirm the skills appear.
 
 ## Optional: bundle the manifest for an external reviewer
 

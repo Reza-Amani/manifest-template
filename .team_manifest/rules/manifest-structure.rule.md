@@ -15,7 +15,7 @@ learning record.
 The manifest is the union of `.team_manifest/` and `.local_manifest/`. Those
 directories hold domain knowledge, decision records, operational notes, global
 rules, and specialized task automation for AI agents and human contributors.
-`.agents/` is only a gitignored discovery shim of skill symlinks. Canonical
+`.agents/` is only a gitignored discovery shim of per-skill links. Canonical
 content belongs in the two manifest directories, not in the shim.
 
 ## Layout: two directories and a shim
@@ -201,6 +201,19 @@ performance dig, or root-cause analysis.
 - **Purpose:** Provide agents with simple repeatable procedures without the
   ceremony of a full skill.
 
+### `scripts/`
+
+**Manifest Scripts** — executable helpers that maintain the manifest itself,
+such as the discovery-shim builder `sync-skill-links.ps1` / `.sh`.
+
+- **Format:** PowerShell (`.ps1`) for Windows and Bash (`.sh`) for macOS/Linux.
+- **Naming:** Descriptive `<verb>-<noun>.<ext>` names.
+- **Purpose:** Keep per-machine, gitignored manifest plumbing reproducible.
+- **Rule of thumb:** Only manifest tooling belongs here. Project build, test,
+  and run commands go in `guides/commands.md`.
+- **Location:** Tracked in `.team_manifest/` for both repo types so a fresh
+  clone can run them.
+
 ### `scratch/`
 
 **Ephemeral Workspaces** — temporary artifacts used while executing a detailed
@@ -233,6 +246,7 @@ plan.
 10. Put reproducible analysis and investigation records in `findings/`.
 11. Put temporary implementation artifacts in `scratch/<plan-stem>/`; never
   place them beside plans.
+12. Put scripts that maintain the manifest itself in `scripts/`.
 
 If content seems to belong in more than one place, keep the canonical rule or
 decision in the most authoritative place and link to it from the operational
@@ -295,11 +309,14 @@ requires it. Personas (`*.agent.md`) and skills (`SKILL.md`) usually need a
 | `learning/`   | `YYYY-MM-DD-topic.md` | optional                  |
 | `findings/`   | `YYYY-MM-DD-topic.md` | optional                  |
 | `actions/`    | descriptive `*.md`    | optional                  |
+| `scripts/`    | `<verb>-<noun>.ps1` / `.sh` | no                  |
 | `scratch/`    | `<plan-stem>/`        | no                        |
 
 ## Discovery and setup
 
-Skills are auto-discovered from the `.agents/skills/` shim. Rules, personas,
+Skills are auto-discovered from the `.agents/skills/` shim, which holds one link
+per skill (`.agents/skills/<name>/SKILL.md`) and is built by
+`scripts/sync-skill-links.ps1` / `.sh`. Rules, personas,
 and other manifest docs are reached through root `AGENTS.md` and the routing
 files. See [`../guides/manifest-layout.md`](../guides/manifest-layout.md) for
 the shim and ignore rules.

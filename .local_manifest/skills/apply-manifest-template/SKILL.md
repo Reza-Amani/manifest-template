@@ -51,9 +51,11 @@ folder is open, stop and tell the user to add their repo to the workspace.
 
 **Tree roots and the discovery shim are the user's job.** Before running, the
 target must already have `.team_manifest/`, `.local_manifest/`, and the
-gitignored `.agents/skills/` shim (`local` in `solo`; `team` and `local` in
-`team`). If any of these is missing, stop and hand the user
-[`user-setup.md`](user-setup.md); do not create roots or symlinks yourself.
+gitignored `.agents/skills/` shim built by
+`.team_manifest/scripts/sync-skill-links.ps1` / `.sh` (one link per skill). If
+any of these is missing, stop and hand the user
+[`user-setup.md`](user-setup.md); do not create roots or links yourself. After
+you add or move skills in step 6, remind the user to re-run the script.
 
 ## Where files go
 
@@ -180,6 +182,8 @@ naming suffixes from `manifest-structure.rule.md`.
 - `.team_manifest/rules/manifest-structure.rule.md` — copy the template's
   version.
 - `.team_manifest/guides/manifest-layout.md` — copy the canonical guide.
+- `.team_manifest/scripts/sync-skill-links.ps1` and `.sh` — copy both from the
+  template unchanged if missing or different.
 - `.team_manifest/rules/routing.rule.md` — real routing tables for docs that
   live under `.team_manifest/`. Remove example rows. Add a backlog row.
 - `.local_manifest/rules/routing.rule.md` — real routing tables for docs that
@@ -201,7 +205,8 @@ naming suffixes from `manifest-structure.rule.md`.
 - `.team_manifest/guides/` — `setup.md` and `commands.md` filled with the
   target's real setup steps and commands; add `notes.md` with the user's
   temporary notes. Link setup to `manifest-layout.md` instead of duplicating
-  layout and shim instructions.
+  layout and shim instructions; keep the short "Manifest tooling" section that
+  names the `sync-skill-links` script.
 - `.team_manifest/backlog.plan.md` — seeded from the target's real open work, or
   leave it shallow with just some brief general guides.
 - Other `.local_manifest/plans/` content only when it comes from real target work:

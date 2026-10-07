@@ -30,8 +30,8 @@ output. Use one name for one concept everywhere.
 
 - **manifest** — the files under `.team_manifest/` and `.local_manifest/`
   together.
-- **discovery shim** — the gitignored `.agents/` directory holding skill
-  symlinks.
+- **discovery shim** — the gitignored `.agents/` directory holding one link per
+  skill, built by `.team_manifest/scripts/sync-skill-links.ps1` / `.sh`.
 
 ---
 

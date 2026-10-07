@@ -34,7 +34,8 @@ an already-applied or migrated manifest.
 │   ├── adr/
 │   ├── guides/
 │   ├── personas/
-│   └── rules/
+│   ├── rules/
+│   └── scripts/              # sync-skill-links.ps1 / .sh
 ├── .local_manifest/          # tracked real directory
 │   ├── AGENTS.md
 │   ├── rules/routing.rule.md
@@ -46,7 +47,7 @@ an already-applied or migrated manifest.
 │   └── skills/
 └── .agents/                  # gitignored discovery shim
     └── skills/
-        └── local -> ../../.local_manifest/skills
+        └── <skill-name> -> .local_manifest/skills/<skill-name>   # one link per skill
 ```
 
 Do not create `.team_manifest/reference/` or `.team_manifest/skills/` in a solo
@@ -65,6 +66,7 @@ repo.
 │   ├── personas/
 │   ├── reference/            # mechanics everyone must know
 │   ├── rules/
+│   ├── scripts/              # sync-skill-links.ps1 / .sh
 │   └── skills/               # skills everyone must have
 ├── .local_manifest/          # gitignored symlink to <LOCAL>
 │   ├── AGENTS.md
@@ -77,8 +79,8 @@ repo.
 │   └── skills/
 └── .agents/                  # gitignored discovery shim
     └── skills/
-        ├── team  -> ../../.team_manifest/skills
-        └── local -> <LOCAL>/skills
+        └── <skill-name> -> .team_manifest/skills/<skill-name> or
+                            .local_manifest/skills/<skill-name>   # one link per skill
 ```
 
 Skill folder names must be unique across the two trees.
@@ -100,6 +102,9 @@ not need special routing or migration behavior.
 Only skills are auto-discovered through `.agents/`. Rules, personas, and other
 documents are discovered through `AGENTS.md` and the routing files.
 
+`.team_manifest/scripts/` is tracked in both repo types and holds the shim
+scripts below.
+
 ## Entry-point templates
 
 Keep existing project mandates when applying these templates.
@@ -113,7 +118,8 @@ Entry point for all AI agents and contributors working in this repository.
 
 The manifest lives in two tracked directories plus a discovery shim:
 
-- `.team_manifest/` — decisions, rules, guides, personas, actions, and backlog.
+- `.team_manifest/` — decisions, rules, guides, personas, actions, scripts, and
+  backlog.
 - `.local_manifest/` — plans, findings, learning, scratch, references, skills,
   and its local `AGENTS.md`.
 - `.agents/` — gitignored skill-discovery shim. Nothing else lives there.
@@ -134,7 +140,7 @@ Entry point for all AI agents and contributors working in this repository.
 The manifest has two trees plus a discovery shim:
 
 - `.team_manifest/` — shared, tracked decisions, rules, guides, personas,
-  actions, references, skills, and backlog.
+  actions, scripts, references, skills, and backlog.
 - `.local_manifest/` — personal plans, findings, learning, scratch, references,
   skills, and its local `AGENTS.md`; linked from a private repository.
 - `.agents/` — gitignored skill-discovery shim. Nothing else lives there.
@@ -178,35 +184,38 @@ On Windows, symbolic links require Developer Mode or an elevated shell.
 
 ## Create the discovery shim
 
-Solo:
+Tools such as VS Code only find skills one level deep, as
+`.agents/skills/<name>/SKILL.md`. A link to a whole `skills/` folder is not
+discovered, so the shim holds **one link per skill folder**. Do not create it by
+hand; run the script from the repo root:
 
 ```powershell
-New-Item -ItemType Directory -Force -Path .\.agents\skills
-New-Item -ItemType SymbolicLink -Path .\.agents\skills\local -Target ..\..\.local_manifest\skills
+.\.team_manifest\scripts\sync-skill-links.ps1
 ```
 
 ```bash
-mkdir -p .agents/skills
-ln -s ../../.local_manifest/skills .agents/skills/local
+bash .team_manifest/scripts/sync-skill-links.sh
 ```
 
-Team:
+The script links every folder that has a `SKILL.md` under
+`.team_manifest/skills/` (team repos only) and `.local_manifest/skills/`. It:
 
-```powershell
-$local = '<LOCAL>'
-New-Item -ItemType Directory -Force -Path .\.agents\skills
-New-Item -ItemType SymbolicLink -Path .\.agents\skills\team -Target ..\..\.team_manifest\skills
-New-Item -ItemType SymbolicLink -Path .\.agents\skills\local -Target "$local\skills"
-```
+- uses junctions on Windows (no Developer Mode or elevation needed) and
+  relative symlinks on macOS/Linux;
+- stops before changing anything if two skills share a folder name, and warns
+  when a skill's frontmatter `name` differs from its folder name or a folder has
+  no `SKILL.md`;
+- removes only the links it owns (old `local`/`team` links, links into the two
+  `skills/` trees, and dangling links) and leaves real folders in
+  `.agents/skills/` alone;
+- is safe to re-run.
 
-```bash
-mkdir -p .agents/skills
-ln -s ../../.team_manifest/skills .agents/skills/team
-ln -s <LOCAL>/skills .agents/skills/local
-```
+Run it after every clone and after adding, renaming, or removing a skill.
+Because links go through `.local_manifest/skills/`, a team repo's
+`.local_manifest` link must resolve first.
 
-Point a team repo's local skill link directly at `<LOCAL>/skills`; do not chain
-it through the `.local_manifest` symlink.
+A new repo has no scripts yet: copy the template's `.team_manifest/scripts/`
+folder into it before the first run.
 
 ## Ignore rules
 
@@ -249,9 +258,9 @@ gitignored links:
 
 - `.local_manifest` is a real directory for solo and a resolving symlink for
   team.
-- `.agents/skills/local` resolves; team also has a resolving
-  `.agents/skills/team`.
-- `.agents/` contains only skill links.
+- `.agents/skills/` holds one resolving link per skill, and every `SKILL.md`
+  is reachable as `.agents/skills/<name>/SKILL.md`.
+- `.agents/` contains only `skills/`, with no manifest content.
 - Solo has no team `reference/` or `skills/` directories.
 - Team has no duplicate skill folder names across the two trees.
 - Ignore rules match the detected repo type.

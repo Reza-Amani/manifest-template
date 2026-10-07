@@ -25,7 +25,11 @@ From the canonical guide:
 1. Create the folders shown for the chosen type.
 2. For `team`, create the local tree in a private manifest repository and link
    it at `.local_manifest`.
-3. Create the `.agents/skills` discovery links.
+3. Copy this template's `.team_manifest/scripts/` folder into the target's
+   `.team_manifest/`, then run `sync-skill-links.ps1` (Windows) or
+   `sync-skill-links.sh` (macOS/Linux) from the target root. It builds the
+   `.agents/skills` discovery links, one per skill. With no skills yet it
+   only creates the empty folder; re-run it after the skill runs.
 4. Merge the matching ignore rules.
 5. Run the guide's verification checklist.
 

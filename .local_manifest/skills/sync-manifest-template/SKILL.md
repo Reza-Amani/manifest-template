@@ -43,7 +43,8 @@ Do **not** use this to scaffold a manifest from scratch — use
    user instead of guessing.**
 5. **Write into the target's two-directory layout.** Never recreate a single
    content tree under `.agents/`. `.agents/` on the target is only the
-   discovery shim.
+   discovery shim, built by `.team_manifest/scripts/sync-skill-links.*`; never
+   create or edit its links by hand.
 6. **Place each incoming file by the target's repo type**, not by where it
    happens to live in this template. This template is a solo repo: every skill
    and every `*.ref.md` lives under `.local_manifest/`. A team target still
@@ -95,6 +96,10 @@ missing a newly introduced structural file:
 - `.team_manifest/rules/routing.rule.md`
 - `.local_manifest/rules/routing.rule.md`
 - `.team_manifest/rules/terms.rule.md`
+- `.team_manifest/scripts/sync-skill-links.ps1` and `.sh` (copy whole files;
+  they carry no target-specific content)
+- the "Manifest tooling" section of `.team_manifest/guides/setup.md` (only that
+  section; the rest of `setup.md` is the target's own)
 - `.team_manifest/personas/manifester.agent.md` (and other shared personas)
 - root `AGENTS.md`
 - `.local_manifest/AGENTS.md` (do not overwrite an existing one; only fix a
@@ -112,6 +117,7 @@ Use this table:
 | New folder type documented (e.g. adding `learning/`) | Template example files: `*example*` ADRs, refs, skills, `example/` dirs |
 | New naming-suffix / placement / cross-link rules | The apply/sync/migrate/create-GitHub-repo meta-skills (template-only) |
 | Two-directory layout wording, split routing, shim `.gitignore` | Recreating a single content tree under `.agents/` |
+| `.team_manifest/scripts/` shim scripts and the one-link-per-skill shim wording | Hand-made links or a whole-folder `skills/local` / `skills/team` link in `.agents/skills/` |
 | Simple-plan vs. epic-directory conventions | `plans/example-epic/` and all files inside it |
 | Generic planning, debugging, and review workflow skills, including `debug-agent` and `review-changes` | Target-specific plans, specs, tests, and implementation content |
 | Required third-party attribution for copied adapted skills | Unrelated template notices or licenses |
@@ -139,6 +145,16 @@ If the target already has the change (or a more advanced local version), skip it
   `.local_manifest/reference/` (and `.local_manifest/scratch/`).
 - Merge the repo-type ignore blocks from `manifest-layout.md` if they are
   missing.
+- **Shim format change.** VS Code and other tools find only
+  `.agents/skills/<name>/SKILL.md`, so the shim is now one link per skill built
+  by a script instead of `skills/local` / `skills/team` folder links. If the
+  target lacks `.team_manifest/scripts/sync-skill-links.*`, copy both files from
+  this template and bring across the shim wording in `manifest-layout.md`,
+  `manifest-structure.rule.md` (its `scripts/` section and placement rule),
+  `terms.rule.md`, root `AGENTS.md`, and the routing row for rebuilding the
+  shim. Add or update the "Manifest tooling" section of the target's
+  `guides/setup.md` so it tells people to run the script after a clone and
+  after any skill change; keep the rest of `setup.md` untouched.
 
 ### 6. Validate and finish
 - Check the edited target files for broken links and markdown errors.
@@ -148,6 +164,12 @@ If the target already has the change (or a more advanced local version), skip it
   a script), remind the user to regenerate it after manifest changes.
 - Confirm you did not write content into `.agents/` and did not add
   `.team_manifest/skills/` or `.team_manifest/reference/` on a solo target.
+- If you brought across or changed the shim scripts, run the target's
+  `.team_manifest/scripts/sync-skill-links.ps1` (Windows) or `.sh` once from
+  the target root; it only rebuilds gitignored links in `.agents/skills/`.
+  Confirm each skill appears as `.agents/skills/<name>/SKILL.md`, report any
+  duplicate-name or name-mismatch warnings, and tell the user to run the same
+  script on every other machine and clone, then restart the editor.
 - Summarize what was brought across and what was deliberately skipped and why.
 
 ## Decision Heuristic

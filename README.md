@@ -19,7 +19,8 @@ of truth** that is:
 - **Layered** — durable *decisions* are kept apart from current *mechanics* and
   step-by-step *how-tos*, so each can change at its own pace.
 - **Tool-agnostic** — the canonical content lives in `.team_manifest/` and
-  `.local_manifest/`. `.agents/` is only a gitignored shim of skill symlinks.
+  `.local_manifest/`. `.agents/` is only a gitignored shim of per-skill links,
+  built by `.team_manifest/scripts/sync-skill-links.ps1` / `.sh`.
 - **Low-noise** — agents read only what a task needs, not the whole manifest.
 
 ## How it works
@@ -100,7 +101,8 @@ Let an agent do the work:
 3. **Edit both routing files** — point the tables at your real documents.
 4. **Replace the examples** — every folder ships with a worked example marked as
    such. Turn them into real docs or delete them once you have your own.
-5. **Recreate the shim** — follow
+5. **Recreate the shim** — run `.team_manifest/scripts/sync-skill-links.ps1`
+   (Windows) or `.sh` (macOS/Linux); details in
    [`.team_manifest/guides/manifest-layout.md`](.team_manifest/guides/manifest-layout.md).
 6. **Keep it in sync** — when a change makes a doc wrong, fix it in the same
    change. The [`verify-docs-in-sync`](.team_manifest/actions/verify-docs-in-sync.md)
@@ -136,6 +138,8 @@ the format and the expected level of detail.
   for read-only pre-commit reviews; plus an `example-add-module` (coding)
   example.
 - **actions/** — a `verify-docs-in-sync` one-step check.
+- **scripts/** — `sync-skill-links.ps1` / `.sh`, which build the `.agents/skills`
+  discovery shim (one link per skill).
 - **personas/** — a `reviewer` and a `manifester` agent.
 - **plans/** — a simple example `*.planning.md` feature plan and a
   template-only `example-epic/` with `*.master.md` / `*.planning.md` examples

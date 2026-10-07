@@ -7,10 +7,10 @@ The manifest lives in two directories plus a discovery shim. Both directories
 are tracked.
 
 - `.team_manifest/` — decisions (`adr/`), rules, guides, personas, actions,
-  and `backlog.plan.md`.
+  scripts, and `backlog.plan.md`.
 - `.local_manifest/` — plans, findings, learning, scratch, reference docs,
   skills, and `AGENTS.md`.
-- `.agents/` — gitignored shim holding a `skills/local` symlink so tools
+- `.agents/` — gitignored shim holding one link per skill so tools
   auto-discover skills. Nothing else lives there.
 
 **Before acting, read

@@ -4,8 +4,8 @@ description: >-
   One-time migration of a repository's agent manifest from the legacy single
   `.agents/` tree to the two-tree layout: `.team_manifest/` plus
   `.local_manifest/`, with a gitignored `.agents/` discovery shim that holds
-  skill symlinks. The user creates the trees, moves files, and creates the
-  symlinks by hand first; this skill then derives the rename map, scaffolds
+  one link per skill. The user creates the trees, moves files, and runs the
+  shim script by hand first; this skill then derives the rename map, scaffolds
   `AGENTS.md` and split routing, rewrites stale addresses and relative links,
   fixes `.gitignore`, removes legacy tool mirrors, and verifies the result.
   Solo repos track both trees and keep every `reference/` and `skills/` item
@@ -35,7 +35,8 @@ The **user** does the judgement work before invoking this skill, following
 - creates `.team_manifest/` and `.local_manifest/` (in `team` repos the latter
   is one symlink into a private git repo),
 - moves every file into its new tree,
-- creates the `.agents/` skill symlink(s).
+- copies the template's `.team_manifest/scripts/` into the repo and runs
+  `sync-skill-links` to build the `.agents/skills` links.
 
 In `solo` repos every `reference/` doc and every skill goes under
 `.local_manifest/`. Do not create `reference/` or `skills/` under
@@ -129,10 +130,11 @@ exist under `.team_manifest/`.
 List, as seen from the target root:
 
 - `.team_manifest/**` and `.local_manifest/**` (follow the symlink on `team`).
-- `.agents/**`. Expected:
-  - `team`: `skills/team` and `skills/local`, both symbolic links.
-  - `solo`: `skills/local` as a symbolic link. `skills/team` only if
-    `.team_manifest/skills/` exists (it should not in a correct solo setup).
+- `.agents/**`. Expected: only `skills/`, holding one link per skill folder
+  (built by `.team_manifest/scripts/sync-skill-links.*`). Old `skills/local`
+  or `skills/team` links to a whole `skills/` folder are **stale**; tools
+  cannot discover skills through them. Ask the user to re-run the script, which
+  replaces them.
   Anything else under `.agents/` is a **legacy leftover** — a real folder or
   an old per-folder symlink the user has not yet moved or removed. Stop and
   list leftovers; do not proceed until the user resolves them.
@@ -207,6 +209,8 @@ structure changes.
 
 - **`.team_manifest/guides/manifest-layout.md`** — copy the canonical guide
   from this template so the migrated repo owns its permanent layout contract.
+- **`.team_manifest/scripts/`** — copy `sync-skill-links.ps1` and `.sh` from
+  this template if missing or different.
 - **Root `AGENTS.md`.** Keep the target's existing first-read file if it
   already names one (for example a project-wide `global.rule.md`). Only insert
   the two-directory description and the read of `.local_manifest/AGENTS.md`.
@@ -287,12 +291,15 @@ holds real, unmirrored content, leave it and list it. Never touch
 
 Check, and print the results:
 
-- `solo`: `.agents/skills/local` is a real symbolic link and resolves.
+- `solo`: `.agents/skills/` holds one resolving link per skill folder under
+  `.local_manifest/skills/`, no old `local`/`team` links remain, and
   `.local_manifest` is a real folder, not a symlink, and is **not** in
   `.gitignore`. `.team_manifest/reference/` and `.team_manifest/skills/` are
   absent (flag if present).
-- `team`: `.agents/skills/team` and `.agents/skills/local` are real symbolic
-  links and resolve. `.local_manifest` is a symbolic link that resolves.
+- `team`: `.agents/skills/` holds one resolving link per skill folder in
+  `.team_manifest/skills/` and `.local_manifest/skills/`, and no old
+  `local`/`team` links remain. `.local_manifest` is a symbolic link that
+  resolves.
 - No skill folder name exists in both `skills/` trees, and each `SKILL.md`
   `name` equals its folder name.
 - No template-side apply, sync, migrate, or GitHub-repo creation skill remains

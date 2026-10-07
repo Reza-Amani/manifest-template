@@ -42,6 +42,7 @@ Read the matching ADR under `adr/` only when working in that domain:
 ## Task → Guide
 
 - Choose, create, or verify a solo/team manifest layout → [`guides/manifest-layout.md`](../guides/manifest-layout.md)
+- Rebuild the `.agents/skills` discovery links after a clone or a skill change → [`guides/manifest-layout.md`](../guides/manifest-layout.md#create-the-discovery-shim)
 - Set up this project's tools and dependencies → [`guides/setup.md`](../guides/setup.md)
 - Find this project's build, test, run, and maintenance commands → [`guides/commands.md`](../guides/commands.md)
 
