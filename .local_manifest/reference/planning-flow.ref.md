@@ -78,12 +78,15 @@ not yet clear enough for meaningful pre-implementation tests,
    The skill preserves that intent in `<epic>-initial.md` and produces
    `<epic>.master.md` in a dedicated `plans/<epic>/` directory.
 2. The master plan contains only the overall outcome, high-level requirements,
-   high-level architecture, and a phased roadmap. Each phase must be small
-   enough for one spec and one detailed plan, and independent enough to
+   high-level architecture, and a phased roadmap with numbered phase IDs and
+   names (for example `01-<phase-slug>: Phase 1 — <name>`). Each phase must be
+   small enough for one spec and one detailed plan, and independent enough to
    implement without taking on later phases.
-3. For one phase, `grill-to-spec` writes `<phase>.spec.md` in the epic directory.
+3. For one phase, `grill-to-spec` writes `<01-phase-slug>.spec.md` in the epic
+   directory using the master plan's numbered phase ID.
 4. `spec-to-plan`, `plan-to-criteria`, and `implement-plan` run as they do for a
-   small task. The detailed plan and spec stay inside the epic directory.
+   small task. The detailed plan (`<01-phase-slug>.planning.md`) and spec stay
+   inside the epic directory.
 5. After all acceptance criteria pass, `implement-plan` may mark only the
    matching phase complete in the master plan. It may read the rest of the
    master plan for context, but must not implement or edit other phases.

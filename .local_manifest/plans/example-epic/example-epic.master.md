@@ -2,17 +2,17 @@
 name: Example Epic Master Plan
 overview: Template-only high-level roadmap for background report exports, split into independently plannable phases.
 todos:
-  - id: export-request
-    content: Accept and queue an authorized export request
+  - id: 01-export-request
+    content: "Phase 1 — Export request: Accept and queue an authorized export request"
     status: pending
-  - id: job-lifecycle
-    content: Process jobs and expose progress, failure, and cancellation
+  - id: 02-job-lifecycle
+    content: "Phase 2 — Job lifecycle: Process jobs and expose progress, failure, and cancellation"
     status: pending
-  - id: secure-downloads
-    content: Authorize downloads and expire completed files
+  - id: 03-secure-downloads
+    content: "Phase 3 — Secure downloads: Authorize downloads and expire completed files"
     status: pending
-  - id: operations-rollout
-    content: Add operational controls and roll out background exports
+  - id: 04-operations-rollout
+    content: "Phase 4 — Operations rollout: Add operational controls and roll out background exports"
     status: pending
 isProject: true
 ---
@@ -56,17 +56,19 @@ enforces retention after completion.
 
 ## Phases
 
-- [ ] **export-request: Accept and queue requests** — validate admin requests,
-  create one durable job, and return without generating the file. This phase
-  has no worker or download behavior.
-  - Spec: [`export-request.spec.md`](export-request.spec.md)
-  - Detailed plan: [`export-request.planning.md`](export-request.planning.md)
-- [ ] **job-lifecycle: Process and track jobs** — run queued work and expose
-  progress, failure, retry, and cancellation. Depends on `export-request`.
-- [ ] **secure-downloads: Deliver and expire files** — authorize completed-file
-  downloads and enforce retention. Depends on `job-lifecycle`.
-- [ ] **operations-rollout: Operate the feature** — add monitoring, limits, and
-  staged rollout controls. Depends on the earlier behavior phases.
+- [ ] **01-export-request: Phase 1 — Accept and queue requests** — validate
+  admin requests, create one durable job, and return without generating the
+  file. This phase has no worker or download behavior.
+  - Spec: [`01-export-request.spec.md`](01-export-request.spec.md)
+  - Detailed plan: [`01-export-request.planning.md`](01-export-request.planning.md)
+- [ ] **02-job-lifecycle: Phase 2 — Process and track jobs** — run queued work
+  and expose progress, failure, retry, and cancellation. Depends on
+  `01-export-request`.
+- [ ] **03-secure-downloads: Phase 3 — Deliver and expire files** — authorize
+  completed-file downloads and enforce retention. Depends on
+  `02-job-lifecycle`.
+- [ ] **04-operations-rollout: Phase 4 — Operate the feature** — add monitoring,
+  limits, and staged rollout controls. Depends on the earlier behavior phases.
 
 ## Out of scope
 

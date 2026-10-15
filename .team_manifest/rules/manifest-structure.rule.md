@@ -131,12 +131,14 @@ implementation plans, and backlog items.
     informal, but it is the source of truth for the epic's starting intent.
   - `<epic>.master.md` — the high-level roadmap produced by
     `grill-to-master` from the initial idea. It holds overall requirements,
-    architecture, and independently plannable phases. It is an epic backlog and
-    ordering guide, not an implementation plan, and has no acceptance criteria.
-  - `<part>.spec.md` — a spec produced by `grill-to-spec` from user input or
-    from one part of the master plan. It describes intended behavior and
-    scenarios in human language, without design or acceptance criteria.
-  - `<part>.planning.md` — a detailed implementation plan produced by
+    architecture, and independently plannable numbered phases (such as
+    `01-<phase-slug>`). It is an epic backlog and ordering guide, not an
+    implementation plan, and has no acceptance criteria.
+  - `<01-phase-slug>.spec.md` — a spec produced by `grill-to-spec` from user
+    input or from one numbered phase of the master plan. It describes intended
+    behavior and scenarios in human language, without design or acceptance
+    criteria.
+  - `<01-phase-slug>.planning.md` — a detailed implementation plan produced by
     `spec-to-plan` from a spec. `plan-to-criteria` later adds its independent
     acceptance section, then `implement-plan` builds and verifies it.
 - **Content:** Scope, milestones, tasks, status, checkboxes, dependencies, and

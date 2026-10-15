@@ -95,13 +95,15 @@ Save to the **target** repo only:
 # Simple work
 .local_manifest/plans/<topic>.planning.md
 
-# One part of an epic
-.local_manifest/plans/<epic>/<part>.planning.md
+# One phase of an epic (matches the numbered spec stem, e.g. 01-export-request.planning.md)
+.local_manifest/plans/<epic>/<01-phase-slug>.planning.md
 ```
 
 Use a short dash-case name (for example `partial-refunds.planning.md`). When a
-spec file exists, save the plan beside that spec: a top-level spec produces a
-top-level plan, and an epic spec produces a plan in the same epic directory.
+spec file exists, save the plan beside that spec with the exact same stem: a
+top-level spec produces a top-level plan, and a numbered epic phase spec
+(`<01-phase-slug>.spec.md`) produces `<01-phase-slug>.planning.md` in the same
+epic directory.
 The `*.master.md` suffix is reserved for epic roadmaps and must not be used
 for a detailed implementation plan. Create the chosen directory if needed.
 

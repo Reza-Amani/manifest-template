@@ -53,12 +53,11 @@ If a *fact* can be found by exploring the target repo, look it up rather than
 asking. The *decisions*, though, are the user's — put each one to them and wait
 for their answer.
 
-If the user asks for a brief grilling session (e.g. "grill me briefly"), ask only critical questions; whenevr you can guess the intended behavior with relatively high confidence, don't ask the user and only list them at the end, before writing the spec (phase 3).
+If the user asks for a brief grilling session (e.g. "grill me briefly"), ask only critical questions; whenever you can guess the intended behavior with relatively high confidence, don't ask the user and only list them at the end, before writing the spec (phase 3).
 
 If there is previous chat messages between the user and the agent, use them to prune the list of questions to ask; whatever discussed and the user seems to be ok with, don't ask the user and only list them at the end, before writing the spec (phase 3).
 
-Do not write the spec, and do not enact the plan, until the user confirms you
-have reached a shared understanding. Do not implement any of the decisions until the spec is written. Even then, recommend the user to plan and implement the spec in a separate chat.
+Once the design branches are resolved, write the spec directly without asking for a separate final confirmation gate. Do not implement any of the decisions until the spec is written. Even then, recommend the user to plan and implement the spec in a separate chat.
 
 ## Phase 2: Domain modeling during the session
 
@@ -83,19 +82,20 @@ of manifest files that the session's decisions make stale. You will add them to 
 
 ## Phase 3: Write the spec
 
-When the user confirms shared understanding is reached — or asks to wrap up —
+Once shared understanding is reached — or the user asks to wrap up —
 choose the path from the target's planning structure:
 
 ```
 # Simple work
 .local_manifest/plans/<topic>.spec.md
 
-# One part of an epic
-.local_manifest/plans/<epic>/<part>.spec.md
+# One phase of an epic (use the master plan's numbered phase id, e.g. 01-export-request.spec.md)
+.local_manifest/plans/<epic>/<01-phase-slug>.spec.md
 ```
 
 Use a short, descriptive dash-case `<topic>` (e.g. `partial-refunds.spec.md`).
-For an epic, use the existing epic directory and a short dash-case `<part>`.
+For an epic phase, use the existing epic directory and the exact numbered
+dash-case phase `id` from `<epic>.master.md` (e.g. `01-export-request.spec.md`).
 If the user points to an epic master plan, verify that it uses the
 `*.master.md` suffix and save the spec beside it. Do not place an epic spec at
 the top level or create a second directory for the same epic. Create the chosen
@@ -173,11 +173,11 @@ Workspace folders?
 ├─ Exactly two ..................... target = the other folder
 └─ Ambiguous ....................... ASK which folder is the target
 
-Shared understanding confirmed?
-├─ No .............................. keep grilling; no spec, no edits
+Shared understanding reached?
+├─ No (session ended early) ........ tell user which branches remain unresolved; no spec, no edits
 └─ Yes
   ├─ Simple work .................. write plans/<topic>.spec.md
-  └─ Epic part .................... write plans/<epic>/<part>.spec.md
+  └─ Epic phase ................... write plans/<epic>/<01-phase-slug>.spec.md
 
 Stale manifest files found in target?
 ├─ No .............................. report "manifest untouched" and stop

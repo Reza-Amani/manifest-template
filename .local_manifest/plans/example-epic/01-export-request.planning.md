@@ -24,7 +24,7 @@ isProject: false
 
 ## Spec
 
-Source of truth: [`export-request.spec.md`](export-request.spec.md).
+Source of truth: [`01-export-request.spec.md`](01-export-request.spec.md).
 
 ## Approach
 

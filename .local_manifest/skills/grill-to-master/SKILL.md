@@ -60,6 +60,16 @@ Look up repository facts instead of asking the user. Decisions remain the
 user's. Stop questions from drifting into API signatures, file-level changes,
 test cases, or acceptance criteria; those belong to later stages.
 
+If the user asks for a brief grilling session (for example, "grill me briefly"),
+ask only critical questions about outcomes, architecture, or phase boundaries;
+whenever you can infer the intended behavior with high confidence, do not ask
+the user and instead list those assumptions before writing the master plan.
+
+If there are previous chat messages between the user and the agent, use them to
+prune the questions to ask; do not re-ask anything already discussed that the
+user settled, and instead list those settled points before writing the master
+plan.
+
 ## Phase 3: Test the phase split
 
 Each phase must:
@@ -83,9 +93,13 @@ Write:
 ```
 
 Use YAML frontmatter with `name`, `overview`, `todos`, and `isProject: true`.
-Give every phase a stable dash-case todo `id` and `status: pending`. Mirror the
-same phases as Markdown checkboxes in the body so `implement-plan` can mark the
-matching phase complete later.
+Give every phase a numbered dash-case todo `id` (such as `01-<phase-slug>`,
+`02-<phase-slug>`) and `status: pending`. Downstream phase specs and plans must
+use that exact numbered `id` as their filename stem (`01-<phase-slug>.spec.md`
+and `01-<phase-slug>.planning.md`). Mirror the same numbered phases as
+Markdown checkboxes in the body so phases are easy to address in future chats,
+specs, and plans, and so `implement-plan` can mark the matching phase complete
+later.
 
 Use this body shape:
 
@@ -105,7 +119,7 @@ Only requirements that apply across phases.
 System boundaries and major flow. No file-level design.
 
 ## Phases
-- [ ] **<phase-id>: <name>** — phase outcome, boundary, and dependencies.
+- [ ] **<01-phase-slug>: Phase 1 — <name>** — phase outcome, boundary, and dependencies.
 
 ## Out of scope
 Epic-wide non-goals.
@@ -128,6 +142,7 @@ unless the user explicitly asks.
   dedicated plans directory.
 - The master plan links to the initial idea.
 - The roadmap is high-level and each phase is independently plannable.
-- Frontmatter todos and body phase checkboxes match.
+- Every phase has a number in its todo `id` and display name, and frontmatter
+  todos and body phase checkboxes match.
 - No phase details or acceptance criteria were added.
 - Nothing was written to the template when a separate target was open.
