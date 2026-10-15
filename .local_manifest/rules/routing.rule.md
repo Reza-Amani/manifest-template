@@ -46,6 +46,9 @@ Manifest skills:
 - Wrap up completed planning work: archive a task, an explicitly requested epic phase, or a finished epic; create/update reference docs for non-trivial design → [`skills/wrap-up-plan`](../skills/wrap-up-plan/SKILL.md)
 - Diagnose and fix a user-identified issue with runtime evidence and temporary instrumentation → [`skills/debug-agent`](../skills/debug-agent/SKILL.md)
 - Review uncommitted changes for bugs, architecture flaws, and introduced technical debt without editing files → [`skills/review-changes`](../skills/review-changes/SKILL.md)
+- Check whether the current branch is ready for a PR against a target branch (deterministic checks plus architecture and standards review) → [`skills/pr-ready`](../skills/pr-ready/SKILL.md)
+- Create, edit, or split a GitHub PR with an intent-and-architecture description → [`skills/pr-create`](../skills/pr-create/SKILL.md)
+- Review someone else's GitHub PR in chat without writing to GitHub → [`skills/pr-review`](../skills/pr-review/SKILL.md)
 - _(coding example)_ Add a new module end-to-end → [`skills/example-add-module`](../skills/example-add-module/SKILL.md)
 
 _(add your real runbooks here under `skills/<name>/SKILL.md`)_

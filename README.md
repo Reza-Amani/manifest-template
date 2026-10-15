@@ -135,7 +135,10 @@ the format and the expected level of detail.
   completed planning work and document non-trivial design;
   [`debug-agent`](.local_manifest/skills/debug-agent/SKILL.md) for
   evidence-driven issue diagnosis and fixes; [`review-changes`](.local_manifest/skills/review-changes/SKILL.md)
-  for read-only pre-commit reviews; plus an `example-add-module` (coding)
+  for read-only pre-commit reviews; [`pr-ready`](.local_manifest/skills/pr-ready/SKILL.md),
+  [`pr-create`](.local_manifest/skills/pr-create/SKILL.md), and
+  [`pr-review`](.local_manifest/skills/pr-review/SKILL.md) for pull-request
+  readiness, creation/splitting, and review; plus an `example-add-module` (coding)
   example.
 - **actions/** — a `verify-docs-in-sync` one-step check.
 - **scripts/** — `sync-skill-links.ps1` / `.sh`, which build the `.agents/skills`

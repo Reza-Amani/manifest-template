@@ -221,11 +221,18 @@ naming suffixes from `manifest-structure.rule.md`.
   named.
 - `.team_manifest/personas/` — only personas that fit the target (adapt `reviewer`;
   include `manifester` so the target can maintain its own docs).
-- `.local_manifest/skills/` — include the generic planning workflow skills
+- `skills/` — place under `.local_manifest/skills/` on `solo` targets; on `team`
+  targets, place shared team workflow skills (such as `pr-ready`, `pr-create`,
+  `pr-review`, and any other team-shared runbooks) under
+  `.team_manifest/skills/` and personal workflow skills under
+  `.local_manifest/skills/`. Include the generic planning workflow skills
   (`grill-to-master`, `grill-to-spec`, `spec-to-plan`, `plan-to-criteria`, and
   `implement-plan`), the `wrap-up-plan` closeout skill, the `debug-agent`
-  debugging skill, and the read-only `review-changes`
-  pre-commit review skill. Preserve any existing target skills.
+  debugging skill, the read-only `review-changes` pre-commit review skill, and
+  the pull-request workflow skills (`pr-ready`, `pr-create`, `pr-review` —
+  adapting `pr-ready`'s deterministic check table to the target's real build,
+  lint, and test commands when helpful, or keeping it linked to `commands.md`).
+  Preserve any existing target skills.
   If no domain skill exists, create one example skill relevant to the target's
   business and mark it clearly as an example. Keep `debug-agent` generic. Keep
   `review-changes` generic, but ensure its links resolve to the target's adapted

@@ -119,7 +119,7 @@ Use this table:
 | Two-directory layout wording, split routing, shim `.gitignore` | Recreating a single content tree under `.agents/` |
 | `.team_manifest/scripts/` shim scripts and the one-link-per-skill shim wording | Hand-made links or a whole-folder `skills/local` / `skills/team` link in `.agents/skills/` |
 | Simple-plan vs. epic-directory conventions | `plans/example-epic/` and all files inside it |
-| Generic planning, debugging, and review workflow skills, including `debug-agent` and `review-changes` | Target-specific plans, specs, tests, and implementation content |
+| Generic planning, debugging, review, and PR workflow skills (`debug-agent`, `review-changes`, `pr-ready`, `pr-create`, `pr-review`; place `pr-*` in `.team_manifest/skills/` on team targets) | Target-specific plans, specs, tests, and implementation content |
 | Required third-party attribution for copied adapted skills | Unrelated template notices or licenses |
 | Routing discipline and discovery-flow wording | This template's `README.md` describing the template itself |
 | Persona convention updates (plain-English rules, folder lists) | Edits the target already has, or is ahead on |
