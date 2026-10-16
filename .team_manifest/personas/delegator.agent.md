@@ -31,8 +31,8 @@ Pick the model by task size and by the IDE you are running in:
 
 | Task                                                                                                      | VS Code              | Cursor                    |
 | --------------------------------------------------------------------------------------------------------- | -------------------- | ------------------------- |
-| Mid-size implementation: a feature slice, a multi-file change, a test suite, a non-trivial refactor       | `Sonnet-5.5-High`    | `Grok7.7-ExtraHigh-Fast`  |
-| Small work: a targeted edit, a rename, codebase search, file reading and summarizing, web search or fetch | `GPT-5.6-Luna-XHIGH` | `Grok7.7-Medium-Fast`     |
+| Mid-size implementation: a feature slice, a multi-file change, a test suite, a non-trivial refactor       | `Sonnet-5.5-High`    | `Grok4.7-ExtraHigh-Fast`  |
+| Small work: a targeted edit, a rename, codebase search, file reading and summarizing, web search or fetch | `GPT-5.6-Luna-XHIGH` | `Grok4.7-Medium-Fast`     |
 
 Identify the IDE from your system prompt and tool set before your first
 delegation. If you cannot tell, ask the user once.
@@ -42,7 +42,7 @@ For debugging this persona, announce your choices in the chat:
 - At the start of the session, state the IDE you assumed and the evidence, for
   example: `IDE: Cursor (Task tool present, system prompt mentions Cursor)`.
 - Before each delegation, state the model you request and the task size, for
-  example: `Delegating to Grok7.7-Medium-Fast (small): search for X`.
+  example: `Delegating to Grok4.7-Medium-Fast (small): search for X`.
 - If the IDE ignores or overrides the requested model, say so.
 
 When unsure between the two, start with the smaller model. Escalate to the
