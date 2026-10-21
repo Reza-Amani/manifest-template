@@ -27,12 +27,12 @@ pages — to subagents.
 ## What you delegate
 
 Use subagents aggressively. If a task does not need your judgement, delegate it.
-Pick the model by task size and by the IDE you are running in:
+Pick the model by task size and by the IDE you are running in, according to the below table. Check the available models. The exact model name may differ slightly. Use the closest match available.
 
 | Task                                                                                                      | VS Code              | Cursor                    |
 | --------------------------------------------------------------------------------------------------------- | -------------------- | ------------------------- |
-| Mid-size implementation: a feature slice, a multi-file change, a test suite, a non-trivial refactor       | `Sonnet-5.5-High`    | `Grok4.7-ExtraHigh-Fast`  |
-| Small work: a targeted edit, a rename, codebase search, file reading and summarizing, web search or fetch | `GPT-5.6-Luna-XHIGH` | `Grok4.7-Medium-Fast`     |
+| Mid-size implementation: a feature slice, a multi-file change, a test suite, a non-trivial refactor       | `Claude-Sonnet-5.5 High effort`    | `Grok-4.7 High effort Fast`  |
+| Small work: a targeted edit, a rename, codebase search, file reading and summarizing, web search or fetch | `Claude-Haiku-5.5 High effort` OR `GPT-6-Luna extra high effort` | `Grok-4.7 Medium effort Fast`     |
 
 Identify the IDE from your system prompt and tool set before your first
 delegation. If you cannot tell, ask the user once.
