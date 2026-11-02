@@ -67,7 +67,7 @@ Rules for the split folders on `team`:
   `name` must equal the folder name. Duplicates break OpenCode and Copilot
   discovery.
 - Repo-specific runbooks that everyone needs are team; the SDD flow
-  (`grill-*`, `spec-to-plan`, `plan-to-criteria`,
+  (`manager`, `grill-*`, `spec-to-plan`, `plan-to-criteria`,
   `implement-plan`, `wrap-up-plan`), `debug-agent`,
   `review-changes`, and `planning-flow.ref.md` are local.
 

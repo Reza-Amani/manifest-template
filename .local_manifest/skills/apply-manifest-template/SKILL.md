@@ -220,13 +220,14 @@ naming suffixes from `manifest-structure.rule.md`.
   investigation records belong (perf digs, root-cause analyses) and how they are
   named.
 - `.team_manifest/personas/` — only personas that fit the target (adapt `reviewer`;
-  include `manifester` so the target can maintain its own docs).
+  include `manifester` so the target can maintain its own docs, and `delegator`
+  for the manager workflow's model selection and worker policy).
 - `skills/` — place under `.local_manifest/skills/` on `solo` targets; on `team`
   targets, place shared team workflow skills (such as `pr-ready`, `pr-create`,
   `pr-review`, and any other team-shared runbooks) under
   `.team_manifest/skills/` and personal workflow skills under
   `.local_manifest/skills/`. Include the generic planning workflow skills
-  (`grill-to-master`, `grill-to-spec`, `spec-to-plan`, `plan-to-criteria`, and
+  (`manager`, `grill-to-master`, `grill-to-spec`, `spec-to-plan`, `plan-to-criteria`, and
   `implement-plan`), the `wrap-up-plan` closeout skill, the `debug-agent`
   debugging skill, the read-only `review-changes` pre-commit review skill, and
   the pull-request workflow skills (`pr-ready`, `pr-create`, `pr-review` —

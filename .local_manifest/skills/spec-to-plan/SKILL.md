@@ -18,8 +18,8 @@ the spec and do not add acceptance criteria.
 
 This skill pairs with [grill-to-spec](../grill-to-spec/SKILL.md): that skill
 writes `*.spec.md`; this one turns a ready spec into a detailed `*.planning.md`
-in the same planning directory. `plan-to-criteria` adds the acceptance section
-and plan-derived red tests in the next stage.
+in the same planning directory. `plan-to-criteria` writes the sibling criteria
+file and plan-derived red tests in the next stage.
 
 Follow the canonical [planning flow](../../reference/planning-flow.ref.md).
 
@@ -84,8 +84,11 @@ line or symbol anchors where known, per-todo verification, edge cases, and a
 clear "do not change" list. Goal: a weaker implementer should not invent the
 wrong API or skip a constraint.
 
-Ask once if detail level is unclear and the user did not say which model will
-build. Default to Plan Mode depth if they do not answer.
+For a standalone run, ask once if detail level is unclear and the user did not
+say which model will build. Default to Plan Mode depth if they do not answer.
+Under `manager`, choose detail from the assigned implementation model and task
+complexity without that question; return unresolved behavior decisions to the
+main agent.
 
 ## Phase 4: Write the plan file
 
@@ -147,6 +150,10 @@ After writing the plan:
 2. Summarize open assumptions (if any) and any spec issues still outstanding.
 3. Recommend running `plan-to-criteria` before implementation.
 4. Do not start coding unless the user asks.
+
+Under [manager](../manager/SKILL.md), return the exact plan path and a compact
+summary to the orchestrator. Its invocation already authorizes the later stages;
+do not ask for document approval or a separate instruction to start coding.
 
 ## Decision tree
 

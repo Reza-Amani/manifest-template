@@ -39,10 +39,11 @@ Manifest skills:
 - Sanitise a target manifest: repair duplication, stale or conflicting information, fluff, and ADRs bloated with mechanics, recommendations, or future ideas → [`skills/sanitise-manifest`](../skills/sanitise-manifest/SKILL.md)
 - One-time move from the legacy single `.agents/` tree to `.team_manifest/` + `.local_manifest/` + shim; repairs addresses after the user's manual split → [`skills/migrate-manifest-layout`](../skills/migrate-manifest-layout/SKILL.md)
 - Grill a large task into a high-level phased master plan → [`skills/grill-to-master`](../skills/grill-to-master/SKILL.md)
+- Manage one task or named epic phase through grilling, delegated stages, independent review, and archival; resume or reopen that run → [`skills/manager`](../skills/manager/SKILL.md)
 - Grill the user about a plan, then write a spec into the target repo's `plans/` → [`skills/grill-to-spec`](../skills/grill-to-spec/SKILL.md)
 - Turn a spec into a Cursor-style implementation plan without acceptance criteria → [`skills/spec-to-plan`](../skills/spec-to-plan/SKILL.md)
 - Write sibling criteria with high-level behavioral requirements and integration-first proof → [`skills/plan-to-criteria`](../skills/plan-to-criteria/SKILL.md)
-- Implement a detailed plan, make its red tests green, and prove every criterion → [`skills/implement-plan`](../skills/implement-plan/SKILL.md)
+- Implement a detailed plan, make its red tests green, and record acceptance evidence → [`skills/implement-plan`](../skills/implement-plan/SKILL.md)
 - Wrap up completed planning work: archive a task, an explicitly requested epic phase, or a finished epic; create/update reference docs for non-trivial design → [`skills/wrap-up-plan`](../skills/wrap-up-plan/SKILL.md)
 - Diagnose and fix a user-identified issue with runtime evidence and temporary instrumentation → [`skills/debug-agent`](../skills/debug-agent/SKILL.md)
 - Review uncommitted changes for bugs, architecture flaws, and introduced technical debt without editing files → [`skills/review-changes`](../skills/review-changes/SKILL.md)
@@ -82,8 +83,10 @@ _(add your real runbooks here under `skills/<name>/SKILL.md`)_
   - When the user asks to continue or edit planning work, search the full
     `plans/` tree, regardless of the agent's default plan directory.
   - Completed task artifacts may be moved to `plans/archive/` only by
-    `wrap-up-plan`. A master plan and its initial document move only when every
-    epic phase is complete; otherwise, phase archival requires the user's
-    explicit request.
+    `wrap-up-plan`. A master plan and its initial document move only during
+    whole-epic closeout after every epic phase is complete. Phase archival
+    requires the user's explicit request (including invoking `manager` for that
+    phase). Manager always archives only its selected task/phase and records pending human
+    checks and minor findings under the planning flow's Managed completion policy.
   - The `plans/example-epic/` directory belongs only to this template. Do not
     copy it into a target repository.

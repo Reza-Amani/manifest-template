@@ -32,6 +32,8 @@ output. Use one name for one concept everywhere.
   together.
 - **discovery shim** — the gitignored `.agents/` directory holding one link per
   skill, built by `.team_manifest/scripts/sync-skill-links.ps1` / `.sh`.
+- **manager** — the skill that runs the spec-to-wrap-up flow for one task or one
+  named epic phase, with delegated stages and independent review.
 
 ---
 

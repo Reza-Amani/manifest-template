@@ -11,6 +11,7 @@ but they must not silently rewrite them.
 | `*.spec.md` | User, with `grill-to-spec` | Plain-language intended behavior and scenarios |
 | `*.planning.md` | `spec-to-plan` | Cursor-style implementation steps and technical approach |
 | `*.criteria.md` (highly recommended, not required) | `plan-to-criteria` | High-level behavioral and narrative requirements plus integration-first test contract and final proof |
+| `*.manager.md` (manager runs only) | `manager` | Stage checkpoint, review evidence, pending human checks, minor findings, and archive/reopen paths |
 | `*-initial.md` | User | Starting intent for an epic |
 | `*.master.md` | `grill-to-master` | High-level epic roadmap, architecture, and independent phases |
 
@@ -36,6 +37,9 @@ because its interface is unclear, `plan-to-criteria` records the required cases
 and outcomes for `implement-plan` instead of guessing the production contract.
 
 ## Small tasks
+
+These are the standalone stage rules. For an orchestrated run, apply the
+[Managed completion](#managed-completion) handoff and closeout exceptions.
 
 1. The user gives `grill-to-spec` a plain task definition. The skill asks
    focused questions and writes a human-readable `plans/<topic>.spec.md`.
@@ -85,6 +89,9 @@ and outcomes for `implement-plan` instead of guessing the production contract.
 
 ## Epics
 
+The standalone epic lifecycle follows. Manager handles only one selected phase
+and uses the [Managed completion](#managed-completion) exceptions below.
+
 1. The user gives `grill-to-master` a plain explanation of the intended epic.
    The skill preserves that intent in `<epic>-initial.md` and produces
    `<epic>.master.md` in a dedicated `plans/<epic>/` directory.
@@ -110,6 +117,56 @@ and outcomes for `implement-plan` instead of guessing the production contract.
    completed phase plan, matching spec, and criteria. It does not move unrelated or
    ambiguous files; previously archived phases remain in place.
 
+## Managed completion
+
+The [manager skill](../skills/manager/SKILL.md) orchestrates the same stages for
+one task or one named epic phase. It keeps grilling in the main agent, delegates
+substantial stage work, and obtains a fresh independent review against the spec
+and criteria before closeout. Its invocation authorizes stage transitions and
+archival of that selected task/phase, without intermediate confirmation.
+
+For a manager run, completion requires implemented plan work, passing required
+checks executable in the agent's environment, and no unresolved severe review
+finding. Two explicitly recorded exceptions do not block closeout:
+
+- Human checks that the agent cannot perform remain **human check pending**.
+  Record the reason, steps, inputs, and expected outcome in the criteria and
+  sibling `<stem>.manager.md` checkpoint, or only the checkpoint if criteria
+  were explicitly skipped.
+- Minor independent-review findings remain reported, with evidence and impact.
+  Only severe findings trigger an automatic fix-worker/review loop. A known
+  failing executable acceptance check cannot be relabeled minor or human-only.
+
+Complete the plan's task statuses and checkboxes and only the matching master
+phase when applicable, then archive the task/phase and checkpoint. A completion
+status means this managed delivery flow finished; it does not assert that
+pending human checks passed or minor findings were fixed. Leave affected
+acceptance checkboxes unchecked with explicit pending/minor annotations, and
+add a visible closeout note linking the checkpoint from the plan, criteria, and
+matching master phase. Never mark an unperformed check as passed. Known severe
+defects and unresolved executable-check failures still block completion.
+
+Manager phase closeout always uses **Epic phase** mode, even for the last phase:
+keep the master and initial idea active and do not start another phase. A later
+explicit whole-epic wrap-up may archive the epic; recorded managed exceptions
+remain visible and are not converted into passing evidence.
+
+After the user requests reopening for a failed human check, manager restores
+only the archived task/phase companions, resets affected task and matching
+master-phase statuses, and resumes repair and verification. Preserve the
+previous evidence and do not overwrite conflicting active files.
+
+Outside a recorded manager run, the normal completion gates below still apply.
+Manager workers return blockers and questions to the main agent, which owns
+user communication. Implementation returns evidence before final status updates
+and scratch cleanup; manager orders those only after independent review.
+
+Plan-local scratch cleanup is authorized by default for `implement-plan` and
+manager closeout. Preserve durable evidence first, inventory the plan's scratch
+directory, verify the resolved target stays within the repository's scratch
+tree, and remove its disposable contents without another confirmation. Honor
+an explicit request to retain them.
+
 ## Change boundaries
 
 - `grill-to-spec` does not design the implementation or write acceptance
@@ -132,9 +189,11 @@ and outcomes for `implement-plan` instead of guessing the production contract.
    Conflicting mandatory gates remain blockers, not permission for test-only
    production changes or silent reductions in verification.
 - `wrap-up-plan` runs after implementation. It closes a completed task, an
-  explicitly requested completed epic phase, or a fully completed epic without
+  explicitly requested completed epic phase (including a manager invocation), or a fully completed epic without
   a second confirmation. It creates or updates a `reference/*.ref.md` when the
   finished design is non-trivial and not already documented; skip when capture
   would not help future tasks.
 - If any stage finds an obvious error in an earlier planning source file, it
    explains the problem and gets user approval before changing that file.
+  Truthful evidence, status updates, archive link repairs, and manager closeout
+  notes do not change requirements and follow their explicit permissions above.

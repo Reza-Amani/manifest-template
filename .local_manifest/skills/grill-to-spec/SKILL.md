@@ -57,7 +57,12 @@ If the user asks for a brief grilling session (e.g. "grill me briefly"), ask onl
 
 If there is previous chat messages between the user and the agent, use them to prune the list of questions to ask; whatever discussed and the user seems to be ok with, don't ask the user and only list them at the end, before writing the spec (phase 3).
 
-Once the design branches are resolved, write the spec directly without asking for a separate final confirmation gate. Do not implement any of the decisions until the spec is written. Even then, recommend the user to plan and implement the spec in a separate chat.
+Once the design branches are resolved, write the spec directly without asking
+for a separate final confirmation gate. For a standalone run, recommend
+planning and implementation in a separate chat. Under
+[manager](../manager/SKILL.md), keep grilling in the main
+agent, delegate repository fact-finding, and hand the written spec's exact path
+to the planning worker without another user approval.
 
 ## Phase 2: Domain modeling during the session
 

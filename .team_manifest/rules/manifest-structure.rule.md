@@ -146,6 +146,10 @@ implementation plans, and backlog items.
     criteria when present and otherwise proceeds from the plan without them.
   - `<01-phase-slug>.criteria.md` (highly recommended, not required) — high-level behavioral and narrative/design
     requirements plus integration-first proof, produced by `plan-to-criteria`.
+- **Manager runs:** Keep a matching `<plan-stem>.manager.md` beside the spec,
+  plan, and optional criteria. It records stage state, review evidence, pending
+  human checks, minor findings, and archive/reopen paths; requirements remain
+  in their original sources. Archive this checkpoint with its task/phase.
 - **Content:** Scope, milestones, tasks, status, checkboxes, dependencies, and
   progress notes at the level implied by the file type.
 - **Purpose:** Track work that spans multiple sessions and help agents resume
@@ -160,7 +164,12 @@ implementation plans, and backlog items.
   preserving their relative layout, and creates or updates a
   `reference/*.ref.md` when the finished design is worth capturing. While an
   epic has remaining phases, it archives a completed phase only on the user's
-  explicit request. Once every epic phase is complete, it may archive the
+  explicit request, including invoking `manager` for that phase. Manager always
+  archives only the selected task/phase, even if it is the last phase. Its
+  [Managed completion](../../.local_manifest/reference/planning-flow.ref.md#managed-completion)
+  policy permits recorded pending human checks and minor review findings without
+  marking them passed or fixed. Outside that mode, once every epic phase is
+  complete, it may archive the
   master plan, linked initial document, and all remaining completed phase
   artifacts. Backlog files, unrelated files, and files with unfinished work
   remain active and must not move.
@@ -232,8 +241,10 @@ plan.
   disposable working files.
 - **Purpose:** Keep implementation ephemerals isolated from plans and durable
   repository content.
-- **Lifecycle:** The `implement-plan` skill inventories these files after
-  acceptance passes and removes them only with user authorization.
+- **Lifecycle:** `implement-plan` or manager closeout preserves durable evidence,
+  inventories the selected plan's scratch, verifies the resolved deletion scope,
+  and removes disposable files without another confirmation. Cleanup is
+  authorized by default; honor an explicit request to retain them.
 
 ## Placement Rules
 
@@ -246,7 +257,7 @@ plan.
 6. Put active simple plans and specs directly in `plans/`. Put each active
   epic's initial idea, master plan, specs, and detailed plans in one dedicated
   subdirectory under `plans/`. Preserve the same relative organization under
-  `plans/archive/` for user-confirmed completed task artifacts.
+  `plans/archive/` for task artifacts closed under the applicable completion policy.
 7. Put role behavior and task focus in `personas/`.
 8. Put tutorials and operator how-to material in `guides/`.
 9. Put records from `teach` skill sessions in `learning/`.
@@ -312,7 +323,7 @@ requires it. Personas (`*.agent.md`) and skills (`SKILL.md`) usually need a
 | `personas/`   | `<role>.agent.md`     | yes (`name`, `description`) |
 | `skills/`     | `<skill>/SKILL.md`    | yes (`name`, `description`) |
 | `guides/`     | descriptive `*.md`    | no                        |
-| `plans/`      | `*.planning.md`, `*.criteria.md`, `*.master.md`, `*.spec.md`, `backlog.plan.md`, or epic subdirectory files described above | optional (`todos` block) |
+| `plans/`      | `*.planning.md`, `*.criteria.md`, `*.master.md`, `*.spec.md`, `*.manager.md`, `backlog.plan.md`, or epic subdirectory files described above | optional (`todos` block) |
 | `learning/`   | `YYYY-MM-DD-topic.md` | optional                  |
 | `findings/`   | `YYYY-MM-DD-topic.md` | optional                  |
 | `actions/`    | descriptive `*.md`    | optional                  |

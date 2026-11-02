@@ -302,6 +302,11 @@ validation. The subsection guidance below defines their contents.
   regression commands.
 - List integration tests before unit tests when both are present.
 - Include precise manual checks for anything automation cannot prove.
+- For a manager run, distinguish checks the agent can execute (including UI
+  and inspection checks) from checks needing human access or judgment. Record
+  precise human steps and expected results; follow the planning flow's
+  [Managed completion](../../reference/planning-flow.ref.md#managed-completion)
+  policy when recording later evidence. Pending checks are never passing evidence.
 
 Do not use vague criteria such as "works correctly" or "tests pass." Name the
 input, action, and observable result, or name the design artifact and the exact

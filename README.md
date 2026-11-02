@@ -57,13 +57,25 @@ For small work, `grill-to-spec` turns plain user intent into a human-readable
 behavior spec. `spec-to-plan` creates a Cursor-style implementation plan without
 acceptance criteria. `plan-to-criteria` studies the test setup, writes failing
 tests for the planned behavior when the change is not a test-invalidating
-redesign, and adds behavioral plus narrative acceptance criteria to the plan.
+redesign, and writes behavioral plus narrative acceptance criteria in a sibling
+`*.criteria.md` file.
 `implement-plan` then implements until those tests pass and every criterion is
 proved. `wrap-up-plan` then archives the completed planning artifacts and
 creates or refreshes a `reference/*.ref.md` when the finished design is
 non-trivial. While an epic has remaining phases, it archives a phase only when
 the user explicitly requests that phase's closeout; once every phase is
 complete, it archives the master plan, initial idea, and remaining epic record.
+
+Use [`manager`](.local_manifest/skills/manager/SKILL.md) to run this flow for one
+task or one named epic phase with fewer interruptions. The main agent handles
+grilling and delegates substantial stages to fresh workers using the delegator
+persona's model tiers. Independent review checks the generated code against the
+spec and criteria; severe findings trigger fixes, while minor findings are
+reported. Pending human checks are recorded without being marked passed, and
+manager still completes and archives the selected task/phase. It leaves the
+master plan active, never starts the next phase, and can reopen archived work
+when the user reports a failed human check. See
+[Managed completion](.local_manifest/reference/planning-flow.ref.md#managed-completion).
 
 An epic adds one stage at the front: `grill-to-master` preserves the human
 initial idea and creates a high-level phased roadmap. Each phase then follows
@@ -133,6 +145,8 @@ the format and the expected level of detail.
   [`implement-plan`](.local_manifest/skills/implement-plan/SKILL.md), followed by
   [`wrap-up-plan`](.local_manifest/skills/wrap-up-plan/SKILL.md) to archive
   completed planning work and document non-trivial design;
+  [`manager`](.local_manifest/skills/manager/SKILL.md) to orchestrate those stages
+  for one task or phase with independent review and resumable handoffs;
   [`debug-agent`](.local_manifest/skills/debug-agent/SKILL.md) for
   evidence-driven issue diagnosis and fixes; [`review-changes`](.local_manifest/skills/review-changes/SKILL.md)
   for read-only pre-commit reviews; [`pr-ready`](.local_manifest/skills/pr-ready/SKILL.md),
@@ -143,7 +157,7 @@ the format and the expected level of detail.
 - **actions/** — a `verify-docs-in-sync` one-step check.
 - **scripts/** — `sync-skill-links.ps1` / `.sh`, which build the `.agents/skills`
   discovery shim (one link per skill).
-- **personas/** — a `reviewer` and a `manifester` agent.
+- **personas/** — `reviewer`, `manifester`, and `delegator` agents.
 - **plans/** — a simple example `*.planning.md` feature plan and a
   template-only `example-epic/` with `*.master.md` / `*.planning.md` examples
   that must not be copied into target repositories. The backlog lives at
