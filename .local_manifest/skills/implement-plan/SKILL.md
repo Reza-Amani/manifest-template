@@ -41,8 +41,11 @@ description: >-
 
 # Implement Plan
 
-Implement one detailed plan end to end. For a normal change, start from the red
-tests written by `plan-to-criteria` and make them green by implementing required
+Implement one detailed plan end to end. Running `plan-to-criteria` first is
+highly recommended, but a user choice to skip it must not block implementation.
+Without a sibling criteria file, proceed from the plan and validate the work
+using relevant existing tests, commands, and behavioral checks; do not require
+or create a criteria file. When plan-derived red tests exist, make them green by implementing required
 production behavior, not by weakening the contract or adding test-only production
 changes. Honor recorded alternative proof for difficult-to-unit-test behavior.
 For a test-invalidating redesign, honor
@@ -55,14 +58,17 @@ Follow the canonical [planning flow](../../reference/planning-flow.ref.md).
 
 - **Plan (required):** one detailed `*.planning.md`. Reject a
   `*.master.md` as the implementation input.
+- **Criteria (highly recommended, not required):** the sibling file obtained by replacing the plan's
+  `.planning.md` suffix with `.criteria.md`. Read its `## Acceptance criteria`
+  section as the acceptance contract when present. If the file does not exist,
+  ignore it and proceed without running `plan-to-criteria`.
 - **Spec (optional):** use the linked `*.spec.md` when present for behavioral
   context. The plan remains the implementation guide.
 - **Master plan (epics only, optional context):** read it to identify the
   matching phase and dependencies. Do not implement other phases.
 
-If the plan has no `## Acceptance criteria` section, stop and recommend running
-`plan-to-criteria` first. The section must identify its pre-implementation test
-strategy: plan-derived red tests, a per-behavior unit-test deferral with an
+When a criteria file is present, its acceptance section must identify its pre-implementation test strategy:
+integration-first plan-derived red tests, a justified per-behavior unit-test deferral with an
 `Implement-plan unit-test note`, or an explicit test-authoring skip for a
 test-invalidating redesign or unavailable test infrastructure. If it does not,
 stop and recommend rerunning `plan-to-criteria`. If the plan, optional spec, or
@@ -85,6 +91,7 @@ requires explicit confirmation during plan closeout.
 
 - Do not edit spec text.
 - Do not edit plan prose, architecture, steps, or acceptance criteria.
+- Do not edit the sibling criteria file's requirements or test contract.
 - You may update plan YAML todo statuses and matching Markdown task checkboxes
   as work is completed.
 - For an epic, you may update only the matching phase status and checkbox in
@@ -94,16 +101,19 @@ requires explicit confirmation during plan closeout.
 
 ## Phase 1: Prepare the build
 
-1. Read the whole plan and its acceptance section.
+1. Read the whole plan and sibling criteria file if it exists.
 2. Read the optional spec and relevant manifest files routed by the target.
 3. For an epic, identify the exact master-plan phase ID and verify required
    earlier phases are complete.
-4. Read the `Pre-implementation test contract` and classify the run:
+4. If a criteria file exists, read its `Pre-implementation test contract` and
+   classify the run below. Otherwise, skip this contract-specific step and use
+   the plan and existing verification practices without requiring red tests:
 
    - **Normal change:** inspect every named plan-derived test and its recorded
      expected red result, each deferred `Implement-plan unit-test note`, and
      each alternative proof and residual risk. Do not demand red unit tests for
-     documented deferred behavior, even when the contract has no new unit tests.
+     documented deferred behavior or behavior adequately proved by integration
+     or higher-level checks, even when the contract has no new unit tests.
    - **Test-invalidating redesign:** confirm the criteria explain why
      pre-implementation tests were skipped and identify the invalidated unit
      suite.
@@ -162,6 +172,10 @@ disposition is part of the plan.
 
 After implementation, evaluate every acceptance checkbox precisely:
 
+If no criteria file exists, verify the completed plan steps with relevant
+existing tests, build/lint commands, and observable behavioral checks instead.
+Report the results and any unavailable checks; missing criteria are not a blocker.
+
 - for a normal change, run every plan-derived pre-implementation test and
   confirm it is now green;
 - run every named automated test and validation command;
@@ -196,7 +210,8 @@ blockers to resolve, not permission to silently rewrite the contract.
 
 ## Phase 4: Close the plan
 
-Only after every acceptance criterion passes:
+Only after every applicable acceptance criterion passes, or, without a criteria
+file, after plan completion and relevant verification succeed:
 
 1. Confirm all detailed-plan work and acceptance checks are complete, but defer
    final status updates until the scratch decision is resolved.
@@ -239,6 +254,9 @@ Only after every acceptance criterion passes:
 
 - Every acceptance criterion passed; otherwise the task is reported blocked,
   not complete.
+
+- An absent criteria file was ignored, not treated as a prerequisite or created
+  automatically; work was verified against the plan and existing checks instead.
 
 - Plan status and the matching master phase status reflect actual completion.
 

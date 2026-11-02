@@ -10,13 +10,17 @@ but they must not silently rewrite them.
 | --- | --- | --- |
 | `*.spec.md` | User, with `grill-to-spec` | Plain-language intended behavior and scenarios |
 | `*.planning.md` | `spec-to-plan` | Cursor-style implementation steps and technical approach |
-| `## Acceptance criteria` in `*.planning.md` | `plan-to-criteria` | Plan-derived test contract plus behavioral, narrative, and final proof requirements |
+| `*.criteria.md` (highly recommended, not required) | `plan-to-criteria` | High-level behavioral and narrative requirements plus integration-first test contract and final proof |
 | `*-initial.md` | User | Starting intent for an epic |
 | `*.master.md` | `grill-to-master` | High-level epic roadmap, architecture, and independent phases |
 
 The spec says **what should happen**. The detailed plan says **how to build
 it**. Acceptance criteria say **how to prove it works**. Do not merge these
 roles into one document stage.
+
+Running `plan-to-criteria` before implementation is highly recommended and is
+the normal flow. The user may choose to skip it; an absent criteria file does
+not block implementation or wrap-up and need not be created to proceed.
 
 Production readability, performance, design integrity, code size, and execution
 speed must never be compromised for unit tests or coverage. Do not change
@@ -25,11 +29,11 @@ residual coverage gaps when unit testing is impractical.
 
 Acceptance evidence is prioritized as complete narrative and design criteria,
 then integration tests when suitable infrastructure exists, then unit tests.
-Unit tests remain required when the repository has unit-test infrastructure and
-the planned unit boundary is clear. When interfaces or function signatures are
-not yet clear enough for meaningful pre-implementation tests,
-`plan-to-criteria` records the required unit cases and desired outcomes for
-`implement-plan` instead of guessing the production contract.
+Unit tests are selective gap-fillers, not required merely because unit-test
+infrastructure exists. Add them only for important gaps not adequately covered
+by integration or higher-level proof. If a selected unit test is premature
+because its interface is unclear, `plan-to-criteria` records the required cases
+and outcomes for `implement-plan` instead of guessing the production contract.
 
 ## Small tasks
 
@@ -38,10 +42,11 @@ not yet clear enough for meaningful pre-implementation tests,
 2. `spec-to-plan` researches the repo and writes
    `plans/<topic>.planning.md` in Cursor Plan Mode style. At this point the plan has
    implementation steps but no formal acceptance criteria. 
-3. `plan-to-criteria` reads both files, studies the existing test setup, and
+3. The highly recommended `plan-to-criteria` stage reads both files, studies the existing test setup, and
    classifies the work. For a normal change it completes the narrative/design
    criteria first, writes integration tests when suitable infrastructure
-   exists, and writes unit tests when the unit boundary is clear. It confirms
+   exists, and adds focused unit tests only for important remaining proof gaps
+   with clear boundaries. It confirms
    authored tests fail because implementation is missing and records that red
    state. When a module interface or function signature is too unclear for a
    meaningful unit test, it records an implement-plan note containing the
@@ -53,11 +58,17 @@ not yet clear enough for meaningful pre-implementation tests,
    classification and testing the remaining behavior. Each fallback names
    alternative proof, expected results, and residual risk. It
    likewise skips test authoring when no suitable test infrastructure exists
-   rather than adding an unapproved framework. It then adds a standalone
-   `## Acceptance criteria` section containing the test strategy, behavioral
-   criteria, narrative/design requirements, and final validations while
-   leaving the rest of the plan unchanged.
-4. `implement-plan` follows the plan. For a normal change with red tests it first
+   rather than adding a framework. It writes `plans/<topic>.criteria.md` beside
+   the plan, replacing only the `.planning.md` suffix. The file links to the
+   source plan and spec and contains an `## Acceptance criteria` section with
+   high-level behavioral and narrative/design requirements first, then the
+   supporting test contract and final validations. The entire planning file
+   remains byte-for-byte unchanged.
+4. `implement-plan` reads the plan and sibling criteria file if present. If the
+   criteria file does not exist, it ignores it and proceeds without requiring
+   `plan-to-criteria`, validating the plan with relevant existing tests, commands,
+   and behavioral checks instead.
+   For a normal change with red tests it first
    reproduces the intentional test failures, then implements required production
    behavior until those tests pass. After resolving an interface named in a
    deferred unit-test note, it adds the specified unit cases against the settled
@@ -69,7 +80,7 @@ not yet clear enough for meaningful pre-implementation tests,
    narrative and other validation criteria. It updates applicable task
    checkboxes only after every required acceptance check passes.
 5. After implementation finishes, `wrap-up-plan` may move that task's completed
-   plan and matching spec to `plans/archive/`, and captures or refreshes a
+   plan, matching spec, and criteria file when present to `plans/archive/`, and captures or refreshes a
    `reference/*.ref.md` when the shipped design is worth retaining.
 
 ## Epics
@@ -84,19 +95,19 @@ not yet clear enough for meaningful pre-implementation tests,
    implement without taking on later phases.
 3. For one phase, `grill-to-spec` writes `<01-phase-slug>.spec.md` in the epic
    directory using the master plan's numbered phase ID.
-4. `spec-to-plan`, `plan-to-criteria`, and `implement-plan` run as they do for a
+4. `spec-to-plan`, the highly recommended `plan-to-criteria`, and `implement-plan` run as they do for a
    small task. The detailed plan (`<01-phase-slug>.planning.md`) and spec stay
-   inside the epic directory.
+   inside the epic directory, alongside `<01-phase-slug>.criteria.md` when created.
 5. After all acceptance criteria pass, `implement-plan` may mark only the
    matching phase complete in the master plan. It may read the rest of the
    master plan for context, but must not implement or edit other phases.
 6. While an epic has remaining phases, `wrap-up-plan` leaves all phase records
-   active by default. It archives a completed phase plan and matching spec only
+   active by default. It archives a completed phase plan, matching spec, and criteria only
    when the user explicitly asks to wrap up that phase. It leaves the epic
    initial idea, master plan, other phases, and every unfinished file active.
 7. When every master phase is complete, `wrap-up-plan` closes the epic: it
    archives the master plan, linked initial idea, and every remaining active,
-   completed phase plan and matching spec. It does not move unrelated or
+   completed phase plan, matching spec, and criteria. It does not move unrelated or
    ambiguous files; previously archived phases remain in place.
 
 ## Change boundaries
@@ -104,8 +115,8 @@ not yet clear enough for meaningful pre-implementation tests,
 - `grill-to-spec` does not design the implementation or write acceptance
   criteria.
 - `spec-to-plan` does not edit the spec or add acceptance criteria.
-- `plan-to-criteria` avoids changing the existing plan body. It owns only the
-  acceptance section and pre-implementation tests derived from planned
+- `plan-to-criteria` leaves the entire planning file untouched. It owns only the
+  sibling `*.criteria.md` file and pre-implementation tests derived from planned
   behavior. It does not add tests merely to characterize current code, and it
    skips test authoring for test-invalidating redesigns. It never changes
    production code to enable tests and records per-behavior unit-test notes and

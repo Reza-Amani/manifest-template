@@ -22,9 +22,9 @@ Choose exactly one mode:
 
 | Mode | Primary input | Eligible archive set |
 | --- | --- | --- |
-| **Task** | One completed `*.planning.md` outside `archive/` | The plan, its matching spec, and a task-exclusive initial file when one exists |
-| **Epic phase** | One completed phase `*.planning.md` under an epic | The phase plan and matching spec only |
-| **Epic** | One completed `*.master.md` | The master plan, its linked initial file, and every remaining active, completed phase plan and matching spec in that epic |
+| **Task** | One completed `*.planning.md` outside `archive/` | The plan, its matching spec and criteria, and a task-exclusive initial file when one exists |
+| **Epic phase** | One completed phase `*.planning.md` under an epic | The phase plan and matching spec and criteria only |
+| **Epic** | One completed `*.master.md` | The master plan, its linked initial file, and every remaining active, completed phase plan and matching spec and criteria in that epic |
 
 Reject `backlog.plan.md`, specs, and initial files as primary inputs. If the
 input is ambiguous, list plausible completed candidates and ask the user to
@@ -36,8 +36,9 @@ select one.
 
 1. Archive exactly one task, phase, or fully completed epic per invocation.
 2. Never move backlogs, unrelated files, or files with unfinished work.
-3. Require every todo, task checkbox, and acceptance checkbox in each detailed
-   plan being moved to be complete; reject blockers, skipped required checks,
+3. Require every todo and task checkbox in each detailed plan, and every
+   acceptance checkbox in its sibling criteria file when present,
+   to be complete; reject blockers, skipped required checks,
    and unverified criteria. A phase also requires its matching master phase to
    be complete.
 4. Do not rewrite, remove, weaken, or redefine a criterion to satisfy the
@@ -45,7 +46,11 @@ select one.
    markers and add concise evidence or verification notes when the existing
    criterion is actually satisfied. Leave unmet criteria unchecked and report
    them as blockers.
-5. Include a spec only through an explicit plan link or exact sibling stem.
+5. Include a spec and criteria file only through an explicit plan link or exact
+   sibling stem (`.spec.md` and `.criteria.md` replacing `.planning.md`). Read
+   the sibling criteria for completion checks when present. If absent, ignore
+   it: do not require its creation or a `plan-to-criteria` run. Verify completion
+   from the plan and implementation evidence instead.
    Include an initial file only through an explicit link and only when it is
    exclusive to the archived task or epic. Omit ambiguous companions.
 6. For an epic with any remaining phase, do not archive a completed phase unless
@@ -101,18 +106,21 @@ Read every primary artifact and apply the archive completion rules. For **Epic**
 mode, verify every master phase and all active phase artifacts before selecting
 any move. When the shipped implementation and available evidence satisfy an
 existing acceptance criterion, update its checkbox and record concise evidence
-in the plan before continuing. Do not change the criterion's wording or scope
-just to make it pass. Prose such as "implemented" or a passing build alone is
+in the criteria file when present before continuing. Do not change
+the criterion's wording or scope just to make it pass. Prose such as
+"implemented" or a passing build alone is
 insufficient evidence.
 
 ### 2. Resolve archive companions
 
 Resolve companions conservatively, then search active plans for references.
+Include criteria files only when they exist; their absence is not a blocker.
 Leave any companion needed by another task or unfinished phase in place.
 Build the exact archive move set (paths relative to `plans/`, destinations under
 `plans/archive/`). Reject sources outside `.local_manifest/plans/` and existing
 destinations. In **Epic** mode, include the completed master, linked initial,
-and all remaining active completed phase plans and matching specs. Previously
+and all remaining active completed phase plans, matching specs, and criteria
+files. Previously
 archived phase records stay where they are.
 
 ### 3. Scan design and logic

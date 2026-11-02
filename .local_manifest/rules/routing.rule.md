@@ -41,7 +41,7 @@ Manifest skills:
 - Grill a large task into a high-level phased master plan → [`skills/grill-to-master`](../skills/grill-to-master/SKILL.md)
 - Grill the user about a plan, then write a spec into the target repo's `plans/` → [`skills/grill-to-spec`](../skills/grill-to-spec/SKILL.md)
 - Turn a spec into a Cursor-style implementation plan without acceptance criteria → [`skills/spec-to-plan`](../skills/spec-to-plan/SKILL.md)
-- Add plan-derived red tests plus behavioral and narrative acceptance criteria → [`skills/plan-to-criteria`](../skills/plan-to-criteria/SKILL.md)
+- Write sibling criteria with high-level behavioral requirements and integration-first proof → [`skills/plan-to-criteria`](../skills/plan-to-criteria/SKILL.md)
 - Implement a detailed plan, make its red tests green, and prove every criterion → [`skills/implement-plan`](../skills/implement-plan/SKILL.md)
 - Wrap up completed planning work: archive a task, an explicitly requested epic phase, or a finished epic; create/update reference docs for non-trivial design → [`skills/wrap-up-plan`](../skills/wrap-up-plan/SKILL.md)
 - Diagnose and fix a user-identified issue with runtime evidence and temporary instrumentation → [`skills/debug-agent`](../skills/debug-agent/SKILL.md)
@@ -74,9 +74,11 @@ _(add your real runbooks here under `skills/<name>/SKILL.md`)_
   - For an epic or big task, use one dedicated subdirectory under `plans/` for
     its `*-initial.md`, `*.master.md`, specs, and detailed `*.planning.md`
     plans.
-  - Acceptance criteria live in an independent section of the detailed plan.
-    They are added by `plan-to-criteria`, not by `grill-to-spec` or
-    `spec-to-plan`.
+  - Acceptance criteria live in a sibling `<plan-stem>.criteria.md` file.
+    They are written by `plan-to-criteria`, which leaves the detailed plan
+    untouched, not by `grill-to-spec` or `spec-to-plan`.
+    This stage is highly recommended before implementation. If the user chooses
+    to skip it and the file is absent, proceed without it.
   - When the user asks to continue or edit planning work, search the full
     `plans/` tree, regardless of the agent's default plan directory.
   - Completed task artifacts may be moved to `plans/archive/` only by

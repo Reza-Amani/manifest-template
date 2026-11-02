@@ -124,7 +124,9 @@ implementation plans, and backlog items.
 - **Format:** Markdown files.
 - **Simple work:** Keep its files directly under `plans/`, without an epic
   subdirectory. The standard flow uses `<topic>.spec.md` for intended behavior
-  and a matching `<topic>.planning.md` for implementation and acceptance criteria.
+  and a matching `<topic>.planning.md` for implementation, with acceptance
+  criteria in the highly recommended sibling `<topic>.criteria.md`. The user
+  may skip criteria preparation; the file is not required to implement the plan.
 - **Epics / big tasks:** Give each epic one dash-case subdirectory under
   `plans/`. Keep all files for that epic in its directory:
   - `<epic>-initial.md` — the human-written initial idea. It may be short and
@@ -139,8 +141,11 @@ implementation plans, and backlog items.
     behavior and scenarios in human language, without design or acceptance
     criteria.
   - `<01-phase-slug>.planning.md` — a detailed implementation plan produced by
-    `spec-to-plan` from a spec. `plan-to-criteria` later adds its independent
-    acceptance section, then `implement-plan` builds and verifies it.
+    `spec-to-plan` from a spec. The highly recommended `plan-to-criteria` leaves it untouched
+    and writes `<01-phase-slug>.criteria.md` beside it. `implement-plan` reads
+    criteria when present and otherwise proceeds from the plan without them.
+  - `<01-phase-slug>.criteria.md` (highly recommended, not required) — high-level behavioral and narrative/design
+    requirements plus integration-first proof, produced by `plan-to-criteria`.
 - **Content:** Scope, milestones, tasks, status, checkboxes, dependencies, and
   progress notes at the level implied by the file type.
 - **Purpose:** Track work that spans multiple sessions and help agents resume
@@ -307,7 +312,7 @@ requires it. Personas (`*.agent.md`) and skills (`SKILL.md`) usually need a
 | `personas/`   | `<role>.agent.md`     | yes (`name`, `description`) |
 | `skills/`     | `<skill>/SKILL.md`    | yes (`name`, `description`) |
 | `guides/`     | descriptive `*.md`    | no                        |
-| `plans/`      | `*.planning.md`, `*.master.md`, `*.spec.md`, `backlog.plan.md`, or epic subdirectory files described above | optional (`todos` block) |
+| `plans/`      | `*.planning.md`, `*.criteria.md`, `*.master.md`, `*.spec.md`, `backlog.plan.md`, or epic subdirectory files described above | optional (`todos` block) |
 | `learning/`   | `YYYY-MM-DD-topic.md` | optional                  |
 | `findings/`   | `YYYY-MM-DD-topic.md` | optional                  |
 | `actions/`    | descriptive `*.md`    | optional                  |
