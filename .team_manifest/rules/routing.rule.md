@@ -50,6 +50,8 @@ Read the matching ADR under `adr/` only when working in that domain:
 
 Defined in `personas/*.agent.md`:
 
+- `plain-speaker` — short, complete replies in plain English →
+  [`personas/plain-speaker.agent.md`](../personas/plain-speaker.agent.md)
 - `reviewer` — pre-commit reviewer focused on safety, correctness, and decision
   compliance → [`personas/reviewer.agent.md`](../personas/reviewer.agent.md)
 - `manifester` — manifest keeper who writes and fixes manifest docs in plain

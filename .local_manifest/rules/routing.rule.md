@@ -33,6 +33,7 @@ required:
 
 Manifest skills:
 
+- Re-pitch an unclear reply with brief context, plain language, and code links → [`skills/re-pitch`](../skills/re-pitch/SKILL.md)
 - Create a new GitHub repo with README, license, and first push → [`skills/create-github-repo`](../skills/create-github-repo/SKILL.md)
 - Apply this template to a code repo in the workspace → [`skills/apply-manifest-template`](../skills/apply-manifest-template/SKILL.md)
 - Bring recent template updates into a code repo that already has a manifest → [`skills/sync-manifest-template`](../skills/sync-manifest-template/SKILL.md)

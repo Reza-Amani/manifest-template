@@ -152,7 +152,9 @@ the format and the expected level of detail.
   for read-only pre-commit reviews; [`pr-ready`](.local_manifest/skills/pr-ready/SKILL.md),
   [`pr-create`](.local_manifest/skills/pr-create/SKILL.md), and
   [`pr-review`](.local_manifest/skills/pr-review/SKILL.md) for pull-request
-  readiness, creation/splitting, and review; plus an `example-add-module` (coding)
+  readiness, creation/splitting, and review;
+  [`Re-Pitch`](.local_manifest/skills/re-pitch/SKILL.md) to explain an unclear
+  reply with brief context, plain language, and code links; plus an `example-add-module` (coding)
   example.
 - **actions/** — a `verify-docs-in-sync` one-step check.
 - **scripts/** — `sync-skill-links.ps1` / `.sh`, which build the `.agents/skills`
