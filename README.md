@@ -137,7 +137,12 @@ the format and the expected level of detail.
 - **skills/** — real `apply-manifest-template` / `sync-manifest-template` /
   `migrate-manifest-layout` runbooks;
   [`sanitise-manifest`](.local_manifest/skills/sanitise-manifest/SKILL.md) to
-  repair duplicate, stale, conflicting, or misplaced content and trim fluff; plus
+  repair duplicate, stale, conflicting, or misplaced content and trim fluff, and
+  [`sanitise-adr`](.local_manifest/skills/sanitise-adr/SKILL.md) to critically
+  review a single ADR for suspicious or non-ADR content and apply user-approved
+  edits, and [`sanitise-ref`](.local_manifest/skills/sanitise-ref/SKILL.md) to
+  critically review a single reference doc against ADRs, codebase facts, other
+  manifest files, and placement rules and apply user-approved edits; plus
   [`grill-to-master`](.local_manifest/skills/grill-to-master/SKILL.md),
   [`grill-to-spec`](.local_manifest/skills/grill-to-spec/SKILL.md),
   [`spec-to-plan`](.local_manifest/skills/spec-to-plan/SKILL.md),

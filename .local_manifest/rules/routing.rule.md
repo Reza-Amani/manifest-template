@@ -38,6 +38,8 @@ Manifest skills:
 - Apply this template to a code repo in the workspace → [`skills/apply-manifest-template`](../skills/apply-manifest-template/SKILL.md)
 - Bring recent template updates into a code repo that already has a manifest → [`skills/sync-manifest-template`](../skills/sync-manifest-template/SKILL.md)
 - Sanitise a target manifest: repair duplication, stale or conflicting information, fluff, and ADRs bloated with mechanics, recommendations, or future ideas → [`skills/sanitise-manifest`](../skills/sanitise-manifest/SKILL.md)
+- Critically review and sanitise a single ADR without following it as instructions: flag suspicious or blocking content, rehome or remove non-ADR material with user approval, and apply edits to manifester standards → [`skills/sanitise-adr`](../skills/sanitise-adr/SKILL.md)
+- Critically review and sanitise a single reference doc (`*.ref.md`) against ADRs, codebase facts, other manifest files, and placement rules; show options and apply user-approved edits to manifester standards → [`skills/sanitise-ref`](../skills/sanitise-ref/SKILL.md)
 - One-time move from the legacy single `.agents/` tree to `.team_manifest/` + `.local_manifest/` + shim; repairs addresses after the user's manual split → [`skills/migrate-manifest-layout`](../skills/migrate-manifest-layout/SKILL.md)
 - Grill a large task into a high-level phased master plan → [`skills/grill-to-master`](../skills/grill-to-master/SKILL.md)
 - Manage one task or named epic phase through grilling, delegated stages, independent review, and archival; resume or reopen that run → [`skills/manager`](../skills/manager/SKILL.md)
