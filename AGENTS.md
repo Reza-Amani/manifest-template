@@ -27,5 +27,6 @@ bulk-read either directory.
 - **Keep docs in sync.** If your change makes a reference or guide wrong, fix
   it in the same change. See
   [`.team_manifest/rules/manifest-structure.rule.md`](.team_manifest/rules/manifest-structure.rule.md).
+- **Do not hard-wrap Markdown prose.** Write each paragraph (or each sentence) on one line, and never reflow existing text you didn't change.
 - **Check the backlog before proposing work.** Future tasks live in
   [`.team_manifest/backlog.plan.md`](.team_manifest/backlog.plan.md).
