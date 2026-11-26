@@ -3,4 +3,4 @@
 .local_manifest/scratch/
 
 # pytest local cache; recreated on the next pytest run
-# .pytest_cache/
+.pytest_cache/
