@@ -1,3 +1,6 @@
 # Agent manifest: .agents/ is a discovery shim of per-skill links, rebuilt per machine by .team_manifest/scripts/sync-skill-links.*
 .agents/
 .local_manifest/scratch/
+
+# pytest local cache; recreated on the next pytest run
+# .pytest_cache/
